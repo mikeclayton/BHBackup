@@ -11,7 +11,11 @@ To use it:
 
 * Download the latest version of the program to your computer from <a href="https://github.com/mikeclayton/BHDownload/releases">here</a>
 
-* Find the ```BHDowload.exe``` program in your Downloads folder and double-click it. You'll see a black text-based window like the one at thr top of this page.
+* Find the ```BHDowload.exe``` program in your Downloads folder
+
+* On Windows computers you'll need to "unblock" the file to allow it to run - right click it, select "Properties" (or "Show more options" and *then* "Properties") and in the pop-up dialog tick the "Unblock" checkbox and click "OK".
+
+ and double-click it. You'll see a black text-based window like the one at the top of this page.
 
 * When prompted, enter your username and password that you normally use to log into the Bright Horizons FamilyApp website
 
