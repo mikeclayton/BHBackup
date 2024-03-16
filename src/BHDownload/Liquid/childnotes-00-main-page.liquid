@@ -1,0 +1,12 @@
+{% render "Liquid\\scaffold-header.liquid", site: site, page: page %}
+
+<div id="content" class="shouldScrollContent">
+    <div id="accountSubrouteContentId">
+        <div id="personProfile" class="clearfix mobile-fullscreen">
+            {% render "Liquid\\childnotes-20-profile-header-wrapper" %}
+            {% render "Liquid\\childnotes-30-child-profile-view" %}
+        </div>
+    </div>
+</div>
+
+{% render "Liquid\\scaffold-footer.liquid" %}

@@ -1,0 +1,1309 @@
+/* styles for short stories (messages sent from the classroom account rather than a caraer's account) */
+
+/* div that contains the entire feed post */
+div.feed-story-panel {
+    color: #000;
+    --sat: env(safe-area-inset-top);
+    --sab: env(safe-area-inset-bottom);
+    -webkit-text-size-adjust: 100%;
+    -webkit-font-smoothing: antialiased;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    font-family: Matter,Helvetica Neue,Helvetica,Arial,Lucida Grande,sans-serif;
+    font-size: 16px;
+    font-variant-ligatures: no-contextual;
+    font-weight: 400;
+    line-height: 24px;
+    box-shadow: rgba(2, 2, 3, 0.08) 0px 3px 2px 0px, rgba(2, 2, 3, 0.04) 0px 0px 2px 0px;
+    background-color: rgb(255, 255, 255);
+    box-sizing: border-box;
+    margin: 0px;
+    padding: 0px;
+    margin-bottom: 24px;
+    border: 1px solid rgb(246, 243, 251);
+    border-radius: 8px;
+}
+
+/* div that contains the header and body, but not the footer */
+div.feed-story-content {
+    color: #000;
+    --sat: env(safe-area-inset-top);
+    --sab: env(safe-area-inset-bottom);
+    -webkit-text-size-adjust: 100%;
+    -webkit-font-smoothing: antialiased;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    font-family: Matter,Helvetica Neue,Helvetica,Arial,Lucida Grande,sans-serif;
+    font-size: 16px;
+    font-variant-ligatures: no-contextual;
+    font-weight: 400;
+    line-height: 24px;
+}
+
+/* div that cntains the header */
+div.feed-story-header {
+    color: #000;
+    --sat: env(safe-area-inset-top);
+    --sab: env(safe-area-inset-bottom);
+    -webkit-text-size-adjust: 100%;
+    -webkit-font-smoothing: antialiased;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    font-family: Matter,Helvetica Neue,Helvetica,Arial,Lucida Grande,sans-serif;
+    font-size: 16px;
+    font-variant-ligatures: no-contextual;
+    font-weight: 400;
+    line-height: 24px;
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    margin-bottom: 16px;
+    padding: 16px 16px 0px;
+}
+
+/* div that contains the avatar icon in the header */
+div.feed-story-avatar {
+    color: #000;
+    --sat: env(safe-area-inset-top);
+    --sab: env(safe-area-inset-bottom);
+    -webkit-text-size-adjust: 100%;
+    -webkit-font-smoothing: antialiased;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    font-family: Matter,Helvetica Neue,Helvetica,Arial,Lucida Grande,sans-serif;
+    font-size: 16px;
+    font-variant-ligatures: no-contextual;
+    font-weight: 400;
+    line-height: 24px;
+    border-radius: 50%;
+    overflow: hidden;
+    box-sizing: border-box;
+    display: inline-block;
+    transform: translateX(0%);
+    mask-image: -webkit-radial-gradient(center, white, black);
+    width: 45px;
+    height: 45px;
+    margin-right: 10px;
+}
+
+/* the avatar icon in the header */
+img.feed-story-avatar {
+    color: #000;
+    --sat: env(safe-area-inset-top);
+    --sab: env(safe-area-inset-bottom);
+    -webkit-text-size-adjust: 100%;
+    -webkit-font-smoothing: antialiased;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    font-family: Matter,Helvetica Neue,Helvetica,Arial,Lucida Grande,sans-serif;
+    font-size: 16px;
+    font-variant-ligatures: no-contextual;
+    font-weight: 400;
+    line-height: 24px;
+    vertical-align: middle;
+    border: 0;
+    max-height: 100%;
+    min-width: 100%;
+    height: 100%;
+    width: auto;
+}
+
+/* div that contains the sender and date text in the header */
+div.feed-story-title-panel {
+    color: #000;
+    --sat: env(safe-area-inset-top);
+    --sab: env(safe-area-inset-bottom);
+    -webkit-text-size-adjust: 100%;
+    -webkit-font-smoothing: antialiased;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    font-family: Matter,Helvetica Neue,Helvetica,Arial,Lucida Grande,sans-serif;
+    font-size: 16px;
+    font-variant-ligatures: no-contextual;
+    font-weight: 400;
+    line-height: 24px;
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 0%;
+}
+
+/* div that contains the sender text in the header */
+div.feed-story-sender {
+    color: #000;
+    --sat: env(safe-area-inset-top);
+    --sab: env(safe-area-inset-bottom);
+    -webkit-text-size-adjust: 100%;
+    -webkit-font-smoothing: antialiased;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    font-family: Matter,Helvetica Neue,Helvetica,Arial,Lucida Grande,sans-serif;
+    font-size: 16px;
+    font-variant-ligatures: no-contextual;
+    font-weight: 400;
+    line-height: 24px;
+    margin-top: -1px;
+}
+
+
+/* span that contains the sender text in the header */
+span.feed-story-sender {
+    color: #000;
+    --sat: env(safe-area-inset-top);
+    --sab: env(safe-area-inset-bottom);
+    -webkit-text-size-adjust: 100%;
+    -webkit-font-smoothing: antialiased;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    font-family: Matter,Helvetica Neue,Helvetica,Arial,Lucida Grande,sans-serif;
+    font-variant-ligatures: no-contextual;
+    font-size: 16px;
+    line-height: 24px;
+    font-weight: 600;
+}
+
+/* div that contains the date text in the header */
+div.feed-story-date {
+    color: #000;
+    --sat: env(safe-area-inset-top);
+    --sab: env(safe-area-inset-bottom);
+    -webkit-text-size-adjust: 100%;
+    -webkit-font-smoothing: antialiased;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    font-family: Matter,Helvetica Neue,Helvetica,Arial,Lucida Grande,sans-serif;
+    font-size: 16px;
+    font-variant-ligatures: no-contextual;
+    font-weight: 400;
+    line-height: 24px;
+    margin-top: -2px;
+}
+
+/* link that contains the date text in the header */
+a.feed-story-date {
+    --sat: env(safe-area-inset-top);
+    --sab: env(safe-area-inset-bottom);
+    -webkit-text-size-adjust: 100%;
+    -webkit-font-smoothing: antialiased;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    font-family: Matter,Helvetica Neue,Helvetica,Arial,Lucida Grande,sans-serif;
+    font-variant-ligatures: no-contextual;
+    font-weight: 400;
+    line-height: 24px;
+    text-decoration: none;
+    pointer-events: auto;
+    font-size: 14px;
+    color: rgb(153, 153, 153);
+}
+
+.feed-story-bookmark-icon-outer {
+    color: #000;
+    --sat: env(safe-area-inset-top);
+    --sab: env(safe-area-inset-bottom);
+    -webkit-text-size-adjust: 100%;
+    -webkit-font-smoothing: antialiased;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    font-family: Matter,Helvetica Neue,Helvetica,Arial,Lucida Grande,sans-serif;
+    font-size: 16px;
+    font-variant-ligatures: no-contextual;
+    font-weight: 400;
+    line-height: 24px;
+    display: flex;
+    position: relative;
+    align-self: flex-start;
+    margin-top: -16px;
+    margin-right: -16px;
+    height: calc(53px);
+    width: calc(53px);
+}
+
+.feed-story-bookmark-icon-inner {
+    --sat: env(safe-area-inset-top);
+    --sab: env(safe-area-inset-bottom);
+    -webkit-text-size-adjust: 100%;
+    -webkit-font-smoothing: antialiased;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    font-family: Matter,Helvetica Neue,Helvetica,Arial,Lucida Grande,sans-serif;
+    text-transform: none;
+    appearance: none;
+    margin: 0px;
+    text-align: center;
+    white-space: nowrap;
+    box-sizing: border-box;
+    cursor: pointer;
+    color: rgb(18, 10, 32);
+    outline: none;
+    display: inline-block;
+    vertical-align: middle;
+    font-size: 14px;
+    float: left;
+    padding: 0px;
+    width: 100%;
+    height: 100%;
+    border-radius: 0px;
+    line-height: 1;
+    background: none;
+    filter: none;
+    border: none;
+}
+
+div.feed-story-body-outer {
+    color: #000;
+    --sat: env(safe-area-inset-top);
+    --sab: env(safe-area-inset-bottom);
+    -webkit-text-size-adjust: 100%;
+    -webkit-font-smoothing: antialiased;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    font-family: Matter,Helvetica Neue,Helvetica,Arial,Lucida Grande,sans-serif;
+    font-size: 16px;
+    font-variant-ligatures: no-contextual;
+    font-weight: 400;
+    line-height: 24px;
+    padding: 0px 16px;
+    margin-bottom: 16px;
+    overflow-wrap: break-word;
+}
+
+div.feed-story-body-inner {
+    --sat: env(safe-area-inset-top);
+    --sab: env(safe-area-inset-bottom);
+    -webkit-text-size-adjust: 100%;
+    -webkit-font-smoothing: antialiased;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    font-family: Matter,Helvetica Neue,Helvetica,Arial,Lucida Grande,sans-serif;
+    font-size: 16px;
+    font-variant-ligatures: no-contextual;
+    font-weight: 400;
+    line-height: 24px;
+    overflow-wrap: break-word;
+    color: rgb(18, 10, 32);
+}
+
+div.feed-story-body-inner h1 {
+    --sat: env(safe-area-inset-top);
+    --sab: env(safe-area-inset-bottom);
+    -webkit-text-size-adjust: 100%;
+    -webkit-font-smoothing: antialiased;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    font-family: Matter,Helvetica Neue,Helvetica,Arial,Lucida Grande,sans-serif;
+    font-variant-ligatures: no-contextual;
+    overflow-wrap: break-word;
+    color: rgb(18, 10, 32);
+    margin: .67em 0;
+    text-rendering: optimizeLegibility;
+    font-size: 35px;
+    line-height: 40px;
+    font-weight: 400;
+    margin-bottom: 13px;
+    margin-top: 0px;
+}
+
+div.feed-story-body-inner h1 strong {
+    font-weight: 500;
+}
+
+div.feed-story-body-inner h2 {
+    --sat: env(safe-area-inset-top);
+    --sab: env(safe-area-inset-bottom);
+    -webkit-text-size-adjust: 100%;
+    -webkit-font-smoothing: antialiased;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    font-family: Matter,Helvetica Neue,Helvetica,Arial,Lucida Grande,sans-serif;
+    font-variant-ligatures: no-contextual;
+    overflow-wrap: break-word;
+    color: rgb(18, 10, 32);
+    margin: .83em 0;
+    text-rendering: optimizeLegibility;
+    font-weight: 400;
+    margin-bottom: 13px;
+    font-size: 25px;
+    line-height: 30px;
+    margin-top: 0;
+}
+
+div.feed-story-body-inner h2 strong {
+    font-weight: 500;
+}
+
+div.feed-story-footer-outer {
+    color: #000;
+    --sat: env(safe-area-inset-top);
+    --sab: env(safe-area-inset-bottom);
+    -webkit-text-size-adjust: 100%;
+    -webkit-font-smoothing: antialiased;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    font-family: Matter,Helvetica Neue,Helvetica,Arial,Lucida Grande,sans-serif;
+    font-size: 16px;
+    font-variant-ligatures: no-contextual;
+    font-weight: 400;
+    line-height: 24px;
+}
+
+div.feed-story-footer-inner {
+    --sat: env(safe-area-inset-top);
+    --sab: env(safe-area-inset-bottom);
+    -webkit-text-size-adjust: 100%;
+    -webkit-font-smoothing: antialiased;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    font-variant-ligatures: no-contextual;
+    font-weight: 400;
+    padding: 0px 0px 11px 16px;
+    color: rgb(153, 153, 153);
+    font-size: 12px;
+    font-family: Inter, Matter, "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+    line-height: 1.09;
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+}
+
+button.feed-story-footer {
+    --sat: env(safe-area-inset-top);
+    --sab: env(safe-area-inset-bottom);
+    -webkit-text-size-adjust: 100%;
+    -webkit-font-smoothing: antialiased;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    vertical-align: baseline;
+    text-transform: none;
+    appearance: none;
+    border-radius: 0;
+    width: auto;
+    color: rgb(153, 153, 153);
+    font-size: inherit;
+    font-family: inherit;
+    line-height: 1.09;
+    background: none;
+    text-align: left;
+    cursor: pointer;
+    padding: 10px;
+    margin: -10px;
+    border: 1px solid transparent;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+span.feed-story-footer-span-outer {
+    --sat: env(safe-area-inset-top);
+    --sab: env(safe-area-inset-bottom);
+    -webkit-text-size-adjust: 100%;
+    -webkit-font-smoothing: antialiased;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    text-transform: none;
+    color: rgb(153, 153, 153);
+    font-size: inherit;
+    font-family: inherit;
+    line-height: 1.09;
+    text-align: left;
+    cursor: pointer;
+    white-space: nowrap;
+}
+
+span.feed-story-footer-title {
+    --sat: env(safe-area-inset-top);
+    --sab: env(safe-area-inset-bottom);
+    -webkit-text-size-adjust: 100%;
+    -webkit-font-smoothing: antialiased;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    text-transform: none;
+    color: rgb(153, 153, 153);
+    font-size: inherit;
+    font-family: inherit;
+    line-height: 1.09;
+    text-align: left;
+    cursor: pointer;
+    white-space: nowrap;
+}
+
+span.feed-story-footer-item {
+    --sat: env(safe-area-inset-top);
+    --sab: env(safe-area-inset-bottom);
+    -webkit-text-size-adjust: 100%;
+    -webkit-font-smoothing: antialiased;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    text-transform: none;
+    color: rgb(153, 153, 153);
+    font-size: inherit;
+    font-family: inherit;
+    line-height: 1.09;
+    text-align: left;
+    cursor: pointer;
+    white-space: nowrap;
+}
+
+div.feed-story-whats-next-title {
+    --sat: env(safe-area-inset-top);
+    --sab: env(safe-area-inset-bottom);
+    -webkit-text-size-adjust: 100%;
+    -webkit-font-smoothing: antialiased;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    font-family: Matter,Helvetica Neue,Helvetica,Arial,Lucida Grande,sans-serif;
+    font-size: 16px;
+    font-variant-ligatures: no-contextual;
+    font-weight: 400;
+    line-height: 24px;
+    overflow-wrap: break-word;
+    color: rgb(153, 153, 153);
+}
+
+
+div.feed-story-whats-next-body {
+    color: #000;
+    --sat: env(safe-area-inset-top);
+    --sab: env(safe-area-inset-bottom);
+    -webkit-text-size-adjust: 100%;
+    -webkit-font-smoothing: antialiased;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    font-family: Matter,Helvetica Neue,Helvetica,Arial,Lucida Grande,sans-serif;
+    font-size: 16px;
+    font-variant-ligatures: no-contextual;
+    font-weight: 400;
+    line-height: 24px;
+    overflow-wrap: break-word;
+}
+
+div.feed-story-whats-next-body p {
+    --sat: env(safe-area-inset-top);
+    --sab: env(safe-area-inset-bottom);
+    -webkit-text-size-adjust: 100%;
+    -webkit-font-smoothing: antialiased;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    font-family: Matter,Helvetica Neue,Helvetica,Arial,Lucida Grande,sans-serif;
+    font-variant-ligatures: no-contextual;
+    overflow-wrap: break-word;
+    color: rgb(18, 10, 32);
+    text-rendering: optimizeLegibility;
+    font-style: normal;
+    font-weight: 400;
+    margin: 1em 0;
+    cursor: default;
+    font-size: 16px;
+    line-height: 24px;
+    margin-top: 0px;
+}
+
+div.feed-story-areas-outer {
+    color: #000;
+    --sat: env(safe-area-inset-top);
+    --sab: env(safe-area-inset-bottom);
+    -webkit-text-size-adjust: 100%;
+    -webkit-font-smoothing: antialiased;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    font-family: Matter,Helvetica Neue,Helvetica,Arial,Lucida Grande,sans-serif;
+    font-size: 16px;
+    font-variant-ligatures: no-contextual;
+    font-weight: 400;
+    line-height: 24px;
+    margin-bottom: 16px;
+}
+
+div.feed-story-areas-inner {
+    color: #000;
+    --sat: env(safe-area-inset-top);
+    --sab: env(safe-area-inset-bottom);
+    -webkit-text-size-adjust: 100%;
+    -webkit-font-smoothing: antialiased;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    font-family: Matter,Helvetica Neue,Helvetica,Arial,Lucida Grande,sans-serif;
+    font-size: 16px;
+    font-variant-ligatures: no-contextual;
+    font-weight: 400;
+    line-height: 24px;
+    margin-top: 0px;
+    padding: 0px 16px;
+}
+
+div.feed-story-areas-inner-2 {
+    color: #000;
+    --sat: env(safe-area-inset-top);
+    --sab: env(safe-area-inset-bottom);
+    -webkit-text-size-adjust: 100%;
+    -webkit-font-smoothing: antialiased;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    font-family: Matter,Helvetica Neue,Helvetica,Arial,Lucida Grande,sans-serif;
+    font-size: 16px;
+    font-variant-ligatures: no-contextual;
+    font-weight: 400;
+    line-height: 24px;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+div.feed-story-areas-pill {
+    color: #000;
+    --sat: env(safe-area-inset-top);
+    --sab: env(safe-area-inset-bottom);
+    -webkit-text-size-adjust: 100%;
+    -webkit-font-smoothing: antialiased;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    font-family: Matter,Helvetica Neue,Helvetica,Arial,Lucida Grande,sans-serif;
+    font-size: 16px;
+    font-variant-ligatures: no-contextual;
+    font-weight: 400;
+    line-height: 24px;
+    margin: 4px 0px;
+    padding: 4px 12px;
+    -webkit-print-color-adjust: exact;
+    border-radius: 100px;
+    opacity: 1;
+    margin-right: 8px;
+}
+
+div.feed-story-areas-pill-blue {
+    background: rgb(33, 149, 242) !important;
+}
+
+div.feed-story-areas-pill-yellow {
+    background: rgb(255, 202, 60) !important;
+}
+
+div.feed-story-areas-pill-red {
+    background: rgb(233, 29, 98) !important;
+}
+
+div.feed-story-areas-pill-green {
+    background: rgb(23, 207, 72) !important;
+}
+
+div.feed-story-areas-pill-purple {
+    background: rgb(92, 52, 163) !important;
+}
+
+small.feed-story-areas-pill {
+    --sat: env(safe-area-inset-top);
+    --sab: env(safe-area-inset-bottom);
+    -webkit-text-size-adjust: 100%;
+    -webkit-font-smoothing: antialiased;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    font-variant-ligatures: no-contextual;
+    -webkit-print-color-adjust: exact;
+    color: rgb(255, 255, 255);
+    font-family: Matter, "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+    font-size: 14px;
+    line-height: 22px;
+    font-weight: 500;
+    letter-spacing: normal;
+    display: block;
+    margin: 0px;
+}
+
+div.feed-story-post-images {
+    color: #000;
+    --sat: env(safe-area-inset-top);
+    --sab: env(safe-area-inset-bottom);
+    -webkit-text-size-adjust: 100%;
+    -webkit-font-smoothing: antialiased;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    font-family: Matter,Helvetica Neue,Helvetica,Arial,Lucida Grande,sans-serif;
+    font-size: 16px;
+    font-variant-ligatures: no-contextual;
+    font-weight: 400;
+    line-height: 24px;
+    margin-bottom: 16px;
+    overflow: hidden;
+}
+
+div.feed-story-large-image-holder {
+    color: #000;
+    --sat: env(safe-area-inset-top);
+    --sab: env(safe-area-inset-bottom);
+    -webkit-text-size-adjust: 100%;
+    -webkit-font-smoothing: antialiased;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    font-family: Matter,Helvetica Neue,Helvetica,Arial,Lucida Grande,sans-serif;
+    font-size: 16px;
+    font-variant-ligatures: no-contextual;
+    font-weight: 400;
+    line-height: 24px;
+    cursor: pointer;
+    overflow: hidden;
+    max-height: 800px;
+    height: auto;
+}
+
+img.feed-story-large-image {
+    color: #000;
+    --sat: env(safe-area-inset-top);
+    --sab: env(safe-area-inset-bottom);
+    -webkit-text-size-adjust: 100%;
+    -webkit-font-smoothing: antialiased;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    font-family: Matter,Helvetica Neue,Helvetica,Arial,Lucida Grande,sans-serif;
+    font-size: 16px;
+    font-variant-ligatures: no-contextual;
+    font-weight: 400;
+    line-height: 24px;
+    cursor: pointer;
+    vertical-align: middle;
+    border: 0;
+    width: 100%;
+}
+
+div.feed-story-files-outer {
+    color: #000;
+    --sat: env(safe-area-inset-top);
+    --sab: env(safe-area-inset-bottom);
+    -webkit-text-size-adjust: 100%;
+    -webkit-font-smoothing: antialiased;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    font-family: Matter,Helvetica Neue,Helvetica,Arial,Lucida Grande,sans-serif;
+    font-size: 16px;
+    font-variant-ligatures: no-contextual;
+    font-weight: 400;
+    line-height: 24px;
+    display: flex;
+    flex-wrap: wrap;
+    padding: 0px 16px;
+    margin-bottom: 5px;
+}
+
+div.feed-story-files-panel-left {
+    color: #000;
+    --sat: env(safe-area-inset-top);
+    --sab: env(safe-area-inset-bottom);
+    -webkit-text-size-adjust: 100%;
+    -webkit-font-smoothing: antialiased;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    font-family: Matter,Helvetica Neue,Helvetica,Arial,Lucida Grande,sans-serif;
+    font-size: 16px;
+    font-variant-ligatures: no-contextual;
+    font-weight: 400;
+    line-height: 24px;
+    margin-bottom: 8px;
+    margin-right: 8px;
+    min-width: 0px;
+}
+
+div.feed-story-files-panel-right {
+    color: #000;
+    --sat: env(safe-area-inset-top);
+    --sab: env(safe-area-inset-bottom);
+    -webkit-text-size-adjust: 100%;
+    -webkit-font-smoothing: antialiased;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    font-family: Matter,Helvetica Neue,Helvetica,Arial,Lucida Grande,sans-serif;
+    font-size: 16px;
+    font-variant-ligatures: no-contextual;
+    font-weight: 400;
+    line-height: 24px;
+    margin-bottom: 8px;
+    margin-right: 8px;
+    min-width: 0px;}
+
+a.feed-story-files-link {
+    --sat: env(safe-area-inset-top);
+    --sab: env(safe-area-inset-bottom);
+    -webkit-text-size-adjust: 100%;
+    -webkit-font-smoothing: antialiased;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    font-family: Matter,Helvetica Neue,Helvetica,Arial,Lucida Grande,sans-serif;
+    font-variant-ligatures: no-contextual;
+    font-weight: 400;
+    text-decoration: none;
+    max-width: 100%;
+    pointer-events: auto;
+    margin: 0px;
+    text-align: center;
+    border: 1px solid rgba(18, 10, 32, 0.08);
+    white-space: nowrap;
+    box-sizing: border-box;
+    cursor: pointer;
+    background-color: rgb(255, 255, 255);
+    color: rgb(18, 10, 32);
+    outline: none;
+    display: inline-block;
+    vertical-align: middle;
+    font-size: 14px;
+    padding: 6px 10px;
+    line-height: 20px;
+    border-radius: 4px;
+}
+
+div.feed-story-files-inner {
+    --sat: env(safe-area-inset-top);
+    --sab: env(safe-area-inset-bottom);
+    -webkit-text-size-adjust: 100%;
+    -webkit-font-smoothing: antialiased;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    font-family: Matter,Helvetica Neue,Helvetica,Arial,Lucida Grande,sans-serif;
+    font-variant-ligatures: no-contextual;
+    font-weight: 400;
+    pointer-events: auto;
+    text-align: center;
+    white-space: nowrap;
+    cursor: pointer;
+    color: rgb(18, 10, 32);
+    font-size: 14px;
+    line-height: 20px;
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+}
+
+.feed-story-files-icon {
+    --sat: env(safe-area-inset-top);
+    --sab: env(safe-area-inset-bottom);
+    -webkit-text-size-adjust: 100%;
+    -webkit-font-smoothing: antialiased;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    font-family: Matter,Helvetica Neue,Helvetica,Arial,Lucida Grande,sans-serif;
+    font-variant-ligatures: no-contextual;
+    font-weight: 400;
+    pointer-events: auto;
+    text-align: center;
+    white-space: nowrap;
+    cursor: pointer;
+    color: rgb(18, 10, 32);
+    font-size: 14px;
+    line-height: 20px;
+    width: 24px;
+    height: 24px;
+    background: initial;
+    border-radius: initial;
+    flex-shrink: 0;
+    overflow: hidden;
+    vertical-align: text-top;
+}
+
+.feed-story-files-name {
+    --sat: env(safe-area-inset-top);
+    --sab: env(safe-area-inset-bottom);
+    -webkit-text-size-adjust: 100%;
+    -webkit-font-smoothing: antialiased;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    font-variant-ligatures: no-contextual;
+    pointer-events: auto;
+    text-align: center;
+    cursor: pointer;
+    margin-left: 8px;
+    color: rgb(18, 10, 32);
+    font-family: Matter, "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+    font-size: 14px;
+    line-height: 22px;
+    font-weight: normal;
+    letter-spacing: normal;
+    display: block;
+    margin-bottom: 0px;
+    margin-top: 0px;
+    margin-right: 0px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.feed-story-assessment-section-outer {
+    color: #000;
+    --sat: env(safe-area-inset-top);
+    --sab: env(safe-area-inset-bottom);
+    -webkit-text-size-adjust: 100%;
+    -webkit-font-smoothing: antialiased;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    font-family: Matter,Helvetica Neue,Helvetica,Arial,Lucida Grande,sans-serif;
+    font-size: 16px;
+    font-variant-ligatures: no-contextual;
+    font-weight: 400;
+    line-height: 24px;
+    margin-bottom: 16px;
+}
+
+.feed-story-assessment-section-inner {
+    color: #000;
+    --sat: env(safe-area-inset-top);
+    --sab: env(safe-area-inset-bottom);
+    -webkit-text-size-adjust: 100%;
+    -webkit-font-smoothing: antialiased;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    font-family: Matter,Helvetica Neue,Helvetica,Arial,Lucida Grande,sans-serif;
+    font-size: 16px;
+    font-variant-ligatures: no-contextual;
+    font-weight: 400;
+    line-height: 24px;
+    margin-top: 0px;
+}
+
+.feed-story-assessment-area-outer {
+    color: #000;
+    --sat: env(safe-area-inset-top);
+    --sab: env(safe-area-inset-bottom);
+    -webkit-text-size-adjust: 100%;
+    -webkit-font-smoothing: antialiased;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    font-family: Matter,Helvetica Neue,Helvetica,Arial,Lucida Grande,sans-serif;
+    font-size: 16px;
+    font-variant-ligatures: no-contextual;
+    font-weight: 400;
+    line-height: 24px;
+    min-width: 100%;
+    cursor: pointer;
+}
+
+.feed-story-assessment-area-inner {
+    color: #000;
+    --sat: env(safe-area-inset-top);
+    --sab: env(safe-area-inset-bottom);
+    -webkit-text-size-adjust: 100%;
+    -webkit-font-smoothing: antialiased;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    font-family: Matter,Helvetica Neue,Helvetica,Arial,Lucida Grande,sans-serif;
+    font-size: 16px;
+    font-variant-ligatures: no-contextual;
+    font-weight: 400;
+    line-height: 24px;
+    cursor: pointer;
+    padding: 12px 16px;
+}
+
+.feed-story-assessment-area-inner-2 {
+    color: #000;
+    --sat: env(safe-area-inset-top);
+    --sab: env(safe-area-inset-bottom);
+    -webkit-text-size-adjust: 100%;
+    -webkit-font-smoothing: antialiased;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    font-family: Matter,Helvetica Neue,Helvetica,Arial,Lucida Grande,sans-serif;
+    font-size: 16px;
+    font-variant-ligatures: no-contextual;
+    font-weight: 400;
+    line-height: 24px;
+    min-width: 100%;
+    cursor: pointer;
+}
+
+.feed-story-assessment-area-header-outer {
+    color: #000;
+    --sat: env(safe-area-inset-top);
+    --sab: env(safe-area-inset-bottom);
+    -webkit-text-size-adjust: 100%;
+    -webkit-font-smoothing: antialiased;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    font-family: Matter,Helvetica Neue,Helvetica,Arial,Lucida Grande,sans-serif;
+    font-size: 16px;
+    font-variant-ligatures: no-contextual;
+    font-weight: 400;
+    line-height: 24px;
+    cursor: pointer;
+    display: flex;
+    -webkit-box-pack: justify;
+    justify-content: space-between;
+}
+
+.feed-story-assessment-area-header-content {
+    color: #000;
+    --sat: env(safe-area-inset-top);
+    --sab: env(safe-area-inset-bottom);
+    -webkit-text-size-adjust: 100%;
+    -webkit-font-smoothing: antialiased;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    font-family: Matter,Helvetica Neue,Helvetica,Arial,Lucida Grande,sans-serif;
+    font-size: 16px;
+    font-variant-ligatures: no-contextual;
+    font-weight: 400;
+    line-height: 24px;
+    cursor: pointer;
+    -webkit-box-flex: 1;
+    flex-grow: 1;
+    display: flex;
+}
+
+.feed-story-assessment-area-header-circle-outer {
+    color: #000;
+    --sat: env(safe-area-inset-top);
+    --sab: env(safe-area-inset-bottom);
+    -webkit-text-size-adjust: 100%;
+    -webkit-font-smoothing: antialiased;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    font-family: Matter,Helvetica Neue,Helvetica,Arial,Lucida Grande,sans-serif;
+    font-size: 16px;
+    font-variant-ligatures: no-contextual;
+    font-weight: 400;
+    line-height: 24px;
+    cursor: pointer;
+    margin-top: 2px;
+    margin-right: 8px;
+    flex-shrink: 0;
+}
+
+.feed-story-assessment-area-header-circle-inner {
+    color: #000;
+    --sat: env(safe-area-inset-top);
+    --sab: env(safe-area-inset-bottom);
+    -webkit-text-size-adjust: 100%;
+    -webkit-font-smoothing: antialiased;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    font-family: Matter,Helvetica Neue,Helvetica,Arial,Lucida Grande,sans-serif;
+    font-size: 16px;
+    font-variant-ligatures: no-contextual;
+    font-weight: 400;
+    line-height: 24px;
+    cursor: pointer;
+    height: 20px;
+    width: 20px;
+    border-radius: 50%;
+    opacity: 1;
+}
+
+div.feed-story-assessment-area-header-circle-inner-blue {
+    background: rgb(33, 149, 242) !important;
+}
+
+div.feed-story-assessment-area-header-circle-inner-yellow {
+    background: rgb(255, 202, 60) !important;
+}
+
+div.feed-story-assessment-area-header-circle-inner-red {
+    background: rgb(233, 29, 98) !important;
+}
+
+div.feed-story-assessment-area-header-circle-inner-green {
+    background: rgb(23, 207, 72) !important;
+}
+
+div.feed-story-assessment-area-header-circle-inner-purple {
+    background: rgb(92, 52, 163) !important;
+}
+
+
+.feed-story-assessment-area-header-box {
+    color: #000;
+    --sat: env(safe-area-inset-top);
+    --sab: env(safe-area-inset-bottom);
+    -webkit-text-size-adjust: 100%;
+    -webkit-font-smoothing: antialiased;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    font-family: Matter,Helvetica Neue,Helvetica,Arial,Lucida Grande,sans-serif;
+    font-size: 16px;
+    font-variant-ligatures: no-contextual;
+    font-weight: 400;
+    line-height: 24px;
+    cursor: pointer;
+    -webkit-box-flex: 1;
+    flex-grow: 1;
+}
+
+.feed-story-assessment-area-header-title {
+    --sat: env(safe-area-inset-top);
+    --sab: env(safe-area-inset-bottom);
+    -webkit-text-size-adjust: 100%;
+    -webkit-font-smoothing: antialiased;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    font-variant-ligatures: no-contextual;
+    cursor: pointer;
+    text-rendering: optimizeLegibility;
+    font-style: normal;
+    color: rgb(18, 10, 32);
+    font-family: Matter, "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+    font-size: 16px;
+    line-height: 24px;
+    font-weight: 500;
+    letter-spacing: normal;
+    display: block;
+    margin: 0px;
+    opacity: 1;
+}
+
+.feed-story-assessment-area-header-subtitle{
+    color: #000;
+    --sat: env(safe-area-inset-top);
+    --sab: env(safe-area-inset-bottom);
+    -webkit-text-size-adjust: 100%;
+    -webkit-font-smoothing: antialiased;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    font-family: Matter,Helvetica Neue,Helvetica,Arial,Lucida Grande,sans-serif;
+    font-size: 16px;
+    font-variant-ligatures: no-contextual;
+    font-weight: 400;
+    line-height: 24px;
+    cursor: pointer;
+    margin-top: 4px;
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+}
+
+.feed-story-assessment-area-header-age {
+    --sat: env(safe-area-inset-top);
+    --sab: env(safe-area-inset-bottom);
+    -webkit-text-size-adjust: 100%;
+    -webkit-font-smoothing: antialiased;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    font-variant-ligatures: no-contextual;
+    cursor: pointer;
+    margin-right: 8px;
+    color: rgb(18, 10, 32);
+    font-family: Matter, "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: normal;
+    display: block;
+    margin-bottom: 0px;
+    margin-top: 0px;
+    margin-left: 0px;
+    box-sizing: border-box;
+    border-radius: 100px;
+    padding: 4px 8px;
+    line-height: 20px;
+    border: 1px solid rgb(18, 10, 32);
+}
+
+.feed-story-assessment-area-header-status {
+    --sat: env(safe-area-inset-top);
+    --sab: env(safe-area-inset-bottom);
+    -webkit-text-size-adjust: 100%;
+    -webkit-font-smoothing: antialiased;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    font-variant-ligatures: no-contextual;
+    cursor: pointer;
+    font-family: Matter, "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: normal;
+    display: block;
+    margin: 0px;
+    box-sizing: border-box;
+    border-radius: 100px;
+    padding: 4px 8px;
+    line-height: 20px;
+    -webkit-print-color-adjust: exact;
+    border: 1px solid transparent;
+    color: rgb(64, 43, 110) !important;
+    background: rgb(214, 204, 235) !important;
+}
+
+.feed-story-assessment-area-header-arrow-box {
+    color: #000;
+    --sat: env(safe-area-inset-top);
+    --sab: env(safe-area-inset-bottom);
+    -webkit-text-size-adjust: 100%;
+    -webkit-font-smoothing: antialiased;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    font-family: Matter,Helvetica Neue,Helvetica,Arial,Lucida Grande,sans-serif;
+    font-size: 16px;
+    font-variant-ligatures: no-contextual;
+    font-weight: 400;
+    line-height: 24px;
+    cursor: pointer;
+    flex-shrink: 0;
+    align-self: center;
+}
+
+.feed-story-assessment-area-header-arrow-icon {
+    --sat: env(safe-area-inset-top);
+    --sab: env(safe-area-inset-bottom);
+    -webkit-text-size-adjust: 100%;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    font-variant-ligatures: no-contextual;
+    cursor: pointer;
+    user-select: none;
+    width: 1em;
+    height: 1em;
+    overflow: hidden;
+    display: inline-block;
+    text-align: center;
+    flex-shrink: 0;
+    font-family: "Material Symbols Rounded";
+    font-variation-settings: "FILL" 0, "wght" 300, "GRAD" 0, "opsz" 24;
+    font-weight: normal;
+    font-style: normal;
+    letter-spacing: normal;
+    text-transform: none;
+    white-space: nowrap;
+    overflow-wrap: normal;
+    line-height: 1em;
+    direction: ltr;
+    -webkit-font-smoothing: antialiased;
+    transition: font-variation-settings 0.1s ease-in-out 0s;
+    font-size: 32px;
+    color: inherit;
+}
+
+.feed-story-assessment-area-body-outer {
+    color: #000;
+    --sat: env(safe-area-inset-top);
+    --sab: env(safe-area-inset-bottom);
+    -webkit-text-size-adjust: 100%;
+    -webkit-font-smoothing: antialiased;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    font-family: Matter,Helvetica Neue,Helvetica,Arial,Lucida Grande,sans-serif;
+    font-size: 16px;
+    font-variant-ligatures: no-contextual;
+    font-weight: 400;
+    line-height: 24px;
+    cursor: pointer;
+    overflow: hidden;
+    transition: max-height 0.6s ease-in-out 0s;
+}
+
+div.feed-story-assessment-area-body-text {
+    --sat: env(safe-area-inset-top);
+    --sab: env(safe-area-inset-bottom);
+    -webkit-text-size-adjust: 100%;
+    -webkit-font-smoothing: antialiased;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    font-variant-ligatures: no-contextual;
+    cursor: pointer;
+    text-rendering: optimizeLegibility;
+    font-style: normal;
+    color: rgb(18, 10, 32);
+    font-family: Matter, "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+    font-size: 16px;
+    line-height: 24px;
+    font-weight: normal;
+    letter-spacing: normal;
+    display: block;
+    margin: 0px;
+}
+
+p.feed-story-assessment-area-body-text {
+    --sat: env(safe-area-inset-top);
+    --sab: env(safe-area-inset-bottom);
+    -webkit-text-size-adjust: 100%;
+    -webkit-font-smoothing: antialiased;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    font-variant-ligatures: no-contextual;
+    cursor: pointer;
+    text-rendering: optimizeLegibility;
+    font-style: normal;
+    color: rgb(18, 10, 32);
+    font-family: Matter, "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+    font-size: 16px;
+    line-height: 24px;
+    font-weight: normal;
+    letter-spacing: normal;
+    display: block;
+    margin: 0px;
+}
+
+div.feed-story-event-panel-outer {
+    color: #000;
+    --sat: env(safe-area-inset-top);
+    --sab: env(safe-area-inset-bottom);
+    -webkit-text-size-adjust: 100%;
+    -webkit-font-smoothing: antialiased;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    font-family: Matter,Helvetica Neue,Helvetica,Arial,Lucida Grande,sans-serif;
+    font-size: 16px;
+    font-variant-ligatures: no-contextual;
+    font-weight: 400;
+    line-height: 24px;
+    margin-bottom: 16px;
+}
+
+div.feed-story-event-panel-inner {
+    color: #000;
+    --sat: env(safe-area-inset-top);
+    --sab: env(safe-area-inset-bottom);
+    -webkit-text-size-adjust: 100%;
+    -webkit-font-smoothing: antialiased;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    font-family: Matter,Helvetica Neue,Helvetica,Arial,Lucida Grande,sans-serif;
+    font-size: 16px;
+    font-variant-ligatures: no-contextual;
+    font-weight: 400;
+    line-height: 24px;
+    margin: 0px 16px;
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+    border-radius: 2px;
+    box-sizing: border-box;
+    background-color: rgb(244, 244, 244);
+    box-shadow: rgba(18, 10, 32, 0.1) 0px 2px 4px 0px;
+}
+
+div.feed-story-event-panel-content {
+    color: #000;
+    --sat: env(safe-area-inset-top);
+    --sab: env(safe-area-inset-bottom);
+    -webkit-text-size-adjust: 100%;
+    -webkit-font-smoothing: antialiased;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    font-family: Matter,Helvetica Neue,Helvetica,Arial,Lucida Grande,sans-serif;
+    font-size: 16px;
+    font-variant-ligatures: no-contextual;
+    font-weight: 400;
+    line-height: 24px;
+}
+
+.feed-story-event-calendar-icon {
+    --sat: env(safe-area-inset-top);
+    --sab: env(safe-area-inset-bottom);
+    -webkit-text-size-adjust: 100%;
+    -webkit-font-smoothing: antialiased;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    font-variant-ligatures: no-contextual;
+    text-rendering: optimizeLegibility;
+    font-style: normal;
+    color: rgb(18, 10, 32);
+    font-family: Matter, "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+    font-size: 16px;
+    line-height: 24px;
+    font-weight: 500;
+    letter-spacing: normal;
+    vertical-align: middle;
+    border: 0;
+    width: 15px;
+    height: 15px;
+    margin-top: -4px;
+    margin-right: 4px;
+}
+
+.feed-story-event-title {
+    --sat: env(safe-area-inset-top);
+    --sab: env(safe-area-inset-bottom);
+    -webkit-text-size-adjust: 100%;
+    -webkit-font-smoothing: antialiased;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    font-variant-ligatures: no-contextual;
+    text-rendering: optimizeLegibility;
+    font-style: normal;
+    color: rgb(18, 10, 32);
+    font-family: Matter, "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+    font-size: 16px;
+    line-height: 24px;
+    font-weight: 500;
+    letter-spacing: normal;
+    display: block;
+    margin: 0px;
+}
+
+.feed-story-event-date {
+    --sat: env(safe-area-inset-top);
+    --sab: env(safe-area-inset-bottom);
+    -webkit-text-size-adjust: 100%;
+    -webkit-font-smoothing: antialiased;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    font-variant-ligatures: no-contextual;
+    margin: 4px 0px 8px;
+    color: rgba(18, 10, 32, 0.6);
+    font-family: Matter, "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+    font-size: 14px;
+    line-height: 22px;
+    font-weight: normal;
+    letter-spacing: normal;
+    display: block;
+}
+
+.feed-story-event-text-outer {
+    --sat: env(safe-area-inset-top);
+    --sab: env(safe-area-inset-bottom);
+    -webkit-text-size-adjust: 100%;
+    -webkit-font-smoothing: antialiased;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    font-variant-ligatures: no-contextual;
+    color: rgb(18, 10, 32);
+    font-family: Matter, "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+    font-size: 14px;
+    line-height: 22px;
+    font-weight: normal;
+    letter-spacing: normal;
+    display: block;
+    margin: 0px;
+    height: 50px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.feed-story-event-text-inner {
+    --sat: env(safe-area-inset-top);
+    --sab: env(safe-area-inset-bottom);
+    -webkit-text-size-adjust: 100%;
+    -webkit-font-smoothing: antialiased;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    font-variant-ligatures: no-contextual;
+    color: rgb(18, 10, 32);
+    font-family: Matter, "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+    font-size: 14px;
+    line-height: 22px;
+    font-weight: normal;
+    letter-spacing: normal;
+}

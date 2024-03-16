@@ -1,0 +1,370 @@
+.childnotes-profile-header-wrapper
+{
+    color: #000;
+    --sat: env(safe-area-inset-top);
+    --sab: env(safe-area-inset-bottom);
+    -webkit-text-size-adjust: 100%;
+    -webkit-font-smoothing: antialiased;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    font-family: Matter,Helvetica Neue,Helvetica,Arial,Lucida Grande,sans-serif;
+    font-size: 16px;
+    font-variant-ligatures: no-contextual;
+    font-weight: 400;
+    line-height: 24px;
+}
+
+.childnotes-child-profile-header {
+    color: #000;
+    --sat: env(safe-area-inset-top);
+    --sab: env(safe-area-inset-bottom);
+    -webkit-text-size-adjust: 100%;
+    -webkit-font-smoothing: antialiased;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    font-family: Matter,Helvetica Neue,Helvetica,Arial,Lucida Grande,sans-serif;
+    font-size: 16px;
+    font-variant-ligatures: no-contextual;
+    font-weight: 400;
+    line-height: 24px;
+    height: 130px;
+    box-sizing: border-box;
+    margin-bottom: 36px;
+    background: rgb(251, 251, 251);
+}
+
+.childnotes-child-profile-header-inner {
+    color: #000;
+    --sat: env(safe-area-inset-top);
+    --sab: env(safe-area-inset-bottom);
+    -webkit-text-size-adjust: 100%;
+    -webkit-font-smoothing: antialiased;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    font-family: Matter,Helvetica Neue,Helvetica,Arial,Lucida Grande,sans-serif;
+    font-size: 16px;
+    font-variant-ligatures: no-contextual;
+    font-weight: 400;
+    line-height: 24px;
+    display: flex;
+    flex-flow: row wrap;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 1056px;
+    height: 100%;
+}
+
+.childnotes-child-profile-header-inner2 {
+    color: #000;
+    --sat: env(safe-area-inset-top);
+    --sab: env(safe-area-inset-bottom);
+    -webkit-text-size-adjust: 100%;
+    -webkit-font-smoothing: antialiased;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    font-family: Matter,Helvetica Neue,Helvetica,Arial,Lucida Grande,sans-serif;
+    font-size: 16px;
+    font-variant-ligatures: no-contextual;
+    font-weight: 400;
+    line-height: 24px;
+    min-width: auto;
+    padding-left: .75rem;
+    padding-right: .75rem;
+    flex: 0 0 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+    height: 100%;
+    display: flex;
+}
+
+.childnotes-profile-image-outer {
+    color: #000;
+    --sat: env(safe-area-inset-top);
+    --sab: env(safe-area-inset-bottom);
+    -webkit-text-size-adjust: 100%;
+    -webkit-font-smoothing: antialiased;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    font-family: Matter,Helvetica Neue,Helvetica,Arial,Lucida Grande,sans-serif;
+    font-size: 16px;
+    font-variant-ligatures: no-contextual;
+    font-weight: 400;
+    line-height: 24px;
+    flex-shrink: 0;
+}
+
+.childnotes-profile-image-inner {
+    color: #000;
+    --sat: env(safe-area-inset-top);
+    --sab: env(safe-area-inset-bottom);
+    -webkit-text-size-adjust: 100%;
+    -webkit-font-smoothing: antialiased;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    font-family: Matter,Helvetica Neue,Helvetica,Arial,Lucida Grande,sans-serif;
+    font-size: 16px;
+    font-variant-ligatures: no-contextual;
+    font-weight: 400;
+    line-height: 24px;
+    margin-top: 21px;
+    margin-right: 16px;
+}
+
+.childnotes-profile-image-inner2 {
+    color: #000;
+    --sat: env(safe-area-inset-top);
+    --sab: env(safe-area-inset-bottom);
+    -webkit-text-size-adjust: 100%;
+    -webkit-font-smoothing: antialiased;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    font-family: Matter,Helvetica Neue,Helvetica,Arial,Lucida Grande,sans-serif;
+    font-size: 16px;
+    font-variant-ligatures: no-contextual;
+    font-weight: 400;
+    line-height: 24px;
+    max-width: 130px;
+    max-height: 130px;
+    margin: 0px auto;
+    position: relative;
+    border-radius: 50%;
+    top: 0px;
+    overflow: hidden;
+    cursor: pointer;
+    box-sizing: border-box;
+    border: 3px solid rgb(255, 255, 255);
+    height: 130px;
+    width: 130px;
+}
+
+.childnotes-profile-image
+{
+    color: #000;
+    --sat: env(safe-area-inset-top);
+    --sab: env(safe-area-inset-bottom);
+    -webkit-text-size-adjust: 100%;
+    -webkit-font-smoothing: antialiased;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    font-family: Matter,Helvetica Neue,Helvetica,Arial,Lucida Grande,sans-serif;
+    font-size: 16px;
+    font-variant-ligatures: no-contextual;
+    font-weight: 400;
+    line-height: 24px;
+    cursor: pointer;
+    vertical-align: middle;
+    border: 0;
+    display: block;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+}
+
+.child-profile-text-outer {
+    color: #000;
+    --sat: env(safe-area-inset-top);
+    --sab: env(safe-area-inset-bottom);
+    -webkit-text-size-adjust: 100%;
+    -webkit-font-smoothing: antialiased;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    font-family: Matter,Helvetica Neue,Helvetica,Arial,Lucida Grande,sans-serif;
+    font-size: 16px;
+    font-variant-ligatures: no-contextual;
+    font-weight: 400;
+    line-height: 24px;
+    -webkit-box-flex: 1;
+    flex-grow: 1;
+    display: flex;
+    -webkit-box-pack: justify;
+    justify-content: space-between;
+    flex-direction: column;
+}
+
+.child-profile-text-header-outer {
+    color: #000;
+    --sat: env(safe-area-inset-top);
+    --sab: env(safe-area-inset-bottom);
+    -webkit-text-size-adjust: 100%;
+    -webkit-font-smoothing: antialiased;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    font-family: Matter,Helvetica Neue,Helvetica,Arial,Lucida Grande,sans-serif;
+    font-size: 16px;
+    font-variant-ligatures: no-contextual;
+    font-weight: 400;
+    line-height: 24px;
+    margin-top: 32px;
+}
+
+.child-profile-text-header-inner1 {
+    color: #000;
+    --sat: env(safe-area-inset-top);
+    --sab: env(safe-area-inset-bottom);
+    -webkit-text-size-adjust: 100%;
+    -webkit-font-smoothing: antialiased;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    font-family: Matter,Helvetica Neue,Helvetica,Arial,Lucida Grande,sans-serif;
+    font-size: 16px;
+    font-variant-ligatures: no-contextual;
+    font-weight: 400;
+    line-height: 24px;
+    display: flex;
+    align-items: flex-start;
+}
+
+.child-profile-text-header-inner2 {
+    color: #000;
+    --sat: env(safe-area-inset-top);
+    --sab: env(safe-area-inset-bottom);
+    -webkit-text-size-adjust: 100%;
+    -webkit-font-smoothing: antialiased;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    font-family: Matter,Helvetica Neue,Helvetica,Arial,Lucida Grande,sans-serif;
+    font-size: 16px;
+    font-variant-ligatures: no-contextual;
+    font-weight: 400;
+    line-height: 24px;
+}
+
+.child-profile-text-header-child {
+    --sat: env(safe-area-inset-top);
+    --sab: env(safe-area-inset-bottom);
+    -webkit-text-size-adjust: 100%;
+    -webkit-font-smoothing: antialiased;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    font-variant-ligatures: no-contextual;
+    text-rendering: optimizeLegibility;
+    color: rgb(18, 10, 32);
+    font-family: Matter, "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+    font-size: 24px;
+    line-height: 32px;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+    display: block;
+    margin: 0px;
+}
+
+.child-profile-text-header-class {
+    --sat: env(safe-area-inset-top);
+    --sab: env(safe-area-inset-bottom);
+    -webkit-text-size-adjust: 100%;
+    -webkit-font-smoothing: antialiased;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    font-variant-ligatures: no-contextual;
+    color: rgba(18, 10, 32, 0.35);
+    font-family: Matter, "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+    font-size: 14px;
+    line-height: 22px;
+    font-weight: normal;
+    letter-spacing: normal;
+    display: block;
+    margin: 0px;
+}
+
+.child-profile-tabs-outer {
+    color: #000;
+    --sat: env(safe-area-inset-top);
+    --sab: env(safe-area-inset-bottom);
+    -webkit-text-size-adjust: 100%;
+    -webkit-font-smoothing: antialiased;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    font-family: Matter,Helvetica Neue,Helvetica,Arial,Lucida Grande,sans-serif;
+    font-size: 16px;
+    font-variant-ligatures: no-contextual;
+    font-weight: 400;
+    line-height: 24px;
+    display: flex;
+    background: none;
+}
+
+a.child-profile-tab-first {
+    margin-left: -16px;
+}
+
+a.child-profile-tab-last {
+    margin-right: -16px;
+}
+
+a.child-profile-tab-item {
+    --sat: env(safe-area-inset-top);
+    --sab: env(safe-area-inset-bottom);
+    -webkit-text-size-adjust: 100%;
+    -webkit-font-smoothing: antialiased;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    font-family: Matter,Helvetica Neue,Helvetica,Arial,Lucida Grande,sans-serif;
+    font-size: 16px;
+    font-variant-ligatures: no-contextual;
+    font-weight: 400;
+    line-height: 24px;
+    text-decoration: none;
+    color: rgb(33, 149, 242);
+    pointer-events: auto;
+    white-space: nowrap;
+    flex-shrink: 0;
+    cursor: pointer;
+    position: relative;
+    padding: 0px 16px;
+    height: 44px;
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    justify-content: center;
+    border-top-left-radius: 7px;
+    border-top-right-radius: 7px;
+    transition: background-color 0.1s ease 0s;
+}
+
+a.child-profile-tab-item-selected::after {
+    opacity: 1;
+    content: "";
+    position: absolute;
+    left: 12px;
+    right: 12px;
+    bottom: 0px;
+    height: 4px;
+    border-radius: 2px;
+    background-color: rgba(31, 62, 78, 0.8);
+    /* opacity: 0; */
+    pointer-events: none;
+}
+
+a:hover.child-profile-tab-item {
+    outline: 0;
+    background-color: rgba(31, 62, 78, 0.04);
+}
+
+p.child-profile-tab-item {
+    text-rendering: optimizeLegibility;
+    font-style: normal;
+    font-family: Matter, "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+    font-weight: normal;
+    letter-spacing: normal;
+    display: block;
+    margin: 0px;
+    text-align: center;
+    color: rgba(18, 10, 32, 0.6);
+}
+
+p.child-profile-tab-item-selected {
+    --sat: env(safe-area-inset-top);
+    --sab: env(safe-area-inset-bottom);
+    -webkit-text-size-adjust: 100%;
+    -webkit-font-smoothing: antialiased;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    font-variant-ligatures: no-contextual;
+    pointer-events: auto;
+    white-space: nowrap;
+    cursor: pointer;
+    text-rendering: optimizeLegibility;
+    font-style: normal;
+    color: rgb(18, 10, 32);
+    font-family: Matter, "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+    font-size: 16px;
+    line-height: 24px;
+    font-weight: 500;
+    letter-spacing: normal;
+    display: block;
+    margin: 0px;
+    text-align: center;
+}
+
+p.child-profile-tab-item-selected::after {
+    display: block;
+    content: attr(title);
+    font-weight: 500;
+    height: 0px;
+    overflow: hidden;
+    visibility: hidden;
+}

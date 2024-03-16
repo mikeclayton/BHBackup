@@ -1,0 +1,116 @@
+<!-- begin child profile view -->
+<div class="sc-jjDsRW USghU profileOutlet child-profile-view">
+    <div class="sc-dFWdGd iFvNUI sc-jQBImV bXjfL">
+        <!--
+        <div class="sc-beqWaB sc-hQlIKd sc-gWAFUw bUiODS dwcBRJ iCEfom sc-bEKnip fyglat sc-jrPfva gydwpD sc-jQBImV bXjfL" data-component-id="EDE69EB4-1447-447C-B24D-22A3BCAF261B">
+            <div class="sc-beqWaB sc-dmqHEX bUiODS gOMyPJ">
+                <h3 data-inline="false" overflow="hidden" color="text" type="Subheader" class="sc-beqWaB lnsCDb sc-eDDNvR sc-fsQiph sc-kCtSUc dWJFFR idnCPQ">
+                    Notes
+                </h3>
+            </div>
+        </div>
+        -->
+        <div class="sc-iXMwsk bmMbPq">
+            <div class="redux-infinite-scroll" style="height: 100%;">
+                <div class="child-profile-infinite-scroll-inner-1">
+                    <div class="child-profile-infinite-scroll-inner-2">
+                        <div class="child-profile-infinite-scroll-inner-3">
+                            <div class="sc-ldCHiC bfToLX">
+                                <!--
+                                <form class="sc-cduAxm fgvuhN sc-bIlklX dTTQUe">
+                                    <div class="sc-beqWaB sc-dmqHEX sc-bRwMUK bUiODS bANJut ivxsqg clearfix">
+                                        <label class="sc-eDDNvR AtjFR sc-bfyqmL gTTtn" type="Caption" color="text">
+                                            Filter by
+                                        </label>
+                                        <div class="sc-ewMyiF fZpyAf">
+                                            <label class="sc-gjTGSA gPTNvv sc-dlLLfg iskGwn">
+                                                <input name="sensitive" class="sc-iKGpAt gUzkkB" type="checkbox" value="false" >
+                                                <div class="sc-beqWaB sc-dmqHEX bUiODS gcOEoN sc-lnAgIa hyZarH">
+                                                    <svg size="17" viewBox="0 0 24 24" width="17px" height="17px" version="1.1" xmlns="http://www.w3.org/2000/svg" class="sc-kgKVFY eECuUF">
+                                                        <g class="sc-fLQRDB hsshvg">
+                                                            <path d="M8.926 18.652L4 13.725l1.767-1.768 3.074 3.074L17.959 5l1.849 1.682z"> </path>
+                                                        </g>
+                                                    </svg>
+                                                </div>
+                                                <div>
+                                                    <p data-inline="false" class="sc-beqWaB bUiODS sc-eDDNvR sc-qRumB drFERN" color="text" type="Body">
+                                                        Sensitive
+                                                    </p>
+                                                </div>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </form>
+                            -->
+                            </div>
+                        </div>
+                        <div class="columns small-12 medium-12 large-9">
+                            <div class="child-profile-contents-title-outer">
+                                <h2 class="child-profile-contents-title-text" data-inline="false" color="text" type="Title">
+                                    Notes
+                                </h2>
+                            </div>
+                            <!-- https://shopify.github.io/liquid/basics/introduction/ -->
+                            {% for childNote in repository.ChildNotes %}
+                            <!-- begin child note -->
+                            <!-- child note id - {{ childNote.Id }} -->
+                            <div elevation="one" class="childnotes-panel-outer">
+                                <!-- header -->
+                                <div class="childnotes-panel-header">
+                                    <div class="childnotes-panel-title">
+                                        <h3 class="childnotes-panel-title" data-inline="true" color="text" type="Subheader">Note</h3>
+                                    </div>
+                                </div>
+                                <!-- text -->
+                                <p class="childnotes-panel-text" data-inline="false" color="text" type="Body">
+                                    <span>
+                                        <span>
+                                            <span>{{ childNote.Text }}</span>
+                                        </span>
+                                        <span style="position: fixed; visibility: hidden; top: 0px; left: 0px;">
+                                            …
+                                        </span>
+                                    </span>
+                                </p>
+                                <!-- images -->
+                                {%  liquid
+                                    assign imageCount = childNote.Images | size
+                                    if imageCount > 0
+                                        assign maxIndex = imageCount | minus: 1
+                                        for imageIndex in (0..maxIndex)
+                                            assign childNoteImage = childNote.Images[imageIndex]
+                                            assign columnIndex = imageIndex | modulo: 3
+                                            if columnIndex == 0
+                                                echo '<div class="childnotes-panel-image-row">' | raw
+                                            endif
+                                            echo '<div class="childnotes-panel-image-cell" style="width: 240px; background-image: url(&quot;./' | append: childNoteImage.Secret.OfflineUrl | append: '&quot;)"></div>' | raw
+                                            if imageIndex == maxIndex
+                                                assign missingCells = 2 | minus: columnIndex
+                                                for missingIndex in (1..missingCells)
+                                                    echo '<div class="empty-cell"></div>' | raw
+                                                endfor
+                                            endif
+                                            if columnIndex == 2
+                                                echo '</div>' | raw
+                                            elsif imageIndex == maxIndex
+                                                echo '</div>' | raw
+                                            endif
+                                        endfor
+                                    endif
+                                %}
+                                <!-- footer -->
+                                <div class="sc-beqWaB OPykB"></div>
+                                <p class="childnotes-panel-footer-text" data-inline="false" disabled="" color="text" type="Body">
+                                    Created {{ childNote.CreatedAtParsed | date: "%d %b %Y" }} · by {{ childNote.CreatedBy.Name.FullName }}
+                                </p>
+                            </div>
+                            <!-- end child note -->
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end child profile view -->

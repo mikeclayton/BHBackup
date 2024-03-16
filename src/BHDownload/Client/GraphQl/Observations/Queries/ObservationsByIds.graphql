@@ -1,0 +1,303 @@
+query ObservationsByIds($observationIds: [ObservationId!]!) {
+  childDevelopment {
+    observations(first: 100, observationIds: $observationIds, ignoreMissing: true) {
+      results {
+        ...ObservationData
+        __typename
+      }
+      __typename
+    }
+    __typename
+  }
+}
+
+fragment ObservationData on Observation {
+  ...ObservationDataWithNoComments
+  comments {
+    count
+    results {
+      ...Comment
+      __typename
+    }
+    __typename
+  }
+  __typename
+}
+
+fragment Comment on Comment {
+  behaviors {
+    id: behaviorId
+    __typename
+  }
+  body
+  id
+  likes {
+    count
+    likedByMe
+    likes {
+      ...Like
+      __typename
+    }
+    __typename
+  }
+  sentAt
+  sentBy {
+    name {
+      fullName
+      __typename
+    }
+    profileImage {
+      url
+      __typename
+    }
+    __typename
+  }
+  canReport
+  __typename
+}
+
+fragment Like on Like {
+  likedAt
+  likedBy {
+    profileImage {
+      url
+      __typename
+    }
+    name {
+      firstName
+      fullName
+      __typename
+    }
+    __typename
+  }
+  __typename
+}
+
+fragment ObservationDataWithNoComments on Observation {
+  children {
+    id
+    name
+    institutionId
+    profileImage {
+      url
+      __typename
+    }
+    __typename
+  }
+  id
+  version
+  feedItem {
+    id
+    __typename
+  }
+  createdBy {
+    name {
+      fullName
+      __typename
+    }
+    profileImage {
+      url
+      __typename
+    }
+    __typename
+  }
+  status {
+    state
+    createdAt
+    __typename
+  }
+  variant
+  settings {
+    assessmentSetting {
+      assessmentSettingsId
+      title
+      __typename
+    }
+    __typename
+  }
+  behaviors {
+    id: behaviorId
+    ... on BehaviorCanLinkToFrameworks {
+      ...BehaviorCanLinkToFrameworks
+      __typename
+    }
+    ... on BehaviorObservationVariantAmbiguity {
+      variants
+      __typename
+    }
+    __typename
+  }
+  remark {
+    id
+    body
+    richTextBody
+    date
+    statements {
+      refinement
+      statement {
+        body
+        id
+        area {
+          frameworkId
+          id
+          lower
+          upper
+          title
+          abbr
+          color
+          deletedAt
+          subAreas {
+            title
+            __typename
+          }
+          __typename
+        }
+        __typename
+      }
+      __typename
+    }
+    areas {
+      area {
+        frameworkId
+        id
+        parentId
+        title
+        description
+        abbr
+        color
+        placement
+        deletedAt
+        framework {
+          id
+          title
+          owner
+          __typename
+        }
+        __typename
+      }
+      refinement
+      note
+      areaRefinementSettings {
+        ageBandSetting {
+          ...AgeBandSetting
+          __typename
+        }
+        assessmentOptionSetting {
+          ...AssessmentOptionSetting
+          __typename
+        }
+        __typename
+      }
+      __typename
+    }
+    customFieldValues {
+      customFieldSetting {
+        assessmentSettingsId
+        customFieldId
+        label
+        order
+        __typename
+      }
+      value
+      __typename
+    }
+    __typename
+  }
+  nextStep {
+    id
+    body
+    richTextBody
+    __typename
+  }
+  files {
+    name
+    url
+    id
+    __typename
+  }
+  images {
+    height
+    width
+    id
+    secret {
+      crop
+      expires
+      key
+      path
+      prefix
+      __typename
+    }
+    __typename
+  }
+  videos {
+    ... on TranscodingVideo {
+      id
+      __typename
+    }
+    ... on TranscodedVideo {
+      duration
+      height
+      id
+      thumbnailUrl
+      videoUrl
+      width
+      __typename
+    }
+    __typename
+  }
+  likes {
+    count
+    likedByMe
+    likes {
+      ...Like
+      __typename
+    }
+    __typename
+  }
+  canReport
+  __typename
+}
+
+fragment BehaviorCanLinkToFrameworks on BehaviorCanLinkToFrameworks {
+  id: behaviorId
+  __typename
+  frameworks {
+    ...MinimalFramework
+    __typename
+  }
+}
+
+fragment MinimalFramework on Framework {
+  id
+  title
+  abbr
+  areas {
+    title
+    description
+    abbr
+    color
+    id
+    __typename
+  }
+  __typename
+}
+
+fragment AgeBandSetting on AgeBandSetting {
+  ageBandSettingId
+  id: ageBandSettingId
+  assessmentSettingsId
+  from
+  to
+  label
+  __typename
+}
+
+fragment AssessmentOptionSetting on AssessmentOptionSetting {
+  assessmentOptionSettingId
+  id: assessmentOptionSettingId
+  assessmentSettingsId
+  backgroundColor
+  fontColor
+  label
+  __typename
+}

@@ -1,0 +1,51 @@
+query GetCurrentContext {
+  me {
+    currentContext {
+      ...UserContextFragment
+      __typename
+    }
+    availableContexts {
+      ...UserContextFragment
+      __typename
+    }
+    __typename
+  }
+}
+
+fragment UserContextFragment on UserContext {
+  id
+  target {
+    __typename
+    ... on PersonContextTarget {
+      person {
+        name {
+          fullName
+          __typename
+        }
+        __typename
+      }
+      children {
+        name {
+          firstName
+          fullName
+          __typename
+        }
+        profileImage {
+          url
+          __typename
+        }
+        __typename
+      }
+      __typename
+    }
+    ... on InstitutionSet {
+      title
+      profileImage {
+        url
+        __typename
+      }
+      __typename
+    }
+  }
+  __typename
+}

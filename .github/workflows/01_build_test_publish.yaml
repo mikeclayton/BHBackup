@@ -1,0 +1,81 @@
+name: "01 - Build, Test, Publish"
+
+on:
+  push:
+    # run on all commits
+  pull_request:
+    # run on all pull requests
+  workflow_dispatch:
+    # allows you to run this workflow manually from the Actions tab
+
+jobs:
+  build_test_publish:
+    runs-on: windows-latest
+
+    defaults:
+      run:
+        shell: powershell
+
+    env:
+
+      BUILD_PATH: ./src
+
+      CONFIG_NAME: Release
+
+      # relative to BUILD_PATH
+      PUBLISH_PATH: ../.build/app
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          # needed for gitversion to work
+          fetch-depth: 0
+
+      - name: setup
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 8.0.x
+
+      - name: dotnet info
+        working-directory: ${{ env.BUILD_PATH }}
+        run: dotnet --info
+
+      - name: dotnet restore
+        working-directory: ${{ env.BUILD_PATH }}
+        run: dotnet restore
+
+      - name: dotnet build
+        working-directory: ${{ env.BUILD_PATH }}
+        run: dotnet build --configuration "${{ env.CONFIG_NAME }}" --no-restore
+
+      - name: dotnet test
+        working-directory: ${{ env.BUILD_PATH }}
+        run: dotnet test --configuration "${{ env.CONFIG_NAME }}" --no-build --filter "TestCategory!=Performance"
+
+      - name: dotnet publish
+        working-directory: ${{ env.BUILD_PATH }}
+        run: dotnet publish "./FancyMouse/FancyMouse.csproj" --configuration "${{ env.CONFIG_NAME }}" --no-build --output "${{ env.PUBLISH_PATH }}/net8.0
+
+      #- name: zip release
+      #  working-directory: ${{ env.BUILD_PATH }}
+      #  run: |
+      #    & "C:\Program Files\7-Zip\7z.exe" a "FancyMouse-preview-v0.0.0.zip" "${{ env.PUBLISH_PATH }}"
+
+      - name: upload release
+        uses: actions/upload-artifact@v4
+        with:
+          name: BHDownload-v0.0.0-preview
+          path: .build/app
+
+      #- name: dotnet tool jb inspectcode
+      #  working-directory: ${{ env.BUILD_PATH }}
+      #  run: |
+      #    dotnet new tool-manifest
+      #    dotnet tool install jetbrains.resharper.globaltools
+      #    dotnet tool run jb inspectcode "./FancyMouse.sln" -output="../.build/out/jb-inspectcode.xml" --no-build
+
+      #- name: upload jb-inspectcode.xml
+      #  uses: actions/upload-artifact@v3
+      #  with:
+      #    name: jb-inspectcode.xml
+      #    path: .build/out/jb-inspectcode.xml

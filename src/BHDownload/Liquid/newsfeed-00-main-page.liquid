@@ -1,0 +1,48 @@
+{% render "Liquid\\scaffold-header.liquid", page: page %}
+
+<div id="content" class="shouldScrollContent">
+    <div id="accountSubrouteContentId">
+        <div class="accountSubRouteContentId-inner-1">
+            <div class="column small-12">
+                <div class="redux-infinite-scroll" style="height: 100%;">
+                    <div class="newsfeed-redux-infinite-scroll-inner-1">
+                        <div data-intercom-target="News feed" class="sc-brCpQf enfHpY">
+                            <div class="newsfeed-redux-infinite-scroll-first-row"></div>
+                            <div id="feed" class="sc-hmEbca eNhyjK">
+
+<!-- https://shopify.github.io/liquid/basics/introduction/ -->
+{% for feedItem in repository.FeedItems %}
+
+{% comment %} daycare checkin {% endcomment %}
+{% assign continue_for = false %}
+{% case feedItem.SystemPostTypeClass %}
+{% when "Daycare.Checkin:CheckedIn", "Daycare.Checkin:CheckedOut" %}
+{% assign continue_for = true %}
+{% render "Liquid\\newsfeed-checkin.liquid", feedItem: feedItem %}
+{% endcase %}
+{% if continue_for %}
+{% continue %}
+{% endif %}
+
+{% comment %} observation {% endcomment %}
+{% if feedItem.Embed.Type == "Observation" %}
+{% assign observation = repository.Observations | where: "Id", feedItem.Embed.ObservationId | first %}
+{% render "Liquid\\newsfeed-observation.liquid", feedItem: feedItem, observation: observation %}
+{% continue %}
+{% endif %}
+
+{% comment %} story {% endcomment %}
+{% render "Liquid\\newsfeed-Story.liquid", feedItem: feedItem %}
+
+{% endfor %}
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% render "Liquid\\scaffold-footer.liquid", site: site, sidebr: sidebar, page: page %}

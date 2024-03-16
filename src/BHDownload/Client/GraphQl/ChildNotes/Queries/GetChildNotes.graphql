@@ -1,0 +1,101 @@
+query GetChildNotes($childId: ChildId!, $cursor: ChildNoteCursor, $limit: Int!, $parentVisible: Boolean, $safeguardingConcern: Boolean, $sensitive: Boolean, $noteIds: [ChildNoteId!], $noteTypes: [ChildNoteType!], $showDrafts: Boolean, $isAcknowledgedByParent: Boolean) {
+  childNotes(
+    childIds: [$childId]
+    cursor: $cursor
+    limit: $limit
+    parentVisible: $parentVisible
+    safeguardingConcern: $safeguardingConcern
+    sensitive: $sensitive
+    noteIds: $noteIds
+    noteTypes: $noteTypes
+    drafts: $showDrafts
+    isAcknowledgedByParent: $isAcknowledgedByParent
+  ) {
+    __typename
+    next
+    result {
+      ...Note
+      __typename
+    }
+  }
+}
+
+fragment Note on ChildNote {
+  __typename
+  noteType
+  child {
+    id
+    institutionId
+    __typename
+  }
+  modifiedAt
+  modifiedBy {
+    ...Author
+    __typename
+  }
+  createdBy {
+    ...Author
+    __typename
+  }
+  id: noteId
+  parentVisible
+  sensitive
+  text
+  safeguardingConcern
+  createdAt
+  publishedAt
+  files {
+    id
+    name
+    url
+    __typename
+  }
+  images {
+    height
+    id
+    secret {
+      crop
+      expires
+      key
+      path
+      prefix
+      __typename
+    }
+    width
+    __typename
+  }
+  behaviors {
+    id: behaviorId
+    __typename
+  }
+  parentAcknowledgements {
+    ...NoteAcknowledgement
+    __typename
+  }
+}
+
+fragment Author on Person {
+  name {
+    fullName
+    __typename
+  }
+  profileImage {
+    url
+    __typename
+  }
+  __typename
+}
+
+fragment NoteAcknowledgement on ChildNoteSignature {
+  id
+  targetId
+  acknowledgedAt
+  acknowledgedBy {
+    name {
+      fullName
+      __typename
+    }
+    __typename
+  }
+  __typename
+}

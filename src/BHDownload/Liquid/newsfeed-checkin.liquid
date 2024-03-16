@@ -1,0 +1,28 @@
+﻿<!-- begin checkin post -->
+<!-- feed item id - {{ feedItem.FeedItemId }} -->
+<div class="feed-checkin-outer">
+    <div class="feed-checkin-left-outer">
+        <div class="feed-checkin-left-inner">
+            {% case feedItem.SystemPostTypeClass %}
+            {% when "Daycare.Checkin:CheckedIn" %}
+            <img src="./famly.co/core/feed-icons/checkin.png" class="feed-checkin-left-icon">
+            {% when "Daycare.Checkin:CheckedOut" %}
+            <img src="./famly.co/core/feed-icons/checkout.png" class="feed-checkin-left-icon">
+            {% endcase %}
+        </div>
+    </div>
+    <div class="feed-checkin-right-outer">
+        <img src="./familyapp/img/icons/tap.png" class="feed-checkin-tap-icon">
+        <p data-inline="false" color="text" type="Body" class="feed-checkin-right-title">
+            {{ feedItem.Sender.Name }}
+        </p>
+        <small data-inline="false" disabled="" color="text" type="Caption"
+            class="feed-checkin-right-date">
+            {{ feedItem.CreatedDate }}
+        </small>
+        <div color="text" type="Body" class="feed-checkin-right-body-outer">
+            <div class="feed-checkin-right-body-inner">{{ feedItem.Body }}</div>
+        </div>
+    </div>
+</div>
+<!-- end checkin post -->

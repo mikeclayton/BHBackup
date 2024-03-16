@@ -1,0 +1,198 @@
+div.child-profile-contents-title-outer {
+    --sat: env(safe-area-inset-top);
+    --sab: env(safe-area-inset-bottom);
+    -webkit-text-size-adjust: 100%;
+    -webkit-font-smoothing: antialiased;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    font-family: Matter,Helvetica Neue,Helvetica,Arial,Lucida Grande,sans-serif;
+    font-size: 16px;
+    font-variant-ligatures: no-contextual;
+    font-weight: 400;
+    line-height: 24px;
+    color: #333;
+    margin-bottom: 16px;
+    display: flex;
+    -webkit-box-pack: justify;
+    justify-content: space-between;
+    align-items: flex-end;
+}
+
+h2.child-profile-contents-title-text {
+    --sat: env(safe-area-inset-top);
+    --sab: env(safe-area-inset-bottom);
+    -webkit-text-size-adjust: 100%;
+    -webkit-font-smoothing: antialiased;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    font-variant-ligatures: no-contextual;
+    text-rendering: optimizeLegibility;
+    color: rgb(18, 10, 32);
+    font-family: Matter, "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+    font-size: 24px;
+    line-height: 32px;
+    font-weight: normal;
+    letter-spacing: -0.01em;
+    display: block;
+    margin: 0px;
+}
+
+div.childnotes-panel-outer {
+    --sat: env(safe-area-inset-top);
+    --sab: env(safe-area-inset-bottom);
+    -webkit-text-size-adjust: 100%;
+    -webkit-font-smoothing: antialiased;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    font-family: Matter,Helvetica Neue,Helvetica,Arial,Lucida Grande,sans-serif;
+    font-size: 16px;
+    font-variant-ligatures: no-contextual;
+    font-weight: 400;
+    line-height: 24px;
+    color: #333;
+    box-shadow: rgba(2, 2, 3, 0.08) 0px 3px 2px 0px, rgba(2, 2, 3, 0.04) 0px 0px 2px 0px;
+    background-color: rgb(255, 255, 255);
+    border-radius: 8px;
+    border: 1px solid rgb(246, 243, 251);
+    padding: 24px;
+    cursor: pointer;
+    margin-bottom: 8px;
+}
+
+div.childnotes-panel-header {
+    --sat: env(safe-area-inset-top);
+    --sab: env(safe-area-inset-bottom);
+    -webkit-text-size-adjust: 100%;
+    -webkit-font-smoothing: antialiased;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    font-family: Matter,Helvetica Neue,Helvetica,Arial,Lucida Grande,sans-serif;
+    font-size: 16px;
+    font-variant-ligatures: no-contextual;
+    font-weight: 400;
+    line-height: 24px;
+    color: #333;
+    cursor: pointer;
+    margin-bottom: 12px;
+    display: flex;
+    -webkit-box-pack: justify;
+    justify-content: space-between;
+    -webkit-box-align: center;
+    align-items: center;
+}
+
+div.childnotes-panel-title {
+    --sat: env(safe-area-inset-top);
+    --sab: env(safe-area-inset-bottom);
+    -webkit-text-size-adjust: 100%;
+    -webkit-font-smoothing: antialiased;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    font-family: Matter,Helvetica Neue,Helvetica,Arial,Lucida Grande,sans-serif;
+    font-size: 16px;
+    font-variant-ligatures: no-contextual;
+    font-weight: 400;
+    line-height: 24px;
+    color: #333;
+    cursor: pointer;
+}
+
+h3.childnotes-panel-title {
+    --sat: env(safe-area-inset-top);
+    --sab: env(safe-area-inset-bottom);
+    -webkit-text-size-adjust: 100%;
+    -webkit-font-smoothing: antialiased;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    font-variant-ligatures: no-contextual;
+    cursor: pointer;
+    text-rendering: optimizeLegibility;
+    color: rgb(18, 10, 32);
+    font-family: Matter, "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+    font-size: 20px;
+    line-height: 28px;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+    display: inline;
+    margin: 0px;
+}
+
+p.childnotes-panel-text {
+    --sat: env(safe-area-inset-top);
+    --sab: env(safe-area-inset-bottom);
+    -webkit-text-size-adjust: 100%;
+    -webkit-font-smoothing: antialiased;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    font-variant-ligatures: no-contextual;
+    cursor: pointer;
+    text-rendering: optimizeLegibility;
+    font-style: normal;
+    margin-bottom: 24px;
+    color: rgb(18, 10, 32);
+    font-family: Matter, "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+    font-size: 16px;
+    line-height: 24px;
+    font-weight: normal;
+    letter-spacing: normal;
+    display: block;
+    margin-top: 0px;
+    margin-right: 0px;
+    margin-left: 0px;
+}
+
+div.childnotes-panel-image-row {
+    --sat: env(safe-area-inset-top);
+    --sab: env(safe-area-inset-bottom);
+    -webkit-text-size-adjust: 100%;
+    -webkit-font-smoothing: antialiased;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    font-family: Matter,Helvetica Neue,Helvetica,Arial,Lucida Grande,sans-serif;
+    font-size: 16px;
+    font-variant-ligatures: no-contextual;
+    font-weight: 400;
+    line-height: 24px;
+    color: #333;
+    cursor: pointer;
+    margin-bottom: 24px;
+    display: flex;
+    margin-left: -4px;
+    margin-right: -4px;
+}
+
+div.childnotes-panel-image-cell {
+    --sat: env(safe-area-inset-top);
+    --sab: env(safe-area-inset-bottom);
+    -webkit-text-size-adjust: 100%;
+    -webkit-font-smoothing: antialiased;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    font-family: Matter,Helvetica Neue,Helvetica,Arial,Lucida Grande,sans-serif;
+    font-size: 16px;
+    font-variant-ligatures: no-contextual;
+    font-weight: 400;
+    line-height: 24px;
+    color: #333;
+    cursor: pointer;
+    background-image: url("https://img.familyapp.brighthorizons.co.uk/image/636b5072d9477dde83b65edb0ca00416e0c7c90f59d58bf8b53281c3d7bf276e/1200x628/archive/2024/03/07/14/images/757/8afa72bf-1761-42b2-b42c-5121bc5b011b.jpg?expires=2024-03-08T12:00:00Z");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    border-radius: 1px;
+    position: relative;
+    flex-basis: 33%;
+    height: 160px;
+    margin: 0px 4px;
+}
+
+.childnotes-panel-footer-text {
+    --sat: env(safe-area-inset-top);
+    --sab: env(safe-area-inset-bottom);
+    -webkit-text-size-adjust: 100%;
+    -webkit-font-smoothing: antialiased;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    font-variant-ligatures: no-contextual;
+    cursor: pointer;
+    text-rendering: optimizeLegibility;
+    font-style: normal;
+    color: rgba(18, 10, 32, 0.35);
+    font-family: Matter, "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+    font-size: 16px;
+    line-height: 24px;
+    font-weight: normal;
+    letter-spacing: normal;
+    display: block;
+    margin: 0px;
+}

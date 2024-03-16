@@ -1,0 +1,103 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <Product>BHDownload</Product>
+    <AssemblyTitle>Bright Horizons FamilyApp data download utility</AssemblyTitle>
+    <Copyright>Copyright (c) 2024 Michael Clayton</Copyright>
+    <Description>
+      This program lets you download and save the notes and images from
+      your child's account on the Bright Horizons "FamilyApp" website.
+    </Description>
+    <AssemblyVersion>0.1.0</AssemblyVersion>
+  </PropertyGroup>
+  <ItemGroup>
+    <AssemblyAttribute Include="System.Reflection.AssemblyMetadataAttribute">
+      <_Parameter1>Disclaimer</_Parameter1>
+      <_Parameter2>
+        All trademarks, logos and brand names are the property of their
+        respective owners. The makers of this program are not affiliated
+        with Bright Horizons or Famly. Licensed for use under the terms
+        of The MIT License. Use this program at your own risk.
+      </_Parameter2>
+    </AssemblyAttribute>
+    <AssemblyAttribute Include="System.Reflection.AssemblyMetadataAttribute">
+      <_Parameter1>ProjectUrl</_Parameter1>
+      <_Parameter2>
+        https://github.com/mikeclayton/BHDownload
+      </_Parameter2>
+    </AssemblyAttribute>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="Client\GraphQl\Identity\Queries\GetCurrentContext.graphql" />
+    <None Remove="Client\GraphQl\ChildNotes\Queries\GetChildNotes.graphql" />
+    <None Remove="Client\GraphQl\Observations\Queries\ObservationsByIds.graphql" />
+    <None Remove="Liquid\childnotes-10-page-header.liquid" />
+    <None Remove="Liquid\childnotes-20-profile-header-wrapper.liquid" />
+    <None Remove="Liquid\childnotes-30-child-profile-view.liquid" />
+    <None Remove="Liquid\childnotes-40-page-footer.liquid" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="CommandLineParser" Version="2.9.1" />
+    <PackageReference Include="Crayon" Version="2.0.69" />
+    <PackageReference Include="Fluid.Core" Version="2.5.0" />
+    <PackageReference Include="Microsoft.Extensions.FileProviders.Embedded" Version="3.1.0" />
+  </ItemGroup>
+
+  <PropertyGroup>
+    <GenerateEmbeddedFilesManifest>true</GenerateEmbeddedFilesManifest>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Client\GraphQl\Identity\Queries\GetCurrentContext.graphql" />
+    <EmbeddedResource Include="Client\GraphQl\ChildNotes\Queries\GetChildNotes.graphql" />
+    <EmbeddedResource Include="Client\GraphQl\Observations\Queries\ObservationsByIds.graphql" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Liquid\bhdownload-banner.liquid" />
+    <EmbeddedResource Include="Liquid\scaffold-footer.liquid" />
+    <EmbeddedResource Include="Liquid\scaffold-header.liquid" />
+    <EmbeddedResource Include="Liquid\scaffold-sidebar.liquid" />
+    <EmbeddedResource Include="Liquid\scaffold-topbar.liquid" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Liquid\index.liquid" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Liquid\childnotes-00-main-page.liquid" />
+    <EmbeddedResource Include="Liquid\childnotes-11-deprecation-overlay.liquid" />
+    <EmbeddedResource Include="Liquid\childnotes-20-profile-header-wrapper.liquid" />
+    <EmbeddedResource Include="Liquid\childnotes-30-child-profile-view.liquid" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Liquid\newsfeed-00-main-page.liquid" />
+    <EmbeddedResource Include="Liquid\newsfeed-checkin.liquid" />
+    <EmbeddedResource Include="Liquid\newsfeed-observation.liquid" />
+    <EmbeddedResource Include="Liquid\newsfeed-story.liquid" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Static\Assets\bhdownload-banner.css" />
+    <EmbeddedResource Include="Static\Assets\childnotes-main.css" />
+    <EmbeddedResource Include="Static\Assets\childnotes-profile.css" />
+    <EmbeddedResource Include="Static\Assets\newsfeed-checkin.css" />
+    <EmbeddedResource Include="Static\Assets\newsfeed-scaffold.css" />
+    <EmbeddedResource Include="Static\Assets\newsfeed-story.css" />
+    <EmbeddedResource Include="Static\Assets\newsfeed-fonts.css" />
+    <EmbeddedResource Include="Static\Assets\scaffold-sidebar.css" />
+    <EmbeddedResource Include="Static\Assets\scaffold-topbar.css" />
+  </ItemGroup>
+
+</Project>

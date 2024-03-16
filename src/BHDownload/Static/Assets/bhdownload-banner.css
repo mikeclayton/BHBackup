@@ -1,0 +1,30 @@
+:root {
+    --bhdownload-banner-height: 56px;
+}
+
+.bhdownload-banner {
+    --sat: env(safe-area-inset-top);
+    --sab: env(safe-area-inset-bottom);
+    -webkit-text-size-adjust: 100%;
+    -webkit-font-smoothing: antialiased;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    font-family: Matter,Helvetica Neue,Helvetica,Arial,Lucida Grande,sans-serif;
+    font-size: 16px;
+    font-variant-ligatures: no-contextual;
+    font-weight: 400;
+    -webkit-box-pack: justify;
+    -webkit-box-align: center;
+    align-items: center;
+    position: fixed;
+    right: 0px;
+    box-sizing: border-box;
+    box-shadow: rgba(18, 10, 32, 0.08) 0px -1px 0px 0px inset;
+    color: black;
+    padding-top: 0px;
+    width: calc(100% - 64px);
+    transition: width 0.3s cubic-bezier(0.25, 0.1, 0.25, 1) 0s;
+    will-change: width;
+    background-color: #F5C832;
+    top: 0px;
+    text-align: center;
+}
