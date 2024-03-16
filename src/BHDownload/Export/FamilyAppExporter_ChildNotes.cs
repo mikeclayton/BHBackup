@@ -24,7 +24,7 @@ internal sealed partial class FamilyAppExporter
         );
 
         // read the child notes from the api
-        Console.WriteLine("downloading child notes...");
+        Console.WriteLine("downloading child note data...");
         var childNotes = graphQlClient.PaginateChildNotes(
                 childId: childIds.First(),
                 noteTypes: new List<string> { "Classic" },
@@ -33,7 +33,7 @@ internal sealed partial class FamilyAppExporter
                 safeguardingConcerns: false,
                 sensitive: false,
                 onBeforeReadPage: () =>
-                    Console.WriteLine("    downloading child notes page...")
+                    Console.WriteLine("    downloading child note data page...")
             ).ToBlockingEnumerable()
             .SelectMany(
                 response => response.Data.ChildNotes.Result

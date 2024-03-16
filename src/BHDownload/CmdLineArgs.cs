@@ -1,4 +1,6 @@
-﻿using System.Reflection;
+﻿using System.ComponentModel;
+using System.Diagnostics;
+using System.Reflection;
 using BHDownload.Export;
 using CommandLine;
 using static Crayon.Output;
@@ -168,13 +170,13 @@ internal sealed class CmdLineArgs
             Console.WriteLine(
                 $@"{Green("-----------------------------------------------------------------------")}"
             );
-            Console.WriteLine();
         }
 
         if (string.IsNullOrEmpty(cmdLineArgs.Username))
         {
+            Console.WriteLine();
             Console.Write(
-                Bright.White(
+                Bright.Yellow(
                     "Enter your Bright Horizons FamilyApp username: "
                 )
             );
@@ -183,8 +185,9 @@ internal sealed class CmdLineArgs
 
         if (string.IsNullOrEmpty(cmdLineArgs.Password))
         {
+            Console.WriteLine();
             Console.Write(
-                Bright.White(
+                Bright.Yellow(
                     "Enter your Bright Horizons FamilyApp password: "
                 )
             );
@@ -221,14 +224,15 @@ internal sealed class CmdLineArgs
                 ),
                 $"BHDownload_{DateTime.Now:yyyy_MM_dd}"
             );
+            Console.WriteLine();
             Console.WriteLine(
-                Bright.White(
+                Bright.Yellow(
                     "Enter the name of the folder to download the offline website to:"
                 )
             );
             Console.WriteLine(
                 White(
-                    $"(default value is '{defaultPath}')"
+                     $"(press <enter> to use '{defaultPath}')"
                 )
             );
             var outputDirectory = Console.ReadLine();
@@ -258,6 +262,14 @@ internal sealed class CmdLineArgs
             exporter.GenerateHtmlFiles(repository);
         }
 
+        var indexPath = Path.Join(cmdLineArgs.OutputDirectory, "index.htm");
+        _ = Process.Start(
+            new ProcessStartInfo(indexPath)
+            {
+                UseShellExecute = true
+            }
+        );
+
         Console.WriteLine();
         Console.WriteLine(
             $@"{Green("-----------------------------------------------------------------------")}"
@@ -277,10 +289,16 @@ internal sealed class CmdLineArgs
         );
         Console.WriteLine();
         Console.WriteLine(
-            White(
-                Path.Join(cmdLineArgs.OutputDirectory, "index.htm")
+            Yellow(indexPath)
+        );
+
+        Console.WriteLine();
+        Console.WriteLine(
+            Bright.White(
+                "Press any key to close this program."
             )
         );
+        Console.ReadKey();
 
     }
 

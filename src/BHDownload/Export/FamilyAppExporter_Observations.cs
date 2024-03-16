@@ -22,7 +22,7 @@ internal sealed partial class FamilyAppExporter
         );
 
         // read the observations from the api
-        Console.WriteLine("downloading observations...");
+        Console.WriteLine("downloading observation data...");
         var observations = observationIds
             .Chunk(5)
             .Select(

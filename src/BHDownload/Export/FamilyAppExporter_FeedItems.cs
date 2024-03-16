@@ -24,10 +24,10 @@ internal sealed partial class FamilyAppExporter
         );
 
         // read the feed items from the api
-        Console.WriteLine("downloading feed items...");
+        Console.WriteLine("downloading feed item data...");
         var feedItems = feedsClient.PaginateFeedItems(
                 onBeforeReadPage: timestamp =>
-                    Console.WriteLine($"    downloading feed items from {timestamp:yyyy-MM-dd}")
+                    Console.WriteLine($"    downloading feed item data from {timestamp:yyyy-MM-dd}")
             ).ToBlockingEnumerable()
             .SelectMany(
                 response => response.FeedItems
