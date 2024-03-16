@@ -19,11 +19,10 @@ jobs:
     env:
 
       BUILD_PATH: ./src
-
       CONFIG_NAME: Release
-
       # relative to BUILD_PATH
       PUBLISH_PATH: ../.build/app
+      RUNTIME: win-x64
 
     steps:
       - uses: actions/checkout@v4
@@ -42,19 +41,42 @@ jobs:
 
       - name: dotnet restore
         working-directory: ${{ env.BUILD_PATH }}
-        run: dotnet restore
+        run: |
+            dotnet restore `
+                --runtime "${{ env.RUNTIME }}" `
+                --property:PublishReadyToRun=true
 
       - name: dotnet build
         working-directory: ${{ env.BUILD_PATH }}
-        run: dotnet build --configuration "${{ env.CONFIG_NAME }}" --no-restore
+        run: |
+            dotnet build "./BHDownload/BHDownload.csproj" `
+                --configuration "${{ env.CONFIG_NAME }}" `
+                --no-restore `
+                --runtime        "${{ env.RUNTIME }}" `
+                --self-contained true `
+                --property:PublishSingleFile=true `
+                --property:PublishReadyToRun=true
 
       - name: dotnet test
         working-directory: ${{ env.BUILD_PATH }}
-        run: dotnet test --configuration "${{ env.CONFIG_NAME }}" --no-build --filter "TestCategory!=Performance"
+        run: |
+            dotnet test `
+                --configuration "${{ env.CONFIG_NAME }}" `
+                --no-build `
+                --filter        "TestCategory!=Performance"
 
       - name: dotnet publish
         working-directory: ${{ env.BUILD_PATH }}
-        run: dotnet publish "./BHDownload/BHDownload.csproj" --configuration "${{ env.CONFIG_NAME }}" --no-build --output "${{ env.PUBLISH_PATH }}/net8.0"
+        run: |
+            # windows
+            dotnet publish "./BHDownload/BHDownload.csproj" `
+                --configuration  "${{ env.CONFIG_NAME }}" `
+                --no-build `
+                --runtime        "${{ env.RUNTIME }}" `
+                --output         "${{ enb.PUBLISH_PATH }}/win-x64" `
+                --self-contained true `
+                --property:PublishSingleFile=true `
+                --property:PublishReadyToRun=true
 
       #- name: zip release
       #  working-directory: ${{ env.BUILD_PATH }}
