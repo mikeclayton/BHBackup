@@ -43,8 +43,7 @@ jobs:
         working-directory: ${{ env.BUILD_PATH }}
         run: |
             dotnet restore `
-                --runtime "${{ env.RUNTIME }}" `
-                --property:PublishReadyToRun=true
+                --runtime "${{ env.RUNTIME }}"
 
       - name: dotnet build
         working-directory: ${{ env.BUILD_PATH }}
@@ -54,8 +53,7 @@ jobs:
                 --no-restore `
                 --runtime        "${{ env.RUNTIME }}" `
                 --self-contained true `
-                --property:PublishSingleFile=true `
-                --property:PublishReadyToRun=true
+                --property:PublishSingleFile=true
 
       - name: dotnet test
         working-directory: ${{ env.BUILD_PATH }}
@@ -75,8 +73,7 @@ jobs:
                 --runtime        "${{ env.RUNTIME }}" `
                 --output         "${{ env.PUBLISH_PATH }}/win-x64" `
                 --self-contained true `
-                --property:PublishSingleFile=true `
-                --property:PublishReadyToRun=true
+                --property:PublishSingleFile=true
 
       #- name: zip release
       #  working-directory: ${{ env.BUILD_PATH }}
