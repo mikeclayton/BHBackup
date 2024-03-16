@@ -15,7 +15,7 @@ To use it:
 
 * On Windows computers you *may* need to "unblock" the file to allow it to run - right click it, select "Properties" (or "Show more options" and *then* "Properties") and in the pop-up dialog tick the "Unblock" checkbox and click "OK".
 
-* Double-click ```BHDownload.exe``` to lanuch it - you'll see a black text-based window like the one at the top of this page.
+* Double-click ```BHDownload.exe``` to launch it - you'll see a black text-based window like the one at the top of this page.
 
 * When prompted, enter your username and password that you normally use to log into the Bright Horizons FamilyApp website
 
