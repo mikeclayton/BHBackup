@@ -3,7 +3,14 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.9.34526.213
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BHDownload", "BHDownload\BHDownload.csproj", "{4AEAA535-7548-4DB5-9FCB-B46E08D36095}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BHDownload", "BHDownload\BHDownload.csproj", "{4AEAA535-7548-4DB5-9FCB-B46E08D36095}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".github", ".github", "{4B852D42-F884-47C6-B24A-7E6DFFC4CEE8}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "workflows", "workflows", "{6BC4177A-562E-4123-8C85-F29F8DA7E0E2}"
+	ProjectSection(SolutionItems) = preProject
+		..\.github\workflows\01_build_test_publish.yaml = ..\.github\workflows\01_build_test_publish.yaml
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -18,6 +25,9 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{6BC4177A-562E-4123-8C85-F29F8DA7E0E2} = {4B852D42-F884-47C6-B24A-7E6DFFC4CEE8}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {1F03189D-A476-456B-80DC-93D80C2B0BEC}
