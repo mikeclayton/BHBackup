@@ -73,7 +73,7 @@ jobs:
                 --configuration  "${{ env.CONFIG_NAME }}" `
                 --no-build `
                 --runtime        "${{ env.RUNTIME }}" `
-                --output         "${{ enb.PUBLISH_PATH }}/win-x64" `
+                --output         "${{ env.PUBLISH_PATH }}/win-x64" `
                 --self-contained true `
                 --property:PublishSingleFile=true `
                 --property:PublishReadyToRun=true
