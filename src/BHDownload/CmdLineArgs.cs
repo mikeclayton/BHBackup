@@ -284,7 +284,7 @@ internal sealed class CmdLineArgs
         Console.WriteLine();
         Console.WriteLine(
             White(
-                "You can view the downloaded website by opening the following file in a web browser:"
+                "You can view the offline website by opening this file in a web browser:"
             )
         );
         Console.WriteLine();
