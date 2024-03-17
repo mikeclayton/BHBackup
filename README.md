@@ -1,6 +1,6 @@
-# BHDownload
+# BHBAckuc
 
-![BHDownload screenshot](wiki/BHDownload.png "BHDownload screenshot")
+![BHBackup screenshot](wiki/BHBackup.png "BHBackup screenshot")
 
 ## Overview
 
@@ -9,13 +9,13 @@ child's account on the Bright Horizons "FamilyApp" website.
 
 To use it:
 
-* Download the latest version of the program to your computer from <a href="https://github.com/mikeclayton/BHDownload/releases">here</a>
+* Download the latest version of the program to your computer from <a href="https://github.com/mikeclayton/BHBackup/releases">here</a>
 
-* Find the ```BHDowload.exe``` program in your Downloads folder
+* Find the ```BHBackup.exe``` program in your Downloads folder
 
 * On Windows computers you *may* need to "unblock" the file to allow it to run - right click it, select "Properties" (or "Show more options" and *then* "Properties") and in the pop-up dialog tick the "Unblock" checkbox and click "OK".
 
-* Double-click ```BHDownload.exe``` to launch it - you'll see a black text-based window like the one at the top of this page.
+* Double-click ```BHBackup.exe``` to launch it - you'll see a black text-based window like the one at the top of this page.
 
 * When prompted, enter your username and password that you normally use to log into the Bright Horizons FamilyApp website
 
