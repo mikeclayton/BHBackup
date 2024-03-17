@@ -68,7 +68,7 @@ jobs:
         working-directory: ${{ env.BUILD_PATH }}
         run: |
             # windows
-            dotnet publish "./BHDownload/BHDownload.csproj" `
+            dotnet publish "./BHBackup/BHBackup.csproj" `
                 --configuration  "${{ env.CONFIG_NAME }}" `
                 --no-build `
                 --runtime        "${{ env.RUNTIME }}" `

@@ -299,7 +299,7 @@ internal sealed class CmdLineArgs
         Console.WriteLine();
         Console.WriteLine(
             Bright.White(
-                "Press any key to close this program."
+                "Press any key to close this program . . ."
             )
         );
         Console.ReadKey();
