@@ -21,8 +21,8 @@ internal sealed partial class OfflineUrlVisitor
         var counter = 1;
         foreach (var image in observation.Images)
         {
-            image.Secret.OfflineUrl = OfflineUrlHelper.GetContentImageOfflineUrl(
-                image.Secret.SourceUrl, "observations", observation.Remark.DateParsed, observation.Id, counter
+            image.OfflineUrl = OfflineUrlHelper.GetContentImageOfflineUrl(
+                image.FullSizeUrl, "observations", observation.Remark.DateParsed, observation.Id, image.Id, counter
             );
             counter++;
         }

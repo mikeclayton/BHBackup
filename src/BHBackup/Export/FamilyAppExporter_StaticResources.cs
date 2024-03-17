@@ -7,33 +7,7 @@ namespace BHBackup.Export;
 internal sealed partial class FamilyAppExporter
 {
 
-    private async Task DownloadHttpResource(string resourceUri, string relativePath, bool overwrite)
-    {
-        ArgumentNullException.ThrowIfNull(resourceUri);
-        ArgumentNullException.ThrowIfNull(relativePath);
-        // overwrite existing file?
-        var absolutePath = this.GetAbsoluteFilename(relativePath);
-        if (!overwrite && File.Exists(absolutePath))
-        {
-            Console.WriteLine($"    skipping '{relativePath}'...");
-            return;
-        }
-        // create the destination directory if it doesn't already exist
-        Directory.CreateDirectory(
-            Path.GetDirectoryName(absolutePath) ?? throw new InvalidOperationException()
-        );
-        // build the request message
-        var request = new HttpRequestMessage(HttpMethod.Get, resourceUri);
-        request.Headers.ConnectionClose = false;
-        // download the resource
-        Console.WriteLine($"    downloading '{relativePath}'...");
-        var response = await this.HttpClient.SendAsync(request);
-        await using var responseStream = await response.Content.ReadAsStreamAsync();
-        await using var fileStream = new FileStream(absolutePath, FileMode.Create, FileAccess.Write);
-        await responseStream.CopyToAsync(fileStream);
-    }
-
-    private async Task DownloadStaticResources(IEnumerable<string> resourceUris, bool overwrite)
+    private async Task DownloadStaticResources(IEnumerable<string> resourceUris)
     {
         var domainPathMap = new Dictionary<string, string>
         {
@@ -55,13 +29,13 @@ internal sealed partial class FamilyAppExporter
             var targetFullname = Path.Join(
                 targetRoot, targetPath
             );
-            await this.DownloadHttpResource(
-                resourceUri, targetFullname, overwrite
+            await this.DownloadHelper.DownloadHttpResource(
+                resourceUri, targetFullname
             );
         }
     }
 
-    private async Task DownloadStaticHttpFonts(bool overwrite)
+    private async Task DownloadStaticHttpFonts()
     {
         var resourceUris = new[]
         {
@@ -126,11 +100,10 @@ internal sealed partial class FamilyAppExporter
             "https://familyapp.brighthorizons.co.uk/fonts/Matter/Matter-SemiBoldItalic.woff2"
         };
         Console.WriteLine("downloading static fonts...");
-        await this.DownloadStaticResources(resourceUris, overwrite);
+        await this.DownloadStaticResources(resourceUris);
     }
 
-
-    private async Task DownloadStaticHttpImages(bool overwrite)
+    private async Task DownloadStaticHttpImages()
     {
         var resourceUris = new[]
         {
@@ -140,7 +113,7 @@ internal sealed partial class FamilyAppExporter
             "https://static.famly.co/core/feed-icons/checkout.png"
         };
         Console.WriteLine("downloading static images...");
-        await this.DownloadStaticResources(resourceUris, overwrite);
+        await this.DownloadStaticResources(resourceUris);
     }
 
     private void UnpackEmbeddedStylesheets(bool overwrite)
@@ -165,7 +138,7 @@ internal sealed partial class FamilyAppExporter
             var resourceText = EmbeddedResourceHelper.ReadEmbeddedResourceText(assembly, stylesheet);
 
             var targetRelativeFilename = OfflinePathHelper.GetAssetResourceFileRelativePath(stylesheet[(prefix.Length)..]);
-            var targetAbsoluteFilename = this.GetAbsoluteFilename(targetRelativeFilename);
+            var targetAbsoluteFilename = this.DownloadHelper.GetAbsoluteFilename(targetRelativeFilename);
 
             if (!overwrite && File.Exists(targetAbsoluteFilename))
             {

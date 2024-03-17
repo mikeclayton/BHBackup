@@ -13,8 +13,8 @@ internal sealed partial class OfflineUrlVisitor
         var counter = 1;
         foreach (var image in childNote.Images)
         {
-            image.Secret.OfflineUrl = OfflineUrlHelper.GetContentImageOfflineUrl(
-                image.Secret.SourceUrl, "childnotes", childNote.CreatedAtParsed, childNote.Id, counter
+            image.OfflineUrl = OfflineUrlHelper.GetContentImageOfflineUrl(
+                image.FullSizeUrl, "childnotes", childNote.CreatedAtParsed, childNote.Id, image.Id, counter
             );
             counter++;
         }

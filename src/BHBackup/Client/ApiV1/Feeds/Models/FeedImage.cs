@@ -118,6 +118,10 @@ internal sealed class FeedImage
     }
 
     [JsonIgnore]
+    public string FullSizeUrl
+        => $"{this.Prefix}/{this.Width}x{this.Height}/{this.Key}";
+
+    [JsonIgnore]
     public string OfflineUrl
     {
         get;

@@ -44,4 +44,15 @@ internal sealed class ChildNotesImage
         init;
     }
 
+    [JsonIgnore]
+    public string FullSizeUrl
+        => $"{this.Secret.Prefix}/{this.Secret.Key}/{this.Width}x{this.Height}/{this.Secret.Path}?expires={this.Secret.Expires}";
+
+    [JsonIgnore]
+    public string OfflineUrl
+    {
+        get;
+        set;
+    }
+
 }

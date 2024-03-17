@@ -6,14 +6,9 @@ namespace BHBackup.Export;
 internal sealed partial class FamilyAppExporter
 {
 
-    public string GetAbsoluteFilename(string relativePath)
-    {
-        return Path.Join(this.RepositoryDirectory, relativePath);
-    }
-
     public string[] GetRepositoryFiles(string relativePath, string pattern)
     {
-        var absolutePath = this.GetAbsoluteFilename(relativePath);
+        var absolutePath = this.DownloadHelper.GetAbsoluteFilename(relativePath);
         if (!Directory.Exists(absolutePath))
         {
             throw new InvalidOperationException();
@@ -25,7 +20,7 @@ internal sealed partial class FamilyAppExporter
     {
         var absolutePath = isAbsolutePath
             ? relativePath
-            : this.GetAbsoluteFilename(relativePath);
+            : this.DownloadHelper.GetAbsoluteFilename(relativePath);
         if (!File.Exists(absolutePath))
         {
             throw new InvalidOperationException();
@@ -50,7 +45,7 @@ internal sealed partial class FamilyAppExporter
     {
         var absolutePath = isAbsolutePath
             ? path
-            : this.GetAbsoluteFilename(path);
+            : this.DownloadHelper.GetAbsoluteFilename(path);
         // create the directory if it doesn't already exist
         _ = Directory.CreateDirectory(
              Path.GetDirectoryName(absolutePath) ?? throw new InvalidOperationException()

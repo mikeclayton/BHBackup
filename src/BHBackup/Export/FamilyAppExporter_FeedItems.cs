@@ -1,7 +1,5 @@
-﻿using BHBackup.Client.ApiV1;
-using BHBackup.Client.ApiV1.Feeds;
+﻿using BHBackup.Client.ApiV1.Feeds;
 using BHBackup.Client.ApiV1.Feeds.Models;
-using BHBackup.Client.Core;
 using BHBackup.Helpers;
 using System.Collections.ObjectModel;
 
@@ -10,19 +8,9 @@ namespace BHBackup.Export;
 internal sealed partial class FamilyAppExporter
 {
 
-    private IEnumerable<FeedItem> DownloadFeedItems()
+    private IEnumerable<FeedItem> DownloadFeedItemData()
     {
-
-        var feedsClient = new ApiV1Client(
-            this.HttpClient,
-            () => LoginHelpers.Authenticate(
-                this.HttpClient,
-                this.Username,
-                this.Password,
-                this.DeviceId
-            ).Result
-        );
-
+        var feedsClient = this.DownloadHelper.GetApiV1Client();
         // read the feed items from the api
         Console.WriteLine("downloading feed item data...");
         var feedItems = feedsClient.PaginateFeedItems(
@@ -32,7 +20,6 @@ internal sealed partial class FamilyAppExporter
             .SelectMany(
                 response => response.FeedItems
             ).ToList();
-
         // save the feed items to disk in individual files
         foreach (var feedItem in feedItems)
         {
@@ -42,23 +29,20 @@ internal sealed partial class FamilyAppExporter
             );
             yield return feedItem;
         }
-
     }
 
-    private ReadOnlyCollection<FeedItem> ReadFeedItems(bool roundtrip)
+    private ReadOnlyCollection<FeedItem> ReadFeedItemData(bool roundtrip)
     {
         Console.WriteLine("reading cached feed items...");
         var cacheFiles = this.GetRepositoryFiles(
             OfflinePathHelper.GetFeedItemDataFileRootPath(),
             "feeditem-*.json"
         );
-
         var feedItems = cacheFiles.Select(
-               cacheFile => this.ReadRepositoryJsonFile<FeedItem>(cacheFile, false, true)
+               cacheFile => this.ReadRepositoryJsonFile<FeedItem>(cacheFile, roundtrip, true)
             ).OrderByDescending(feedItem => feedItem.ParseCreatedDate())
             .ToList()
             .AsReadOnly();
-
         return feedItems;
     }
 

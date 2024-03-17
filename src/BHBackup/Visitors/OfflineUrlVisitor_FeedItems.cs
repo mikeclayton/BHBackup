@@ -16,20 +16,22 @@ internal sealed partial class OfflineUrlVisitor
             sender.Name ?? throw new InvalidOperationException()
         );
         // feed item - content files
+        var fileCounter = 1;
         foreach (var feedFile in feedItem.Files)
         {
             feedFile.OfflineUrl = OfflineUrlHelper.GetContentFileOfflineUrl(
-                feedFile.Filename, "feeditems", feedItem.CreatedDateParsed, feedFile.FileId
+                feedFile.Filename, "feeditems", feedItem.CreatedDateParsed, feedItem.FeedItemId, feedFile.FileId, fileCounter
             );
+            fileCounter++;
         }
         // feed item - content images
-        var counter = 1;
+        var imageCounter = 1;
         foreach (var feedImage in feedItem.Images)
         {
             feedImage.OfflineUrl = OfflineUrlHelper.GetContentImageOfflineUrl(
-                feedImage.UrlBig, "feeditems", feedItem.CreatedDateParsed, feedItem.FeedItemId, counter
+                feedImage.UrlBig, "feeditems", feedItem.CreatedDateParsed, feedItem.FeedItemId,  feedImage.ImageId, imageCounter
             );
-            counter++;
+            imageCounter++;
         }
     }
 

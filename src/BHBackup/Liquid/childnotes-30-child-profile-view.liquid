@@ -83,7 +83,7 @@
                                             if columnIndex == 0
                                                 echo '<div class="childnotes-panel-image-row">' | raw
                                             endif
-                                            echo '<div class="childnotes-panel-image-cell" style="width: 240px; background-image: url(&quot;./' | append: childNoteImage.Secret.OfflineUrl | append: '&quot;)"></div>' | raw
+                                            echo '<div class="childnotes-panel-image-cell" style="width: 240px; background-image: url(&quot;./' | append: childNoteImage.OfflineUrl | append: '&quot;)"></div>' | raw
                                             if imageIndex == maxIndex
                                                 assign missingCells = 2 | minus: columnIndex
                                                 for missingIndex in (1..missingCells)

@@ -1,4 +1,4 @@
-# BHBAckuc
+# BHBackup - Bright Horizons FamilyApp website backup utility
 
 ![BHBackup screenshot](wiki/BHBackup.png "BHBackup screenshot")
 

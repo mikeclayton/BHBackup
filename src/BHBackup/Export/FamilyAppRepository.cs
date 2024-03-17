@@ -3,7 +3,6 @@ using BHBackup.Client.ApiV2.Models;
 using BHBackup.Client.GraphQl.ChildNotes.Models;
 using BHBackup.Client.GraphQl.Identity.Models;
 using BHBackup.Client.GraphQl.Observations.Models;
-using BHBackup.Helpers;
 using System.Collections.ObjectModel;
 
 namespace BHBackup.Export;

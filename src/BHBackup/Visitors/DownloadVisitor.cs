@@ -1,25 +1,18 @@
-﻿namespace BHBackup.Visitors;
+﻿using BHBackup.Helpers;
 
-internal sealed class DownloadVisitor : RepositoryVisitor
+namespace BHBackup.Visitors;
+
+internal sealed partial class DownloadVisitor : RepositoryVisitor
 {
 
-//    public override void Visit(Sidebar sidebar)
-//    {
-//        var childItems = sidebar.ChildProfileItems
-//            .DistinctBy(item => item.Icon)
-//            .ToList();
-//        Console.WriteLine("downloading sidebar profile images...");
-//        foreach (var childItem in childItems)
-//        {
-//            this.Visit(childItem);
-//        }
-//    }
+    public DownloadVisitor(DownloadHelper downloadHelper)
+    {
+        this.DownloadHelper = downloadHelper ?? throw new ArgumentNullException(nameof(downloadHelper));
+    }
 
-//    public override void Visit(SidebarItem item)
-//    {
-//        this.DownloadHttpResource(
-//            item.Icon, item.OfflineIcon, overwrite
-//        );
-//    }
+    private DownloadHelper DownloadHelper
+    {
+        get;
+    }
 
 }

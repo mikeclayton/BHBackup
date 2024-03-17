@@ -49,7 +49,7 @@ jobs:
       - name: dotnet build
         working-directory: ${{ env.BUILD_PATH }}
         run: |
-            dotnet build "./BHDownload/BHDownload.csproj" `
+            dotnet build "./BHBackup/BHBackup.csproj" `
                 --configuration "${{ env.CONFIG_NAME }}" `
                 --no-restore `
                 --runtime        "${{ env.RUNTIME }}" `
@@ -84,7 +84,7 @@ jobs:
       - name: upload release
         uses: actions/upload-artifact@v4
         with:
-          name: BHDownload-v0.0.0-preview
+          name: BHBackup-v0.0.0-preview
           path: .build/app
 
       - name: dotnet tool jb inspectcode
@@ -92,7 +92,7 @@ jobs:
         run: |
           dotnet new tool-manifest
           dotnet tool install jetbrains.resharper.globaltools
-          dotnet tool run jb inspectcode "./BHDownload.sln" -output="../.build/out/jb-inspectcode.xml" --no-build
+          dotnet tool run jb inspectcode "./BHBackup.sln" -output="../.build/out/jb-inspectcode.xml" --no-build
 
       - name: upload jb-inspectcode.xml
         uses: actions/upload-artifact@v3

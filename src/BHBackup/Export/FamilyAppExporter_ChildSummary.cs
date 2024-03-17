@@ -1,6 +1,4 @@
-﻿using BHBackup.Client.ApiV2;
-using BHBackup.Client.ApiV2.Models;
-using BHBackup.Client.Core;
+﻿using BHBackup.Client.ApiV2.Models;
 using BHBackup.Helpers;
 
 namespace BHBackup.Export;
@@ -8,19 +6,9 @@ namespace BHBackup.Export;
 internal sealed partial class FamilyAppExporter
 {
 
-    private async IAsyncEnumerable<ChildSummary> DownloadChildSummaries(Sidebar sidebar)
+    private async IAsyncEnumerable<ChildSummary> DownloadChildSummaryData(Sidebar sidebar)
     {
-
-        var apiV2Client = new ApiV2Client(
-            this.HttpClient,
-            () => LoginHelpers.Authenticate(
-                this.HttpClient,
-                this.Username,
-                this.Password,
-                this.DeviceId
-            ).Result
-        );
-
+        var apiV2Client = this.DownloadHelper.GetApiV2Client();
         // save the child summaries to disk in individual files
         Console.WriteLine("downloading child summaries...");
         foreach (var item in sidebar.ChildProfileItems)
@@ -32,27 +20,20 @@ internal sealed partial class FamilyAppExporter
             );
             yield return childSummary;
         }
-
     }
 
-
-    private IEnumerable<ChildSummary> ReadChildSummaries(bool roundtrip)
+    private IEnumerable<ChildSummary> ReadChildSummaryData(bool roundtrip)
     {
-
         Console.WriteLine("reading cached child summaries...");
-
         var cacheFiles = this.GetRepositoryFiles(
             OfflinePathHelper.GetChildSummaryDataFileRootPath(),
             "childsummary-*.json"
         );
-
         var childSummaries = cacheFiles.Select(
                 cacheFile => this.ReadRepositoryJsonFile<ChildSummary>(cacheFile, roundtrip, true)
             ).ToList()
             .AsReadOnly();
-
         return childSummaries;
-
     }
 
 }

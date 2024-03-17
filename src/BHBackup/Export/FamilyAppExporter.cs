@@ -1,5 +1,4 @@
-﻿using System.Reflection;
-using BHBackup.Client.ApiV1.Feeds.Models;
+﻿using BHBackup.Client.ApiV1.Feeds.Models;
 using BHBackup.Helpers;
 using BHBackup.Models;
 using BHBackup.Visitors;
@@ -9,37 +8,28 @@ namespace BHBackup.Export;
 internal sealed partial class FamilyAppExporter
 {
 
-    public FamilyAppExporter(string repositoryDirectory, string username, string password, string deviceId)
+    public FamilyAppExporter(DownloadHelper downloadHelper)
     {
-        this.RepositoryDirectory = repositoryDirectory ?? throw new ArgumentNullException(nameof(repositoryDirectory));
-        this.HttpClient = new HttpClient();
-        this.Username = username ?? throw new ArgumentNullException(nameof(username));
-        this.Password = password ?? throw new ArgumentNullException(nameof(password));
-        this.DeviceId = deviceId ?? throw new ArgumentNullException(nameof(deviceId));
+        this.DownloadHelper = downloadHelper?? throw new ArgumentNullException(nameof(downloadHelper));
     }
 
-    public string RepositoryDirectory { get; }
-
-    public HttpClient HttpClient { get; }
-
-    public string Username { get; }
-
-    public string Password { get; }
-
-    public string DeviceId { get; }
-
-    public FamilyAppRepository DownloadRepository()
+    private DownloadHelper DownloadHelper
     {
-        var identity = this.DownloadCurrentContext().Data.Me;
-        var sidebar = this.DownloadSidebar();
-        var summaries = this.DownloadChildSummaries(sidebar).ToBlockingEnumerable().ToList();
-        var feedItems = this.DownloadFeedItems().ToList();
-        var observations = this.DownloadObservations(
+        get;
+    }
+
+    public FamilyAppRepository DownloadRepositoryData()
+    {
+        var identity = this.DownloadCurrentContextData().Data.Me;
+        var sidebar = this.DownloadSidebarData();
+        var summaries = this.DownloadChildSummaryData(sidebar).ToBlockingEnumerable().ToList();
+        var feedItems = this.DownloadFeedItemData().ToList();
+        var observations = this.DownloadObservationsData(
             feedItems
             .Where(feedItem => feedItem.Embed is FeedEmbedObservation)
             .Select(feedItem => ((FeedEmbedObservation)(feedItem.Embed ?? throw new InvalidOperationException())).ObservationId)
         ).ToList();
-        var childNotes = this.DownloadChildNotes(
+        var childNotes = this.DownloadChildNoteData(
             sidebar.ChildProfileItems.Select(child => child.Id)
         ).ToList();
         var repository = new FamilyAppRepository(
@@ -49,15 +39,15 @@ internal sealed partial class FamilyAppExporter
         return repository;
     }
 
-    public FamilyAppRepository ReadRepository()
+    public FamilyAppRepository ReadRepositoryData()
     {
         var roundtrip = true;
-        var identity = (this.ReadCurrentContext(roundtrip) ?? throw new InvalidOperationException()).Data.Me;
-        var sidebar = this.ReadSidebar(roundtrip) ?? throw new InvalidOperationException();
-        var summaries = this.ReadChildSummaries(roundtrip);
-        var feedItems = this.ReadFeedItems(roundtrip).ToList();
-        var observations = this.ReadObservations(roundtrip).ToList();
-        var childNotes = this.ReadChildNotes(roundtrip).ToList();
+        var identity = (this.ReadCurrentContextData(roundtrip) ?? throw new InvalidOperationException()).Data.Me;
+        var sidebar = this.ReadSidebarData(roundtrip) ?? throw new InvalidOperationException();
+        var summaries = this.ReadChildSummaryData(roundtrip);
+        var feedItems = this.ReadFeedItemData(roundtrip).ToList();
+        var observations = this.ReadObservationsData(roundtrip).ToList();
+        var childNotes = this.ReadChildNoteData(roundtrip).ToList();
         var repository = new FamilyAppRepository(
             identity, sidebar, summaries, feedItems, observations, childNotes
         );
@@ -73,21 +63,13 @@ internal sealed partial class FamilyAppExporter
 
     public async Task DownloadResources(FamilyAppRepository repository)
     {
+        var visitor = new DownloadVisitor(
+            this.DownloadHelper
+        );
+        visitor.Visit(repository);
         // static resources
-        await this.DownloadStaticHttpFonts(false);
-        await this.DownloadStaticHttpImages(false);
-        // sidebar
-        await this.DownloadSidebarImages(repository.Sidebar, false);
-        // profile images
-        await this.DownloadProfileImages(repository.FeedItems, false);
-        await this.DownloadProfileImages(repository.Observations, false);
-        await this.DownloadProfileImages(repository.ChildNotes, false);
-        // content images
-        await this.DownloadContentImages(repository.FeedItems, false);
-        await this.DownloadContentImages(repository.Observations, false);
-        await this.DownloadContentImages(repository.ChildNotes, false);
-        // files
-        await this.DownloadBinaryFiles(repository.FeedItems, false);
+        await this.DownloadStaticHttpFonts();
+        await this.DownloadStaticHttpImages();
     }
 
     public void GenerateHtmlFiles(FamilyAppRepository repository)

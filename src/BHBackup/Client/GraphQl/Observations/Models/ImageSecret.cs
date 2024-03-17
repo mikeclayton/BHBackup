@@ -48,15 +48,4 @@ internal sealed class ImageSecret
         init;
     }
 
-    [JsonIgnore]
-    public string SourceUrl
-        => $"{this.Prefix}/{this.Key}/1080x1920/{this.Path}?expires={this.Expires}";
-
-    [JsonIgnore]
-    public string OfflineUrl
-    {
-        get;
-        set;
-    }
-
 }

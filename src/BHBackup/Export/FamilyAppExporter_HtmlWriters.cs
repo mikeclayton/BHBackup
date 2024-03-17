@@ -93,7 +93,7 @@ internal sealed partial class FamilyAppExporter
         options.MemberAccessStrategy.Register<ChildNotesChild>();
         options.MemberAccessStrategy.Register<ChildNotesImage>();
         options.MemberAccessStrategy.Register<ChildNotesPerson>();
-        
+
         // read "include" files from embedded resources
         options.FileProvider = new ManifestEmbeddedFileProvider(
             executingAssembly
@@ -140,7 +140,7 @@ internal sealed partial class FamilyAppExporter
 
         var renderedHtml = template.Render(context, HtmlEncoder.Default);
 
-        var outputFilename = Path.Join(this.RepositoryDirectory, page.OutputFilename);
+        var outputFilename = this.DownloadHelper.GetAbsoluteFilename(page.OutputFilename);
         Directory.CreateDirectory(
             Path.GetDirectoryName(outputFilename) ?? throw new InvalidOperationException()
         );

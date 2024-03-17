@@ -2,6 +2,7 @@
 using System.Diagnostics;
 using System.Reflection;
 using BHBackup.Export;
+using BHBackup.Helpers;
 using CommandLine;
 using static Crayon.Output;
 
@@ -242,16 +243,19 @@ internal sealed class CmdLineArgs
         }
 
         var exporter = new FamilyAppExporter(
-            repositoryDirectory: cmdLineArgs.OutputDirectory ?? throw new InvalidOperationException(),
-            username: cmdLineArgs.Username ?? throw new InvalidOperationException(),
-            password: cmdLineArgs.Password ?? throw new InvalidOperationException(),
-            deviceId: Guid.NewGuid().ToString()
+            new DownloadHelper(
+                repositoryDirectory: cmdLineArgs.OutputDirectory ?? throw new InvalidOperationException(),
+                username: cmdLineArgs.Username ?? throw new InvalidOperationException(),
+                password: cmdLineArgs.Password ?? throw new InvalidOperationException(),
+                deviceId: Guid.NewGuid().ToString(),
+                overwrite: false
+            )
         );
 
         var download = !cmdLineArgs.SkipDownload;
         var repository = download
-            ? exporter.DownloadRepository()
-            : exporter.ReadRepository();
+            ? exporter.DownloadRepositoryData()
+            : exporter.ReadRepositoryData();
         if (download)
         {
             await exporter.DownloadResources(repository);
