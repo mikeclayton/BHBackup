@@ -11,18 +11,10 @@ internal abstract class CoreApiClient
     public const string FamilyAppUri = "https://familyapp.brighthorizons.co.uk";
 
 
-    internal CoreApiClient(HttpClient httpClient, Func<CoreApiCredentials> credentialFactory)
+    internal CoreApiClient(HttpClient httpClient, CoreApiCredentials? apiCredentials)
     {
-        this.CredentialFactory = credentialFactory ?? throw new ArgumentNullException(nameof(credentialFactory));
         this.HttpClient = httpClient ?? throw new ArgumentNullException(nameof(httpClient));
-        this.Credentials = new Lazy<CoreApiCredentials>(
-            () => this.CredentialFactory.Invoke()
-        );
-    }
-
-    private Func<CoreApiCredentials> CredentialFactory
-    {
-        get;
+        this.ApiCredentials = apiCredentials;
     }
 
     public HttpClient HttpClient
@@ -30,7 +22,7 @@ internal abstract class CoreApiClient
         get;
     }
 
-    private Lazy<CoreApiCredentials> Credentials
+    private CoreApiCredentials? ApiCredentials
     {
         get;
     }
@@ -73,7 +65,10 @@ internal abstract class CoreApiClient
                     contentType
                 )
         };
-        request.Headers.Add("x-famly-accesstoken", this.Credentials.Value.AccessToken);
+        if (this.ApiCredentials is not null)
+        {
+            request.Headers.Add("x-famly-accesstoken", this.ApiCredentials.AccessToken);
+        }
         request.Headers.ConnectionClose = false;
         return request;
     }

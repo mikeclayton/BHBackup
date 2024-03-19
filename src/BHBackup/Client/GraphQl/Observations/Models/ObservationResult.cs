@@ -20,4 +20,12 @@ internal sealed class ObservationResult
         init;
     }
 
+    [JsonPropertyName("next")]
+    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+    public string Next
+    {
+        get;
+        init;
+    }
+
 }

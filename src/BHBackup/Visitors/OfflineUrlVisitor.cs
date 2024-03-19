@@ -3,5 +3,4 @@
 internal sealed partial class OfflineUrlVisitor : RepositoryVisitor
 {
 
-
 }

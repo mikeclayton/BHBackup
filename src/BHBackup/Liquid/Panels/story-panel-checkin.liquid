@@ -1,0 +1,35 @@
+﻿{% comment %}
+
+template for checkin story panels - i.e. feed items where
+feedItem.SystemPostTypeClass = "Daycare.Checkin:CheckedIn" or
+feedItem.SystemPostTypeClass = "Daycare.Checkin:CheckedOut"
+
+{% endcomment %}
+
+<!-- begin checkin panel -->
+<!-- feed item id - {{ feedItem.FeedItemId }} -->
+<div class="story-panel-checkin-outer">
+    <div class="story-panel-checkin-left-outer">
+        <div class="story-panel-checkin-left-inner">
+            {% case feedItem.SystemPostTypeClass %}
+            {% when "Daycare.Checkin:CheckedIn" %}
+            <img class="story-panel-checkin-left-icon" src="./famly.co/core/feed-icons/checkin.png"/>
+            {% when "Daycare.Checkin:CheckedOut" %}
+            <img class="story-panel-checkin-left-icon" src="./famly.co/core/feed-icons/checkout.png" />
+            {% endcase %}
+        </div>
+    </div>
+    <div class="story-panel-checkin-right-outer">
+        <img class="story-panel-checkin-tap-icon" src="./familyapp/img/icons/tap.png" />
+        <p class="story-panel-checkin-right-title" data-inline="false" color="text" type="Body">
+            {{ feedItem.Sender.Name }}
+        </p>
+        <small class="story-panel-checkin-right-date" data-inline="false" disabled="" color="text" type="Caption">
+            {{ feedItem.CreatedDate }}
+        </small>
+        <div class="story-panel-panel-checkin-right-body-outer" color="text" type="Body">
+            <div class="story-panel-checkin-right-body-inner">{{ feedItem.Body }}</div>
+        </div>
+    </div>
+</div>
+<!-- end checkin panel -->

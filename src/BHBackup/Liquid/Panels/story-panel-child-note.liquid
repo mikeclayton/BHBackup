@@ -1,0 +1,53 @@
+<!-- begin child note panel -->
+<!-- child note id - {{ childNote.Id }} -->
+<div elevation="one" class="childnotes-panel-outer">
+    <!-- header -->
+    <div class="childnotes-panel-header">
+        <div class="childnotes-panel-title">
+            <h3 class="childnotes-panel-title" data-inline="true" color="text" type="Subheader">Note</h3>
+        </div>
+    </div>
+    <!-- text -->
+    <p class="childnotes-panel-text" data-inline="false" color="text" type="Body">
+        <span>
+            <span>
+                <span>{{ childNote.Text }}</span>
+            </span>
+            <span style="position: fixed; visibility: hidden; top: 0px; left: 0px;">
+                …
+            </span>
+        </span>
+    </p>
+    <!-- images -->
+    {%  liquid
+        assign imageCount = childNote.Images | size
+        if imageCount > 0
+            assign maxIndex = imageCount | minus: 1
+            for imageIndex in (0..maxIndex)
+                assign childNoteImage = childNote.Images[imageIndex]
+                assign columnIndex = imageIndex | modulo: 3
+                if columnIndex == 0
+                    echo '<div class="childnotes-panel-image-row">' | raw
+                endif
+                echo '<div class="childnotes-panel-image-cell" style="width: 240px; background-image: url(&quot;./' | append: childNoteImage.OfflineUrl | append: '&quot;)"></div>' | raw
+                if imageIndex == maxIndex
+                    assign missingCells = 2 | minus: columnIndex
+                    for missingIndex in (1..missingCells)
+                        echo '<div class="empty-cell"></div>' | raw
+                    endfor
+                endif
+                if columnIndex == 2
+                    echo '</div>' | raw
+                elsif imageIndex == maxIndex
+                    echo '</div>' | raw
+                endif
+            endfor
+        endif
+    %}
+    <!-- footer -->
+    <div class="sc-beqWaB OPykB"></div>
+    <p class="childnotes-panel-footer-text" data-inline="false" disabled="" color="text" type="Body">
+        Created {{ childNote.CreatedAtParsed | date: "%d %b %Y" }} · by {{ childNote.CreatedBy.Name.FullName }}
+    </p>
+</div>
+<!-- end child note panel -->

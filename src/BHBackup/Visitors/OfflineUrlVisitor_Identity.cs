@@ -1,4 +1,4 @@
-﻿using BHBackup.Client.GraphQl.Identity.Models;
+﻿using BHBackup.Client.GraphQl.Identity.Models.Context;
 using BHBackup.Helpers;
 
 namespace BHBackup.Visitors;

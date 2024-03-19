@@ -1,0 +1,144 @@
+﻿<!-- begin news item panel -->
+<!-- feed item id - {{ feedItem.FeedItemId }} -->
+<div data-e2e-class="story" class="feed-story-panel" elevation="one">
+  <div class="feed-story-content">
+    <div class="feed-story-header">
+      <div class="feed-story-avatar">
+        <img class="feed-story-avatar" src="./{{ feedItem.Sender.OfflineUrl }}" />
+      </div>
+      <div class="feed-story-title-panel">
+        <div class="feed-story-sender">
+          <span class="feed-story-sender">{{ feedItem.Sender.Name }}&nbsp;</span>
+        </div>
+        <div class="feed-story-date">
+          <a class="feed-story-date" href="#/account/post/01HQ5DV8DREA7125F40495C1C0">
+            {{ feedItem.CreatedDateParsed | date: "%d %b %Y, %H:%M" }}
+          </a>
+        </div>
+      </div>
+      <!--
+      <div class="sc-beqWaB sc-dmqHEX jEsEvy bANJut sc-hsDlMr RoXEd hideOnPrint">
+          <button type="button" role="button" class="sc-faCEWe ggbJuP sc-bYOEQd sc-dZKGDA dKzFed HqwEi moreButton ignore-react-onclickoutside" data-e2e-id="post-more-button" direction="south">
+              <svg viewBox="0 0 24 24" size="20" width="20px" height="20px" version="1.1" xmlns="http://www.w3.org/2000/svg" class="sc-kgKVFY eECuUF">
+                  <g fill="#5C34A3" class="sc-fLQRDB gSgLqj">
+                      <path d="M12,14 C10.8954305,14 10,13.1045695 10,12 C10,10.8954305 10.8954305,10 12,10 C13.1045695,10 14,10.8954305 14,12 C14,13.1045695 13.1045695,14 12,14 Z M19,14 C17.8954305,14 17,13.1045695 17,12 C17,10.8954305 17.8954305,10 19,10 C20.1045695,10 21,10.8954305 21,12 C21,13.1045695 20.1045695,14 19,14 Z M5,14 C3.8954305,14 3,13.1045695 3,12 C3,10.8954305 3.8954305,10 5,10 C6.1045695,10 7,10.8954305 7,12 C7,13.1045695 6.1045695,14 5,14 Z"></path>
+                  </g>
+              </svg>
+          </button>
+      </div>
+      -->
+    </div>
+    {% if feedItem.Embed.Type == "Daycare.Event" %}
+    <!-- daycare event -->
+    <div class="feed-story-event-panel-outer">
+      <div direction="column" class="sc-beqWaB sc-dmqHEX sc-iWQxIy gwlAfF coXswJ loDkZm">
+        <div class="feed-story-event-panel-inner">
+          <div class="feed-story-event-panel-content">
+            <p class="feed-story-event-title" data-inline="false" color="text" type="Body">
+              <img class="feed-story-event-calendar-icon" src="./familyapp/img/icons/calendar.png" />
+              {{ feedItem.Embed.Title }}
+            </p>
+            <small class="feed-story-event-date" data-inline="false" color="text" type="Caption">
+              {{ feedItem.Embed.FromTimeParsed | date: "%d %b %Y, %H:%M" }}
+            </small>
+            <small class="feed-story-event-text-outer" data-inline="false" color="text" type="Caption">
+              <div class="feed-story-event-text-inner">
+                {{ feedItem.Embed.Body }}
+              </div>
+            </small>
+          </div>
+        </div>
+        <!--
+        <a class="sc-beqWaB bUiODS sc-blLsxD dITZmY sc-faCEWe iuGLOD sc-bYOEQd dKzFed" href="#/account/event/de04f33f-874d-438f-88f1-e4e9ab9d45c2">
+            Show Event
+        </a>
+        -->
+      </div>
+    </div>
+    {% else %}
+    <div class="feed-story-body-outer" data-e2e-class="body">
+      <div class="sc-beqWaB sc-bJYsdd sc-jgWArk bUiODS kgJPHx ebfINz">
+        {% if feedItem.RichTextBody %}
+        {{ feedItem.RichTextBody | raw }}
+        {% else %}
+        {{ feedItem.Body | replace: "\n", "<br />" | raw }}
+        {% endif %}
+      </div>
+    </div>
+    {% endif %}
+  </div>
+  <!-- images -->
+  {% assign imageCount = feedItem.Images | size %}
+  {% if imageCount > 0 %}
+  <div class="feed-story-post-images">
+    <div class="sc-jQBImV dlamVV">
+      {% for image in feedItem.Images %}
+      <div class="feed-story-large-image-holder">
+        <div data-e2e-class="image-container" class="sc-hGBxYJ ftRvle">
+          <img class="feed-story-large-image"
+              src="./{{ image.OfflineUrl }}"
+              srcset="
+                ./{{ image.OfflineUrl }} 2x,
+                ./{{ image.OfflineUrl }} 3x"
+          />
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+  {% endif %}
+  <!-- files -->
+  {% assign fileCount = feedItem.Files | size %}
+  {% if fileCount > 0 %}
+  <div class="feed-story-files-outer">
+    {% assign maxIndex = fileCount | minus: 1 %}
+    {% for fileIndex in (0..maxIndex) %}
+    {% assign file = feedItem.Files[fileIndex] %}
+    {% if fileIndex < maxIndex %}
+    {% assign fileClass = 'feed-story-files-panel-left' %}
+    {% else %}
+    {% assign fileClass = 'feed-story-files-panel-right' %}
+    {% endif %}
+    <div class="{{ fileClass }}">
+      <a class="feed-story-files-link" href="./{{ file.OfflineUrl }}" target="_blank" rel="noopener noreferrer">
+        <div class="feed-story-files-inner">
+          <svg viewBox="0 0 32 32" size="24" class="sc-kgKVFY eECuUF sc-gppZzw kMvqeP" width="24px" height="24px" version="1.1" xmlns="http://www.w3.org/2000/svg">
+            <g fill="#120A20" class="sc-fLQRDB dvWLhU">
+              <path d="M21,8.5V4l5,5H21.5A.5.5,0,0,1,21,8.5Zm5,3V27a1,1,0,0,1-1,1H8a1,1,0,0,1-1-1V5A1,1,0,0,1,8,4H18.5a.5.5,0,0,1,.5.5V10a1,1,0,0,0,1,1h5.5A.5.5,0,0,1,26,11.5Zm-9,11a.5.5,0,0,0-.5-.5h-6a.5.5,0,0,0-.5.5v1a.5.5,0,0,0,.5.5h6a.5.5,0,0,0,.5-.5Zm6-4a.5.5,0,0,0-.5-.5h-12a.5.5,0,0,0-.5.5v1a.5.5,0,0,0,.5.5h12a.5.5,0,0,0,.5-.5Zm0-4a.5.5,0,0,0-.5-.5h-12a.5.5,0,0,0-.5.5v1a.5.5,0,0,0,.5.5h12a.5.5,0,0,0,.5-.5Z"></path>
+            </g>
+          </svg>
+          <small class="feed-story-files-name" data-inline="false" overflow="hidden" color="text" type="Caption">{{ file.Filename }}</small>
+        </div>
+      </a>
+    </div>
+    {% endfor %}
+  </div>
+  {% endif %}
+  <!-- footer -->
+  <div>
+    <div class="feed-story-footer-outer">
+      {% assign recipientCount = feedItem.Receivers | size %}
+      {% if recipientCount > 0 %}
+      <div class="feed-story-footer-inner">
+        <button class="feed-story-footer" type="button" role="button">
+          <span>
+            <span class="feed-story-footer-span-outer">
+              <span class="feed-story-footer-title">Recipients: </span>
+              {% if recipientCount < 5 %}
+              {% for receiver in feedItem.Receivers %}
+                <span class="feed-story-footer-item">{{ receiver }}</span>
+              {% endfor %}
+              {% else %}
+              <span class="feed-story-footer-item">{{ recipientCount }} recipients</span>
+              {% endif %}
+            </span>
+          </span>
+        </button>
+        <div class="sc-fZErkM iQrppn"></div>
+      </div>
+      {% endif %}
+    </div>
+    <div class="sc-jIpAmO fvZlfq"></div>
+  </div>
+</div>
+<!-- end news item panel -->

@@ -1,4 +1,6 @@
-﻿using BHBackup.Client.ApiV2.Models;
+﻿using BHBackup.Client.ApiV2.ChildSummary;
+using BHBackup.Client.ApiV2.ChildSummary.Models;
+using BHBackup.Client.ApiV2.Sidebar.Models;
 using BHBackup.Helpers;
 
 namespace BHBackup.Export;

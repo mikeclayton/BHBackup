@@ -1,6 +1,4 @@
-﻿using BHBackup.Client.GraphQl.Identity.Models;
-using System.Text.Json.Serialization;
-using BHBackup.Client.ApiV1.Feeds.Models;
+﻿using System.Text.Json.Serialization;
 
 namespace BHBackup.Client.GraphQl.Observations.Models;
 

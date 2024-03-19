@@ -1,6 +1,8 @@
 ﻿using System.ComponentModel;
 using System.Diagnostics;
 using System.Reflection;
+using BHBackup.Client.Core;
+using BHBackup.Client.GraphQl;
 using BHBackup.Export;
 using BHBackup.Helpers;
 using CommandLine;
@@ -242,12 +244,21 @@ internal sealed class CmdLineArgs
                 : outputDirectory;
         }
 
+        // use the anonymous "authenticate" endpoint to log in and get an api access token
+        var httpClient = new HttpClient();
+        var apiCredentials = await LoginHelper.Authenticate(
+            httpClient,
+            username: cmdLineArgs.Username ?? throw new InvalidOperationException(),
+            password: cmdLineArgs.Password ?? throw new InvalidOperationException(),
+            deviceId: Guid.NewGuid().ToString()
+        );
+
+        // use the api access token to make any further api calls
         var exporter = new FamilyAppExporter(
             new DownloadHelper(
+                httpClient: httpClient,
                 repositoryDirectory: cmdLineArgs.OutputDirectory ?? throw new InvalidOperationException(),
-                username: cmdLineArgs.Username ?? throw new InvalidOperationException(),
-                password: cmdLineArgs.Password ?? throw new InvalidOperationException(),
-                deviceId: Guid.NewGuid().ToString(),
+                apiCredentials: apiCredentials,
                 overwrite: false
             )
         );

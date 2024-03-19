@@ -1,7 +1,5 @@
-﻿using BHBackup.Client.ApiV2.Models;
+﻿using BHBackup.Client.ApiV2.Sidebar.Models;
 using BHBackup.Helpers;
-using System;
-using System.Reflection;
 
 namespace BHBackup.Visitors;
 

@@ -1,4 +1,5 @@
-﻿using BHBackup.Client.GraphQl.Identity.Api;
+﻿using BHBackup.Client.GraphQl.Identity;
+using BHBackup.Client.GraphQl.Identity.Api;
 using BHBackup.Helpers;
 
 namespace BHBackup.Export;

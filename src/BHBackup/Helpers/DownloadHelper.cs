@@ -8,13 +8,11 @@ namespace BHBackup.Helpers;
 internal sealed class DownloadHelper
 {
 
-    public DownloadHelper(string repositoryDirectory, string username, string password, string deviceId, bool overwrite)
+    public DownloadHelper(string repositoryDirectory, HttpClient httpClient, CoreApiCredentials apiCredentials, bool overwrite)
     {
         this.RepositoryDirectory = repositoryDirectory ?? throw new ArgumentNullException(nameof(repositoryDirectory));
-        this.HttpClient = new HttpClient();
-        this.Username = username ?? throw new ArgumentNullException(nameof(username));
-        this.Password = password ?? throw new ArgumentNullException(nameof(password));
-        this.DeviceId = deviceId ?? throw new ArgumentNullException(nameof(deviceId));
+        this.HttpClient = httpClient ?? throw new ArgumentNullException(nameof(httpClient));
+        this.ApiCredentials = apiCredentials ?? throw new ArgumentNullException(nameof(apiCredentials));
         this.Overwrite = overwrite;
     }
 
@@ -22,11 +20,7 @@ internal sealed class DownloadHelper
 
     public HttpClient HttpClient { get; }
 
-    public string Username { get; }
-
-    public string Password { get; }
-
-    public string DeviceId { get; }
+    public CoreApiCredentials ApiCredentials { get; }
 
     public bool Overwrite { get;  }
 
@@ -34,12 +28,7 @@ internal sealed class DownloadHelper
     {
         return new ApiV1Client(
             this.HttpClient,
-            () => LoginHelpers.Authenticate(
-                this.HttpClient,
-                this.Username,
-                this.Password,
-                this.DeviceId
-            ).Result
+            this.ApiCredentials
         );
     }
 
@@ -47,12 +36,7 @@ internal sealed class DownloadHelper
     {
         return new ApiV2Client(
             this.HttpClient,
-            () => LoginHelpers.Authenticate(
-                this.HttpClient,
-                this.Username,
-                this.Password,
-                this.DeviceId
-            ).Result
+            this.ApiCredentials
         );
     }
 
@@ -60,12 +44,7 @@ internal sealed class DownloadHelper
     {
         return new GraphQlClient(
             this.HttpClient,
-            () => LoginHelpers.Authenticate(
-                this.HttpClient,
-                this.Username,
-                this.Password,
-                this.DeviceId
-            ).Result
+            this.ApiCredentials
         );
     }
 

@@ -34,15 +34,15 @@ internal sealed class FeedEmbedConverter : JsonConverter<FeedEmbed>
             ["Daycare.Event"] = typeof(FeedEmbedDaycareEvent),
             ["Observation"] = typeof(FeedEmbedObservation),
         };
-        if (!map.TryGetValue(typeName, out var embedType))
+        if (!map.TryGetValue(typeName, out var derivedType))
         {
             throw new JsonException();
         }
 
-        var embed = (FeedEmbed)(JsonSerializer.Deserialize(ref reader, embedType, options)
+        var derivedResult = (FeedEmbed)(JsonSerializer.Deserialize(ref reader, derivedType, options)
             ?? throw new InvalidOperationException());
 
-        return embed;
+        return derivedResult;
 
     }
 

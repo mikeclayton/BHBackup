@@ -1,0 +1,77 @@
+{% render "Liquid\\Layout\\layout-header.liquid", site: site, page: page %}
+
+<!-- begin child profile notes page content -->
+<div id="content" class="shouldScrollContent">
+  <div id="accountSubrouteContentId">
+    <div id="personProfile" class="clearfix mobile-fullscreen">
+      {% render "Liquid\\Pages\\childprofile-header-wrapper.liquid" %}
+      <!-- begin child profile view -->
+      <div class="child-profile-view">
+        <div class="sc-dFWdGd iFvNUI sc-jQBImV bXjfL">
+          <!--
+          <div class="sc-beqWaB sc-hQlIKd sc-gWAFUw bUiODS dwcBRJ iCEfom sc-bEKnip fyglat sc-jrPfva gydwpD sc-jQBImV bXjfL" data-component-id="EDE69EB4-1447-447C-B24D-22A3BCAF261B">
+            <div class="sc-beqWaB sc-dmqHEX bUiODS gOMyPJ">
+               <h3 data-inline="false" overflow="hidden" color="text" type="Subheader" class="sc-beqWaB lnsCDb sc-eDDNvR sc-fsQiph sc-kCtSUc dWJFFR idnCPQ">
+                 Notes
+               </h3>
+            </div>
+          </div>
+          -->
+          <div class="sc-iXMwsk bmMbPq">
+            <div class="child-profile-redux-infinite-scroll" style="height: 100%;">
+              <div class="child-profile-infinite-scroll-inner-1">
+                <div class="child-profile-infinite-scroll-inner-2">
+                  <div class="child-profile-left-column">
+                    <div class="sc-ldCHiC bfToLX">
+                      <!--
+                      <form class="sc-cduAxm fgvuhN sc-bIlklX dTTQUe">
+                        <div class="sc-beqWaB sc-dmqHEX sc-bRwMUK bUiODS bANJut ivxsqg clearfix">
+                          <label class="sc-eDDNvR AtjFR sc-bfyqmL gTTtn" type="Caption" color="text">
+                            Filter by
+                          </label>
+                          <div class="sc-ewMyiF fZpyAf">
+                            <label class="sc-gjTGSA gPTNvv sc-dlLLfg iskGwn">
+                              <input name="sensitive" class="sc-iKGpAt gUzkkB" type="checkbox" value="false" />
+                              <div class="sc-beqWaB sc-dmqHEX bUiODS gcOEoN sc-lnAgIa hyZarH">
+                                <svg size="17" viewBox="0 0 24 24" width="17px" height="17px" version="1.1" xmlns="http://www.w3.org/2000/svg" class="sc-kgKVFY eECuUF">
+                                  <g class="sc-fLQRDB hsshvg">
+                                    <path d="M8.926 18.652L4 13.725l1.767-1.768 3.074 3.074L17.959 5l1.849 1.682z"> </path>
+                                  </g>
+                                </svg>
+                              </div>
+                              <div>
+                                <p data-inline="false" class="sc-beqWaB bUiODS sc-eDDNvR sc-qRumB drFERN" color="text" type="Body">
+                                  Sensitive
+                                </p>
+                              </div>
+                            </label>
+                          </div>
+                        </div>
+                      </form>
+                      -->
+                    </div>
+                  </div>
+                  <div class="child-profile-right-column">
+                    <div class="child-profile-contents-title-outer">
+                      <h2 class="child-profile-contents-title-text" data-inline="false" color="text" type="Title">
+                        Notes
+                      </h2>
+                    </div>
+                    {% for childNote in repository.ChildNotes %}
+                    {% render "Liquid\\Panels\\story-panel-child-note.liquid", childNote: childNote %}
+                    {% endfor %}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- end child profile view -->
+
+    </div>
+  </div>
+</div>
+<!-- end child profile notes page content -->
+
+{% render "Liquid\\Layout\\layout-footer.liquid" %}

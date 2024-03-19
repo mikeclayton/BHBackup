@@ -1,0 +1,190 @@
+/*
+
+styles for checkin story panels - i.e. feed items where
+feedItem.SystemPostTypeClass = "Daycare.Checkin:CheckedIn" or
+feedItem.SystemPostTypeClass = "Daycare.Checkin:CheckedOut"
+
+*/
+
+div.story-panel-checkin-outer {
+    color: #000;
+    --sat: env(safe-area-inset-top);
+    --sab: env(safe-area-inset-bottom);
+    -webkit-text-size-adjust: 100%;
+    -webkit-font-smoothing: antialiased;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    font-family: Matter,Helvetica Neue,Helvetica,Arial,Lucida Grande,sans-serif;
+    font-size: 16px;
+    font-variant-ligatures: no-contextual;
+    font-weight: 400;
+    line-height: 24px;
+    display: flex;
+}
+
+div.story-panel-checkin-left-outer {
+    color: #000;
+    --sat: env(safe-area-inset-top);
+    --sab: env(safe-area-inset-bottom);
+    -webkit-text-size-adjust: 100%;
+    -webkit-font-smoothing: antialiased;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    font-family: Matter,Helvetica Neue,Helvetica,Arial,Lucida Grande,sans-serif;
+    font-size: 16px;
+    font-variant-ligatures: no-contextual;
+    font-weight: 400;
+    line-height: 24px;
+}
+
+div.story-panel-checkin-left-inner {
+    color: #000;
+    --sat: env(safe-area-inset-top);
+    --sab: env(safe-area-inset-bottom);
+    -webkit-text-size-adjust: 100%;
+    -webkit-font-smoothing: antialiased;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    font-family: Matter,Helvetica Neue,Helvetica,Arial,Lucida Grande,sans-serif;
+    font-size: 16px;
+    font-variant-ligatures: no-contextual;
+    line-height: 24px;
+    font-weight: 400;
+    margin-top: 11px;
+    margin-left: 13px;
+    margin-right: 12px;
+    height: auto;
+    width: auto;
+    border-radius: 50%;
+    border: 1px solid rgb(230, 230, 230);
+    background-color: white;
+}
+
+.story-panel-checkin-left-icon {
+    color: #000;
+    --sat: env(safe-area-inset-top);
+    --sab: env(safe-area-inset-bottom);
+    -webkit-text-size-adjust: 100%;
+    -webkit-font-smoothing: antialiased;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    font-family: Matter,Helvetica Neue,Helvetica,Arial,Lucida Grande,sans-serif;
+    font-size: 16px;
+    font-variant-ligatures: no-contextual;
+    font-weight: 400;
+    line-height: 24px;
+    vertical-align: middle;
+    border: 0;
+    margin: 3px;
+    border-radius: 50%;
+    width: 39px;
+    height: 39px;
+}
+
+div.story-panel-checkin-right-outer
+{
+    color: #000;
+    --sat: env(safe-area-inset-top);
+    --sab: env(safe-area-inset-bottom);
+    -webkit-text-size-adjust: 100%;
+    -webkit-font-smoothing: antialiased;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    font-family: Matter,Helvetica Neue,Helvetica,Arial,Lucida Grande,sans-serif;
+    font-size: 16px;
+    font-variant-ligatures: no-contextual;
+    font-weight: 400;
+    line-height: 24px;
+    background-color: rgb(255, 255, 255);
+    box-sizing: border-box;
+    border-radius: 8px;
+    margin-bottom: 24px;
+    padding: 16px;
+    position: relative;
+    flex: 1 1 0%;
+}
+
+img.story-panel-checkin-tap-icon {
+    color: #000;
+    --sat: env(safe-area-inset-top);
+    --sab: env(safe-area-inset-bottom);
+    -webkit-text-size-adjust: 100%;
+    -webkit-font-smoothing: antialiased;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    font-family: Matter,Helvetica Neue,Helvetica,Arial,Lucida Grande,sans-serif;
+    font-size: 16px;
+    font-variant-ligatures: no-contextual;
+    font-weight: 400;
+    line-height: 24px;
+    vertical-align: middle;
+    border: 0;
+    position: absolute;
+    top: 28px;
+    left: -10px;
+}
+
+p.story-panel-checkin-right-title {
+    --sat: env(safe-area-inset-top);
+    --sab: env(safe-area-inset-bottom);
+    -webkit-text-size-adjust: 100%;
+    -webkit-font-smoothing: antialiased;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    font-variant-ligatures: no-contextual;
+    text-rendering: optimizeLegibility;
+    font-style: normal;
+    color: rgb(18, 10, 32);
+    font-family: Matter, "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+    font-size: 16px;
+    line-height: 24px;
+    font-weight: 500;
+    letter-spacing: normal;
+    display: block;
+    margin: 0px;
+}
+
+.story-panel-checkin-right-date {
+    --sat: env(safe-area-inset-top);
+    --sab: env(safe-area-inset-bottom);
+    -webkit-text-size-adjust: 100%;
+    -webkit-font-smoothing: antialiased;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    font-variant-ligatures: no-contextual;
+    margin-bottom: 8px;
+    color: rgba(18, 10, 32, 0.35);
+    font-family: Matter, "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+    font-size: 14px;
+    line-height: 22px;
+    font-weight: normal;
+    letter-spacing: normal;
+    display: block;
+    margin-top: 0px;
+    margin-right: 0px;
+    margin-left: 0px;
+}
+
+.story-panel-checkin-right-body-outer {
+    --sat: env(safe-area-inset-top);
+    --sab: env(safe-area-inset-bottom);
+    -webkit-text-size-adjust: 100%;
+    -webkit-font-smoothing: antialiased;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    font-variant-ligatures: no-contextual;
+    color: rgb(18, 10, 32);
+    font-family: Matter, "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+    font-size: 16px;
+    line-height: 24px;
+    font-weight: normal;
+    letter-spacing: normal;
+    display: block;
+    margin: 0px;
+}
+
+.story-panel-checkin-right-body-inner {
+    --sat: env(safe-area-inset-top);
+    --sab: env(safe-area-inset-bottom);
+    -webkit-text-size-adjust: 100%;
+    -webkit-font-smoothing: antialiased;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    font-variant-ligatures: no-contextual;
+    color: rgb(18, 10, 32);
+    font-family: Matter, "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+    font-size: 16px;
+    line-height: 24px;
+    font-weight: normal;
+    letter-spacing: normal;
+}

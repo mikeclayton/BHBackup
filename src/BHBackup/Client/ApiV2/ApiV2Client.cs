@@ -5,12 +5,12 @@ namespace BHBackup.Client.ApiV2;
 internal sealed partial class ApiV2Client : CoreApiClient
 {
 
-    public ApiV2Client(HttpClient httpClient, Func<CoreApiCredentials> credentialFactory)
-        : base(httpClient, credentialFactory)
+    public ApiV2Client(HttpClient httpClient, CoreApiCredentials? apiCredentials = null)
+        : base(httpClient, apiCredentials)
     {
     }
 
-    private async Task<string> ExecuteApiV2Request(string requestUrl, Dictionary<string, string>? querystring, HttpMethod method, string? requestBody, bool roundtrip)
+    public async Task<string> ExecuteApiV2Request(string requestUrl, Dictionary<string, string>? querystring, HttpMethod method, string? requestBody, bool roundtrip)
     {
 
         return await base.ExecuteTextRequestAsync(
@@ -18,7 +18,7 @@ internal sealed partial class ApiV2Client : CoreApiClient
         ) ?? throw new InvalidOperationException();
     }
 
-    private async Task<TResponse> ExecuteApiV2Request<TResponse>(string requestUrl, Dictionary<string, string>? querystring, HttpMethod method, object? requestBody, bool roundtrip)
+    public async Task<TResponse> ExecuteApiV2Request<TResponse>(string requestUrl, Dictionary<string, string>? querystring, HttpMethod method, object? requestBody, bool roundtrip)
     {
 
         return await base.ExecuteJsonRequestAsync<TResponse>(

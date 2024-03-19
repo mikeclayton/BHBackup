@@ -20,6 +20,7 @@ internal sealed partial class FamilyAppExporter
 
     public FamilyAppRepository DownloadRepositoryData()
     {
+        var learningJourney = this.DownloadLearningJourneyData();
         var identity = this.DownloadCurrentContextData().Data.Me;
         var sidebar = this.DownloadSidebarData();
         var summaries = this.DownloadChildSummaryData(sidebar).ToBlockingEnumerable().ToList();
@@ -84,14 +85,14 @@ internal sealed partial class FamilyAppExporter
 
         var index = new GenericPage(
             name: "index",
-            templateFilename: $"{typeof(Liquid.EmbeddedResources).Namespace}.index.liquid",
+            templateFilename: $"{typeof(Liquid.EmbeddedResources).Namespace}.Pages.index.liquid",
             outputFilename: "index.htm"
         );
 
         var site = new Site(
             newsfeedPage: new(
                 name: "newsfeed",
-                templateFilename: $"{typeof(Liquid.EmbeddedResources).Namespace}.newsfeed-00-main-page.liquid",
+                templateFilename: $"{typeof(Liquid.EmbeddedResources).Namespace}.Pages.newsfeed-page.liquid",
                 outputFilename: OfflinePathHelper.GetNewsfeedPageRelativePath(),
                 title: "Bright Horizons | Newsfeed",
                 topBar: new(
@@ -101,16 +102,16 @@ internal sealed partial class FamilyAppExporter
             ),
             childNotesPages: repository.Sidebar.ChildProfileItems
                 .Select(
-                    item => new ChildNotesPage(
-                        name: $"childnotes",
-                        templateFilename: $"{typeof(Liquid.EmbeddedResources).Namespace}.childnotes-00-main-page.liquid",
-                        outputFilename: OfflinePathHelper.GetChildProfileNotesPageRelativePath(item.Title),
+                    sidebarItem => new ChildNotesPage(
+                        name: $"childprofile-notes-{sidebarItem.Id}",
+                        templateFilename: $"{typeof(Liquid.EmbeddedResources).Namespace}.Pages.childprofile-notes-page.liquid",
+                        outputFilename: OfflinePathHelper.GetChildProfileNotesPageRelativePath(sidebarItem.Title),
                         title: "Bright Horizons | Child profile",
                         topBar: new(
                             selectedIcon: "home",
                             title: "Child profile"
                         ),
-                        childSummary: repository.ChildSummaries.First(childSummary => childSummary.Child.ChildId == item.Id)
+                        childSummary: repository.ChildSummaries.First(childSummary => childSummary.Child.ChildId == sidebarItem.Id)
                     )
                 ).ToList()
         );

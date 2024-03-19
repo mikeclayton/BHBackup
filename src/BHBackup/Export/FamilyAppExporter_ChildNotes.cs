@@ -35,7 +35,7 @@ internal sealed partial class FamilyAppExporter
             );
             yield return childNote;
         }
-        ;    }
+    }
 
     private ReadOnlyCollection<ChildNote> ReadChildNoteData(bool roundtrip)
     {

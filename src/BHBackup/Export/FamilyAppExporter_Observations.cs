@@ -1,4 +1,5 @@
-﻿using BHBackup.Client.GraphQl.Observations.Models;
+﻿using BHBackup.Client.GraphQl.Observations;
+using BHBackup.Client.GraphQl.Observations.Models;
 using BHBackup.Helpers;
 
 namespace BHBackup.Export;

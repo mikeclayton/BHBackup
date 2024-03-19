@@ -1,0 +1,173 @@
+﻿<!-- begin observation panel -->
+<!-- feed item id - {{ feedItem.FeedItemId }} -->
+<!-- observation id - {{ observation.Id }} -->
+<div data-e2e-class="story" class="feed-story-panel" id="feed-post-1" elevation="one">
+  <div class="feed-story-content">
+    <div class="feed-story-header">
+      <!-- profile image -->
+      <div class="feed-story-avatar">
+        <img class="feed-story-avatar" src="./{{ observation.CreatedBy.ProfileImage.OfflineUrl }}" />
+      </div>
+      <!-- title / date -->
+      <div class="feed-story-title-panel">
+        <div class="feed-story-title">
+          <div class="feed-story-sender">
+            <span class="feed-story-sender">{{ observation.CreatedBy.Name.FullName }}&nbsp;</span>
+            <span class="sc-jeAryS iDDyNW">made an observation for&nbsp;</span>
+            <span class="feed-story-sender">{{ observation.Children[0].Name }}&nbsp;</span>
+          </div>
+        </div>
+        <div class="feed-story-date">
+          <a class="feed-story-date" href="#/account/post/{{ feedItem.FeedItemId }}">
+            {{ observation.Remark.DateParsed | date: "%d %b %Y" }}
+          </a>
+        </div>
+      </div>
+      <!-- bookmark icon -->
+      <div class="feed-story-bookmark-icon-outer">
+          <button
+            type="button" role="button"
+            class="feed-story-bookmark-icon-inner"
+            data-e2e-id="post-more-button" direction="south"><svg viewBox="0 0 24 24"
+              size="20" width="20px" height="20px" version="1.1"
+              xmlns="http://www.w3.org/2000/svg" class="sc-kgKVFY eECuUF">
+              <g fill="#5C34A3" class="sc-fLQRDB gSgLqj">
+                <path d="M12,14 C10.8954305,14 10,13.1045695 10,12 C10,10.8954305 10.8954305,10 12,10 C13.1045695,10 14,10.8954305 14,12 C14,13.1045695 13.1045695,14 12,14 Z M19,14 C17.8954305,14 17,13.1045695 17,12 C17,10.8954305 17.8954305,10 19,10 C20.1045695,10 21,10.8954305 21,12 C21,13.1045695 20.1045695,14 19,14 Z M5,14 C3.8954305,14 3,13.1045695 3,12 C3,10.8954305 3.8954305,10 5,10 C6.1045695,10 7,10.8954305 7,12 C7,13.1045695 6.1045695,14 5,14 Z"></path>
+              </g>
+            </svg>
+          </button>
+      </div>
+    </div>
+    <!-- body -->
+    <div class="feed-story-body-outer" data-e2e-class="body">
+      <div class="sc-beqWaB sc-bJYsdd sc-jgWArk bUiODS kgJPHx ebfINz">
+        {{ observation.Remark.RichTextBody | raw }}
+      </div>
+    </div>
+    <!-- what's next -->
+    {% if observation.Variant == "REGULAR_OBSERVATION" %}
+    <div class="feed-story-body-outer">
+      <div class="feed-story-whats-next-title">What's next</div>
+      <div class="feed-story-whats-next-body">
+        <div class="sc-beqWaB sc-bJYsdd sc-jgWArk bUiODS kgJPHx ebfINz">
+          {{ observation.NextStep.RichTextBody | raw }}
+        </div>
+      </div>
+    </div>
+    {% endif %}
+    <!-- areas -->
+    {% if observation.Variant == "REGULAR_OBSERVATION" %}
+    <div class="feed-story-areas-outer">
+      <div class="feed-story-areas-inner">
+        <div wrap="wrap" class="feed-story-areas-inner-2">
+          {% assign sorted_areas = observation.Remark.Areas | sort: "Area.Placement" %}
+          {% for refinement in sorted_areas %}
+          {% assign colorIndex = refinement.Area.Color %}
+          {% assign colorNames = "blue, yellow, red, three, four, green, purple" | split: ", " %}
+          {% assign colorName = colorNames[colorIndex] %}
+          <div class="feed-story-areas-pill feed-story-areas-pill-{{ colorName }}">
+            <small class="feed-story-areas-pill" data-inline="false" color="invertedText" type="Caption">
+              {{ refinement.Area.Title }}
+            </small>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+    {% endif %}
+    <!-- assessment -->
+    <!-- https://familyapp.brighthorizons.co.uk/#/account/post/01HFVNMJVDCCC6EA336A3CF5B5 -->
+    {% if observation.Variant == "ASSESSMENT" %}
+    <div class="feed-story-assessment-section-outer">
+      <div class="feed-story-assessment-section-inner">
+        {% assign sorted_areas = observation.Remark.Areas | sort: "Area.Placement" %}
+        {% for refinement in sorted_areas %}
+        <div class="feed-story-assessment-area-outer">
+          <div class="feed-story-assessment-area-inner" cursor="pointer">
+            <div class="feed-story-assessment-area-inner-2">
+              <div class="feed-story-assessment-area-header-outer">
+                <div class="feed-story-assessment-area-header-content">
+                  <div class="feed-story-assessment-area-header-circle-outer">
+                    {% assign colorIndex = refinement.Area.Color %}
+                    {% assign colorNames = "blue, yellow, red, three, four, green, purple" | split: ", " %}
+                    {% assign colorName = colorNames[colorIndex] %}
+                    <div class="feed-story-assessment-area-header-circle-inner feed-story-assessment-area-header-circle-inner-{{ colorName }}"></div>
+                  </div>
+                  <div class="feed-story-assessment-area-header-box">
+                    <p class="feed-story-assessment-area-header-title" data-inline="false" color="text" type="Body">
+                      {{ refinement.Area.Title }}
+                    </p>
+                    <div class="feed-story-assessment-area-header-subtitle">
+                      <small class="feed-story-assessment-area-header-age" data-inline="false" color="text" type="Caption">
+                        {{ refinement.AreaRefinementSettings.AgeSetting.Label }}
+                      </small>
+                      <small class="feed-story-assessment-area-header-status" data-inline="false" color="text" type="Caption">
+                        {{ refinement.AreaRefinementSettings.AssessmentOptionSetting.Label }}
+                      </small>
+                    </div>
+                  </div>
+                </div>
+                <div class="feed-story-assessment-area-header-arrow-box">
+                  <span class="feed-story-assessment-area-header-arrow-icon" aria-hidden="true">
+                    keyboard_arrow_down
+                  </span>
+                </div>
+              </div>
+              <div class="feed-story-assessment-area-body-outer">
+                <p class="feed-story-assessment-area-body-text" data-inline="false" color="text" type="Body">
+                  {{ refinement.Note }}
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+    {% endif %}
+  </div>
+  <!-- images -->
+  {% assign imageCount = observation.Images | size %}
+  {% if imageCount > 0 %}
+  <div class="feed-story-post-images">
+    <div class="sc-jQBImV dlamVV">
+      {% for image in observation.Images %}
+      <div class="feed-story-large-image-holder">
+        <div data-e2e-class="image-container" class="sc-hGBxYJ ftRvle">
+          <img class="feed-story-large-image"
+              src="./{{ image.OfflineUrl }}"
+              srcset="
+                ./{{ image.OfflineUrl }} 2x,
+                ./{{ image.OfflineUrl }} 3x"
+          />
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+  {% endif %}
+  <!-- footer -->
+  <div>
+    {% assign recipientCount = feedItem.Receivers | size %}
+    {% if recipientCount > 0 %}
+    <div class="feed-story-footer-inner">
+      <button class="feed-story-footer" type="button" role="button">
+        <span>
+          <span class="feed-story-footer-span-outer">
+            <span class="feed-story-footer-title">Recipients: </span>
+            {% if recipientCount < 5 %}
+            {% for receiver in feedItem.Receivers %}
+              <span class="feed-story-footer-item">{{ receiver }}</span>
+            {% endfor %}
+            {% else %}
+            <span class="feed-story-footer-item">{{ recipientCount }} recipients</span>
+            {% endif %}
+          </span>
+        </span>
+      </button>
+      <div class="sc-fZErkM iQrppn"></div>
+    </div>
+    {% endif %}
+  </div>
+</div>
+<!-- end observation panel -->

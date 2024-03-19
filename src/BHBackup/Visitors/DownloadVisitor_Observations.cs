@@ -1,5 +1,4 @@
-﻿using BHBackup.Client.ApiV1.Feeds.Models;
-using BHBackup.Client.GraphQl.Identity.Models;
+﻿using BHBackup.Client.GraphQl.Identity.Models.Context;
 using BHBackup.Client.GraphQl.Observations.Models;
 
 namespace BHBackup.Visitors;

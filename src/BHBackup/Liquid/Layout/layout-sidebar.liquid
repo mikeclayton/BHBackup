@@ -1,0 +1,89 @@
+<!-- begin sidebar -->
+<div class="sidebar-main-outer">
+    <div class="sidebar-main-inner">
+        <div class="sidebar-group-container" direction="column" data-e2e-id="sidebar-group-container">
+            <div direction="column" class="sc-beqWaB sc-dmqHEX sc-gugMUb bUiODS coXswJ dmVHGy">
+                <div class="sidebar-brand-icon-panel" data-e2e-id="NavigationGroup-BrandIcon" data-intercom-target="Sidebar Group BrandIcon" data-famlytics-event="[object Object]">
+                    <svg width="54" height="30" viewBox="0 0 54 30" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" fill="none">
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M0.00077838 28.3137C13.5126 29.6608 22.8407 22.5363 34.3459 22.5363C42.7641 22.5363 47.5916 26.1722 54 26.9093V27.1959C46.4291 27.3023 41.7164 25.2428 34.2518 25.2264C25.2436 25.2264 15.2445 29.6117 7.90677 29.6608C2.2931 29.6935 0.233514 28.6453 0 28.6003V28.3137H0.00077838Z" fill="#00844E"></path>
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M22.8527 11.2103C13.4351 13.3927 12.5057 22.1636 12.7758 25.7091C13.7831 25.488 14.8231 25.2055 15.7075 24.9394C15.7075 21.7456 16.8049 15.8495 23.6019 14.1868C30.7019 12.4466 34.7475 18.0071 35.943 20.992C36.9735 21.0064 38.0002 21.1175 39.0099 21.3237C38.9567 18.9898 33.4536 8.749 22.8524 11.2102" fill="#F2BF00"></path>
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M1.63889 20.8039C1.70031 20.3657 2.04834 19.7802 3.04744 19.9604C4.4191 20.2143 9.98365 21.5983 9.80758 22.4171C9.7134 22.8675 9.02554 23.4612 2.74846 22.2247C1.57739 21.9954 1.59382 21.0946 1.63881 20.7998" fill="#F2BF00"></path>
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M7.20715 8.7008C7.43235 8.32001 8.02608 7.91052 8.87365 8.45513C10.0488 9.20854 14.6347 12.4351 14.0369 13.3686C13.9592 13.4874 13.3245 13.4669 7.69441 10.4287C7.3746 10.2872 7.13474 10.0103 7.04045 9.6735C6.94616 9.33676 7.0073 8.97548 7.20716 8.68854" fill="#F2BF00"></path>
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M21.1904 0.359894C21.5999 0.257529 22.3328 0.503201 22.5334 1.49407C22.8118 2.86168 23.5817 8.35664 22.5907 8.49582C22.4966 8.49582 22.255 8.36479 21.8742 7.45987C21.4934 6.55493 20.8301 3.95079 20.2896 2.03045C20.1706 1.68958 20.2005 1.31441 20.3718 0.996608C20.5432 0.678835 20.8402 0.44775 21.1904 0.359824" fill="#F2BF00"></path>
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M37.0569 2.72647C37.5196 2.98443 37.9045 3.64775 37.2494 4.51168C36.4304 5.62538 33.5192 10.2891 32.6921 9.72409C32.6102 9.67086 32.4546 9.27368 32.6921 8.31966C32.9296 7.3656 34.1907 5.27332 35.3536 3.27515C35.9555 2.2515 36.7417 2.54631 37.0652 2.72647" fill="#F2BF00"></path>
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M47.0885 11.7755C47.3833 12.2136 47.4079 13.0243 46.4334 13.4993C45.1804 14.1135 40.4389 16.8077 39.9517 15.9315C39.9066 15.8455 39.9517 15.4278 40.6928 14.785C42.1658 13.6205 43.7008 12.5365 45.291 11.538C46.286 10.891 46.8797 11.4684 47.0885 11.7755" fill="#F2BF00"></path>
+                    </svg>
+                </div>
+                <div class="sidebar-menu-items-outer">
+                    {% for item in repository.Sidebar.Items %}
+                    {% case item.Type %}
+                    {% when "newsfeed" %}
+                    <!-- newsfeed -->
+                    {% liquid
+                        if page.Name == "newsfeed"
+                            assign classname = "sidebar-menu-item-link sidebar-menu-item-selected"
+                        else
+                            assign classname = "sidebar-menu-item-link"
+                        endif
+                    %}
+                    <div>
+                        <a align="center" justify="center"
+                            data-e2e-id="NavigationGroup-HOME"
+                            data-intercom-target="Sidebar Group HOME"
+                            class="{{ classname }}"
+                            data-famlytics-event="[object Object]" href="{{ site.NewsfeedPage.OfflineUrl }}">
+                            <svg width="24" height="24" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                                <path d="M4.31159 10.0812C4.31159 9.66694 3.9758 9.33115 3.56159 9.33115C3.14737 9.33115 2.81159 9.66694 2.81159 10.0812H4.31159ZM22.1886 10.0812C22.1886 9.66694 21.8528 9.33115 21.4386 9.33115C21.0244 9.33115 20.6886 9.66694 20.6886 10.0812H22.1886ZM1.56989 10.5997C1.277 10.8926 1.277 11.3675 1.56989 11.6603C1.86278 11.9532 2.33766 11.9532 2.63055 11.6603L1.56989 10.5997ZM10.3347 2.89546L9.80441 2.36513L9.80441 2.36514L10.3347 2.89546ZM14.6654 2.89546L14.135 3.42579L14.135 3.42579L14.6654 2.89546ZM22.3696 11.6603C22.6625 11.9532 23.1373 11.9532 23.4302 11.6603C23.7231 11.3674 23.7231 10.8925 23.4302 10.5996L22.3696 11.6603ZM19.535 21.25H5.46516V22.75H19.535V21.25ZM5.46516 21.25C4.82975 21.25 4.31159 20.7319 4.31159 20.0964H2.81159C2.81159 21.5603 4.00134 22.75 5.46516 22.75V21.25ZM4.31159 20.0964V10.0812H2.81159V20.0964H4.31159ZM20.6886 10.0812V20.0964H22.1886V10.0812H20.6886ZM20.6886 20.0964C20.6886 20.7318 20.1705 21.25 19.535 21.25V22.75C20.9989 22.75 22.1886 21.5602 22.1886 20.0964H20.6886ZM15.7337 22V15.4809H14.2337V22H15.7337ZM15.7337 15.4809C15.7337 14.5532 14.9801 13.7996 14.0524 13.7996V15.2996C14.1516 15.2996 14.2337 15.3816 14.2337 15.4809H15.7337ZM14.0524 13.7996H10.948V15.2996H14.0524V13.7996ZM10.948 13.7996C10.0203 13.7996 9.26673 14.5532 9.26673 15.4809H10.7667C10.7667 15.3816 10.8487 15.2996 10.948 15.2996V13.7996ZM9.26673 15.4809V22H10.7667V15.4809H9.26673ZM2.63055 11.6603L10.8651 3.42579L9.80441 2.36514L1.56989 10.5997L2.63055 11.6603ZM10.8651 3.42579C11.7661 2.52473 13.234 2.52474 14.135 3.42579L15.1957 2.36514C13.7089 0.878281 11.2913 0.878294 9.80441 2.36513L10.8651 3.42579ZM14.135 3.42579L22.3696 11.6603L23.4302 10.5996L15.1957 2.36513L14.135 3.42579Z" fill="#FFFFFF"></path>
+                            </svg>
+                        </a>
+                    </div>
+                    {% when "Famly.Daycare:Child" %}
+                    <!-- child -->
+                    {% liquid
+                        assign itemPageName = "childprofile-notes-" | append: item.Id
+                        if page.Name == itemPageName
+                            assign classname = "sidebar-menu-item-link sidebar-menu-item-selected"
+                        else
+                            assign classname = "sidebar-menu-item-link"
+                        endif
+                    %}
+                    <div>
+                        <a align="center" justify="center"
+                            data-e2e-id="NavigationGroup-Child-{{ item.Id }}}}"
+                            data-intercom-target="Sidebar Group Child"
+                            class="{{ classname }}"
+                            data-famlytics-event="[object Object]"
+                            href="{{ item.OfflineLink }}">
+                            <img
+                                class="sidebar-menu-item-child-icon"
+                                src="{{ item.OfflineIcon }}"
+                            />
+                          </a>
+                    </div>
+                    {% endcase %}
+                    {% endfor %}
+                </div>
+            </div>
+            <!-- help and support -->
+            <!--
+            <div direction="column" class="sc-beqWaB sc-dmqHEX sc-lfOptZ bUiODS coXswJ etaixy">
+                <div class="sc-cQPkDr ermvjq">
+                    <div data-e2e-id="NavigationGroup-HELP_AND_SUPPORT"
+                        data-intercom-target="Sidebar Group HELP_AND_SUPPORT"
+                        class="sc-beqWaB sc-dmqHEX sc-hVkMzN bUiODS gcOEoN gtyElp"
+                        data-famlytics-event="[object Object]">
+                        <svg width="24" height="24" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                            <g transform="matrix(1,0,0,1,0,0)">
+                                <path d="M9,9a3,3,0,1,1,4,2.829,1.5,1.5,0,0,0-1,1.415V14.25" fill="none" stroke="#FFFFFF" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"> </path>
+                                <path d="M12,17.25a.375.375,0,1,0,.375.375A.375.375,0,0,0,12,17.25h0" fill="none" stroke="#FFFFFF" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"> </path>
+                                <path d="M0.750 12.000 A11.250 11.250 0 1 0 23.250 12.000 A11.250 11.250 0 1 0 0.750 12.000 Z" fill="none" stroke="#FFFFFF" stroke-width="1.5"></path>
+                            </g>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+            -->
+        </div>
+    </div>
+</div>
+<!-- end sidebar -->
