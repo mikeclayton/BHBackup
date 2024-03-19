@@ -87,7 +87,7 @@
     <EmbeddedResource Include="Liquid\Layout\layout-sidebar.liquid" />
     <EmbeddedResource Include="Liquid\Layout\layout-topbar.liquid" />
     <EmbeddedResource Include="Liquid\Pages\childprofile-header-wrapper.liquid" />
-    <EmbeddedResource Include="Liquid\Pages\childprofile-journey-page.liquid" />
+    <!-- <EmbeddedResource Include="Liquid\Pages\childprofile-journey-page.liquid" /> -->
     <EmbeddedResource Include="Liquid\Pages\childprofile-notes-page.liquid" />
     <EmbeddedResource Include="Liquid\Pages\index.liquid" />
     <EmbeddedResource Include="Liquid\Pages\newsfeed-page.liquid" />
