@@ -54,7 +54,7 @@ internal static class ChildNotesExtensions
         bool parentVisible,
         bool safeguardingConcerns,
         bool sensitive,
-        Action? onBeforeReadPage = null
+        Action? onBeforeRequest = null
     )
     {
         ArgumentNullException.ThrowIfNull(graphQlClient);
@@ -62,11 +62,10 @@ internal static class ChildNotesExtensions
         var nextCursor = default(string);
         while (true)
         {
-            onBeforeReadPage?.Invoke();
+            onBeforeRequest?.Invoke();
             var responseObject = await graphQlClient.GetChildNotes(
                     childId, noteTypesList, limit, parentVisible, safeguardingConcerns, sensitive, nextCursor
-                )
-                ?? throw new InvalidOperationException();
+                ) ?? throw new InvalidOperationException();
             yield return responseObject;
             nextCursor = responseObject.Data.ChildNotes.Next;
             if (nextCursor is null)

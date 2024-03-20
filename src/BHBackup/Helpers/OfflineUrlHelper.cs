@@ -45,7 +45,7 @@ internal static class OfflineUrlHelper
         ArgumentNullException.ThrowIfNull(subfolderName);
         ArgumentNullException.ThrowIfNull(parentId);
         ArgumentNullException.ThrowIfNull(itemId);
-        // "familyapp\\files\\<subfoldername>\\yyyy-mm-dd-<parentItemId>-<index>-<imageId>-<filenamex>.<extension>"
+        // "familyapp\\files\\<subfoldername>\\yyyy-mm-dd-<parentItemId>-<index>-<ImageId>-<filename>.<extension>"
         var relativeFilename = string.Join('-',
             createdDate?.ToString("yyyy-MM-dd"),
             OfflineUrlHelper.GetShortItemId(parentId),

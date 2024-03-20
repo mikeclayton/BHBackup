@@ -31,7 +31,7 @@ internal sealed class ChildDevelopment
     }
 
     [JsonPropertyName("observations")]
-    public ObservationResult Observations
+    public LearningJourneyObservationResult Observations
     {
         get;
         init;

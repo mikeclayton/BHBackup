@@ -3,13 +3,13 @@
 internal sealed class TopBar
 {
 
-    public TopBar(string selectedIcon, string title)
+    public TopBar(string style, string title)
     {
-        this.SelectedIcon = selectedIcon ?? throw new ArgumentNullException(nameof(selectedIcon));
+        this.Style = style ?? throw new ArgumentNullException(nameof(style));
         this.Title = title ?? throw new ArgumentNullException(nameof(title));
     }
 
-    public string SelectedIcon
+    public string Style
     {
         get;
     }

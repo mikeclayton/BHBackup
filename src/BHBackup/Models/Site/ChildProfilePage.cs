@@ -2,10 +2,10 @@
 
 namespace BHBackup.Models;
 
-internal sealed class ChildNotesPage : FamilyAppPage
+internal sealed class ChildProfilePage : FamilyAppPage
 {
 
-    public ChildNotesPage(
+    public ChildProfilePage(
         string name,
         string templateFilename, string outputFilename,
         string title,

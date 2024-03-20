@@ -1,5 +1,5 @@
 ﻿<!-- begin observation panel -->
-<!-- feed item id - {{ feedItem.FeedItemId }} -->
+<!-- feed item id - {{ observation.FeedItem.Id }} -->
 <!-- observation id - {{ observation.Id }} -->
 <div data-e2e-class="story" class="feed-story-panel" id="feed-post-1" elevation="one">
   <div class="feed-story-content">
@@ -18,7 +18,7 @@
           </div>
         </div>
         <div class="feed-story-date">
-          <a class="feed-story-date" href="#/account/post/{{ feedItem.FeedItemId }}">
+          <a class="feed-story-date" href="#/account/post/{{ observation.FeedItem.Id }}">
             {{ observation.Remark.DateParsed | date: "%d %b %Y" }}
           </a>
         </div>

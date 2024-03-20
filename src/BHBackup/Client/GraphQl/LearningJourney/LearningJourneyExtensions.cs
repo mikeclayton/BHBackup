@@ -20,8 +20,8 @@ internal static class LearningJourneyExtensions
         this GraphQlClient graphQlClient,
         string childId,
         IEnumerable<string> variants,
-        int first,
-        string next
+        int? first = null,
+        string? next = null
     )
     {
         var requestBody = new
@@ -46,6 +46,31 @@ internal static class LearningJourneyExtensions
             requestBody: requestBody,
             roundtrip: true
         );
+    }
+
+    public static async IAsyncEnumerable<LearningJourneyQueryResponse> PaginateLearningJourneys(
+        this GraphQlClient graphQlClient,
+        string childId,
+        IEnumerable<string> variants,
+        Action? onBeforeRequest = null
+    )
+    {
+        ArgumentNullException.ThrowIfNull(graphQlClient);
+        var variantList = variants.ToList();
+        var nextCursor = default(string);
+        while (true)
+        {
+            onBeforeRequest?.Invoke();
+            var responseObject = await graphQlClient.LearningJourneyQuery(
+                    childId, variantList, 10, nextCursor
+                ) ?? throw new InvalidOperationException();
+            yield return responseObject;
+            nextCursor = responseObject.Data.ChildDevelopment.Observations.Next;
+            if (nextCursor is null)
+            {
+                yield break;
+            }
+        }
     }
 
 }

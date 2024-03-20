@@ -27,7 +27,7 @@
 {% comment %} observation {% endcomment %}
 {% if feedItem.Embed.Type == "Observation" %}
 {% assign observation = repository.Observations | where: "Id", feedItem.Embed.ObservationId | first %}
-{% render "Liquid\\Panels\\story-panel-observation.liquid", feedItem: feedItem, observation: observation %}
+{% render "Liquid\\Panels\\story-panel-observation.liquid", observation: observation %}
 {% continue %}
 {% endif %}
 
@@ -45,4 +45,4 @@
     </div>
 </div>
 
-{% render "Liquid\\Layout\\layout-footer.liquid", site: site, sidebr: sidebar, page: page %}
+{% render "Liquid\\Layout\\layout-footer.liquid", sidebr: sidebar, page: page %}

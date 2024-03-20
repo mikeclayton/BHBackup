@@ -1,26 +1,31 @@
 ﻿using BHBackup.Helpers;
 using System.Text.Json;
 
-namespace BHBackup.Export;
+namespace BHBackup.Storage;
 
-internal sealed partial class FamilyAppExporter
+internal abstract partial class OfflineRepository<T>
 {
 
-    public string[] GetRepositoryFiles(string relativePath, string pattern)
+    protected string GetAbsoluteFilename(string relativePath)
     {
-        var absolutePath = this.DownloadHelper.GetAbsoluteFilename(relativePath);
-        if (!Directory.Exists(absolutePath))
-        {
-            throw new InvalidOperationException();
-        }
-        return Directory.GetFiles(absolutePath, pattern);
+        return OfflineRepository.GetAbsoluteFilename(this.RootFolder, relativePath);
     }
 
-    public T ReadRepositoryJsonFile<T>(string relativePath, bool roundtrip = false, bool isAbsolutePath = false)
+    protected string[] GetRepositoryFiles(string relativePath, string pattern)
+    {
+        return OfflineRepository.GetRepositoryFiles(this.RootFolder, relativePath, pattern);
+    }
+
+    protected T ReadRepositoryJsonFile(string relativePath)
+    {
+        return this.ReadRepositoryJsonFile(relativePath, false);
+    }
+
+    protected T ReadRepositoryJsonFile(string path, bool isAbsolutePath)
     {
         var absolutePath = isAbsolutePath
-            ? relativePath
-            : this.DownloadHelper.GetAbsoluteFilename(relativePath);
+            ? path
+            : this.GetAbsoluteFilename(path);
         if (!File.Exists(absolutePath))
         {
             throw new InvalidOperationException();
@@ -29,7 +34,7 @@ internal sealed partial class FamilyAppExporter
         var fileObject = JsonSerializer.Deserialize<T>(
             fileText
         ) ?? throw new InvalidOperationException();
-        if (roundtrip)
+        if (this.Roundtrip)
         {
             var fileJson = JsonHelper.Prettify(fileText);
             var objectJson = JsonHelper.ConvertToJson(fileObject);
@@ -41,11 +46,11 @@ internal sealed partial class FamilyAppExporter
         return fileObject;
     }
 
-    public void WriteRepositoryJsonFile<T>(string path, T value, bool isAbsolutePath = false)
+    protected void WriteRepositoryJsonFile(string path, T item, bool isAbsolutePath = false)
     {
         var absolutePath = isAbsolutePath
             ? path
-            : this.DownloadHelper.GetAbsoluteFilename(path);
+            : this.GetAbsoluteFilename(path);
         // create the directory if it doesn't already exist
         _ = Directory.CreateDirectory(
              Path.GetDirectoryName(absolutePath) ?? throw new InvalidOperationException()
@@ -53,7 +58,7 @@ internal sealed partial class FamilyAppExporter
         // save the context to disk
         File.WriteAllText(
             absolutePath,
-            JsonHelper.ConvertToJson(value)
+            JsonHelper.ConvertToJson(item)
         );
     }
 

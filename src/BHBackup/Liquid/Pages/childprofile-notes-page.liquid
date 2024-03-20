@@ -1,10 +1,10 @@
-{% render "Liquid\\Layout\\layout-header.liquid", site: site, page: page %}
+{% render "Liquid\\Layout\\layout-header.liquid", page: page %}
 
 <!-- begin child profile notes page content -->
 <div id="content" class="shouldScrollContent">
   <div id="accountSubrouteContentId">
     <div id="personProfile" class="clearfix mobile-fullscreen">
-      {% render "Liquid\\Pages\\childprofile-header-wrapper.liquid" %}
+      {% render "Liquid\\Panels\\child-profile-header.liquid" %}
       <!-- begin child profile view -->
       <div class="child-profile-view">
         <div class="sc-dFWdGd iFvNUI sc-jQBImV bXjfL">

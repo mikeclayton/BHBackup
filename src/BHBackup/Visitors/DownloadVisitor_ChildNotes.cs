@@ -36,7 +36,7 @@ internal sealed partial class DownloadVisitor
         //        childNoteFile.Url, childNoteFile.OfflineUrl
         //    ).GetAwaiter().GetResult();
         //}
-        // observations - content images
+        // child notes - content images
         Console.WriteLine("downloading child note content images...");
         var images = childNoteList
             .SelectMany(childNote => childNote.Images)

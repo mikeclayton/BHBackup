@@ -32,7 +32,7 @@ internal sealed partial class OfflineUrlVisitor
             );
             // sidebar - link
             item.OfflineLink = OfflineUrlHelper.ConvertToOfflineUrl(
-                OfflinePathHelper.GetChildProfileNotesPageRelativePath(item.Title)
+                OfflinePathHelper.GetChildProfileNotesPageRelativePath(item.Title, item.Id)
             );
             itemCounter++;
         }

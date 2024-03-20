@@ -28,14 +28,14 @@ internal static class FeedsExtensions
 
     public static async IAsyncEnumerable<GetFeedsResponse> PaginateFeedItems(
         this ApiV1Client apiV1Client,
-        Action<DateTime>? onBeforeReadPage = null
+        Action<DateTime>? onBeforeRequest = null
     )
     {
         ArgumentNullException.ThrowIfNull(apiV1Client);
         var timestamp = DateTime.UtcNow;
         while (true)
         {
-            onBeforeReadPage?.Invoke(timestamp);
+            onBeforeRequest?.Invoke(timestamp);
             var responseObject = await apiV1Client.GetFeedItems(timestamp)
                 ?? throw new InvalidOperationException();
             if (responseObject.FeedItems.Count == 0)

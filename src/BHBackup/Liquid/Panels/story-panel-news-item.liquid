@@ -11,7 +11,7 @@
           <span class="feed-story-sender">{{ feedItem.Sender.Name }}&nbsp;</span>
         </div>
         <div class="feed-story-date">
-          <a class="feed-story-date" href="#/account/post/01HQ5DV8DREA7125F40495C1C0">
+          <a class="feed-story-date" href="#/account/post/{{ feedItem.FeedItemId }}">
             {{ feedItem.CreatedDateParsed | date: "%d %b %Y, %H:%M" }}
           </a>
         </div>

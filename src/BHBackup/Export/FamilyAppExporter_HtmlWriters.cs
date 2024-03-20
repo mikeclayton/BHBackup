@@ -16,7 +16,7 @@ namespace BHBackup.Export;
 internal sealed partial class FamilyAppExporter
 {
 
-    private void RenderLiquidTemplate(Site site, GenericPage page, FamilyAppRepository repository)
+    private void RenderLiquidTemplate(GenericPage page, FamilyAppRepository repository)
     {
 
         Console.WriteLine($"    writing html file '{page.OutputFilename}'...");
@@ -38,11 +38,10 @@ internal sealed partial class FamilyAppExporter
 
         // scaffold
         options.MemberAccessStrategy.Register<FamilyAppRepository>();
-        options.MemberAccessStrategy.Register<Site>();
         options.MemberAccessStrategy.Register<GenericPage>();
         options.MemberAccessStrategy.Register<FamilyAppPage>();
         options.MemberAccessStrategy.Register<NewsfeedPage>();
-        options.MemberAccessStrategy.Register<ChildNotesPage>();
+        options.MemberAccessStrategy.Register<ChildProfilePage>();
         options.MemberAccessStrategy.Register<TopBar>();
         options.MemberAccessStrategy.Register<Sidebar>();
         options.MemberAccessStrategy.Register<SidebarBehavior>();
@@ -133,7 +132,6 @@ internal sealed partial class FamilyAppExporter
             new
             {
                 repository = filteredRepository,
-                site = site,
                 page = page,
             },
             options
