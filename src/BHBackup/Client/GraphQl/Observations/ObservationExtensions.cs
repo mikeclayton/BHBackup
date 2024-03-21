@@ -1,5 +1,5 @@
-﻿using BHBackup.Client.GraphQl.Observations.Queries;
-using BHBackup.Client.GraphQl.Observations.Api;
+﻿using BHBackup.Client.GraphQl.Observations.Api;
+using BHBackup.Client.GraphQl.Observations.Queries;
 using BHBackup.Helpers;
 using System.Reflection;
 
@@ -34,6 +34,23 @@ internal static class ObservationExtensions
             requestBody: requestBody,
             roundtrip: true
         );
+    }
+
+    public static async IAsyncEnumerable<ObservationsByIdsResponse> PaginateObservationsByIds(
+        this GraphQlClient graphQlClient,
+        IEnumerable<string> observationIds,
+        int pageSize,
+        Action? onBeforeRequest = null
+    )
+    {
+        ArgumentNullException.ThrowIfNull(graphQlClient);
+        var pages = observationIds.Chunk(pageSize).ToList();
+        foreach (var page in pages)
+        {
+            onBeforeRequest?.Invoke();
+            var response = await graphQlClient.ObservationsByIds(page);
+            yield return response;
+        }
     }
 
 }

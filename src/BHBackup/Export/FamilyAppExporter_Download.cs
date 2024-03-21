@@ -7,6 +7,8 @@ using BHBackup.Client.GraphQl.ChildNotes;
 using BHBackup.Client.GraphQl.ChildNotes.Models;
 using BHBackup.Client.GraphQl.Identity;
 using BHBackup.Client.GraphQl.Identity.Api;
+using BHBackup.Client.GraphQl.LearningJourney;
+using BHBackup.Client.GraphQl.LearningJourney.Models;
 using BHBackup.Client.GraphQl.Observations;
 using BHBackup.Client.GraphQl.Observations.Models;
 using BHBackup.Storage;
@@ -46,14 +48,14 @@ internal sealed partial class FamilyAppExporter
         }
     }
 
-    private async IAsyncEnumerable<ChildSummary> DownloadChildSummaryData(ChildSummaryRepository repository, Sidebar sidebar)
+    private async IAsyncEnumerable<ChildSummary> DownloadChildSummaryData(ChildSummaryRepository repository, IEnumerable<string> childIds)
     {
         var apiV2Client = this.DownloadHelper.GetApiV2Client();
         // save the child summaries to disk in individual files
         Console.WriteLine("downloading child summaries...");
-        foreach (var sidebarItem in sidebar.ChildProfileItems)
+        foreach (var childId in childIds)
         {
-            var childSummary = await apiV2Client.GetChildSummary(sidebarItem.Id);
+            var childSummary = await apiV2Client.GetChildSummary(childId);
             repository.WriteItem(childSummary);
             yield return childSummary;
         }
@@ -89,37 +91,41 @@ internal sealed partial class FamilyAppExporter
         return currentContext;
     }
 
-    //private LearningJourneyQueryResponse DownloadLearningJourneyData()
-    //{
-    //    var graphQlClient = this.DownloadHelper.GetGraphQlClient();
-    //    // read the learning journey from the api
-    //    Console.WriteLine("downloading learning journey data...");
-    //    var learningJourney = graphQlClient.LearningJourneyQuery(
-    //        childId: "7d991a43-f23f-40e9-8b9b-4c67d7288317",
-    //        variants: [
-    //            "REGULAR_OBSERVATION",
-    //            "PARENT_OBSERVATION",
-    //            "ASSESSMENT",
-    //            "TWO_YEAR_PROGRESS"
-    //        ],
-    //        first: 10,
-    //        next: null
-    //    ).Result;
-    //    return learningJourney;
-    //}
+    private IEnumerable<LearningJourneyQueryResponse> DownloadLearningJourneyData(
+        LearningJourneyRepository repository, IEnumerable<string> childIds, IEnumerable<string> variants)
+    {
+        var graphQlClient = this.DownloadHelper.GetGraphQlClient();
+        // read the learning journey from the api
+        Console.WriteLine("downloading learning journey data...");
+        var counter = 1;
+        foreach (var childId in childIds)
+        {
+            var journeys = graphQlClient.PaginateLearningJourneys(
+                childId: childId, variants
+            ).ToBlockingEnumerable().ToList();
+            // save the journeys to disk in individual files
+            foreach (var journey in journeys)
+            {
+                repository.WriteItem(journey, counter);
+                yield return journey;
+                counter++;
+            }
+        }
+    }
 
     private IEnumerable<Observation> DownloadObservationData(ObservationRepository repository, IEnumerable<string> observationIds)
     {
         var graphQlClient = this.DownloadHelper.GetGraphQlClient();
         // read the observations from the api
         Console.WriteLine("downloading observation data...");
-        var observations = observationIds
-            .Chunk(5)
-            .Select(
-                chunk => graphQlClient.ObservationsByIds(chunk).Result
-            ).SelectMany(
-                response => response.Data.ChildDevelopment.Observations.Results
-            ).ToList();
+        var observations = graphQlClient.PaginateObservationsByIds(
+                observationIds,
+                pageSize: 5,
+                onBeforeRequest: () =>
+                    Console.WriteLine($"    downloading observation data page...")
+            ).ToBlockingEnumerable()
+            .SelectMany(response => response.Data.ChildDevelopment.Observations.Results)
+            .ToList();
         // save the observations to disk in individual files
         foreach (var observation in observations)
         {

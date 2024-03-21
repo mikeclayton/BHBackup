@@ -22,17 +22,50 @@ internal sealed partial class FamilyAppExporter
 
     public FamilyAppRepository DownloadRepositoryData()
     {
-        //var learningJourney = this.DownloadLearningJourneyData();
-        var identity = this.DownloadCurrentContextData(new IdentityRepository(this.DownloadHelper.RepositoryDirectory, true)).Data.Me;
-        var sidebar = this.DownloadSidebarData(new SidebarRepository(this.DownloadHelper.RepositoryDirectory, true));
-        var summaries = this.DownloadChildSummaryData(new ChildSummaryRepository(this.DownloadHelper.RepositoryDirectory, true), sidebar).ToBlockingEnumerable().ToList();
-        var feedItems = this.DownloadFeedItemData(new FeedItemRepository(this.DownloadHelper.RepositoryDirectory, true)).ToList();
+        // identity
+        var identity = this.DownloadCurrentContextData(
+            new IdentityRepository(this.DownloadHelper.RepositoryDirectory, true)
+        ).Data.Me;
+        // sidebar
+        var sidebar = this.DownloadSidebarData(
+            new SidebarRepository(this.DownloadHelper.RepositoryDirectory, true)
+        );
+        // child journeys
+        var journeyRepository = new LearningJourneyRepository(this.DownloadHelper.RepositoryDirectory, true);
+        journeyRepository.Clear();
+        var childJourneys = this.DownloadLearningJourneyData(
+            journeyRepository,
+            sidebar.ChildProfileItems.Select(child => child.Id),
+            variants: [
+                "REGULAR_OBSERVATION",
+                "PARENT_OBSERVATION",
+                "ASSESSMENT",
+                "TWO_YEAR_PROGRESS"
+            ]
+        ).ToList();
+        // child summaries
+        var summaries = this.DownloadChildSummaryData(
+            new ChildSummaryRepository(this.DownloadHelper.RepositoryDirectory, true),
+            sidebar.ChildProfileItems.Select(item => item.Id)
+        ).ToBlockingEnumerable().ToList();
+        // feed items
+        var feedItems = this.DownloadFeedItemData(
+            new FeedItemRepository(this.DownloadHelper.RepositoryDirectory, true)
+        ).ToList();
+        // observations
+        var observationIds = feedItems
+            .Where(feedItem => feedItem.Embed is FeedEmbedObservation)
+            .Select(feedItem => ((FeedEmbedObservation)(feedItem.Embed ?? throw new InvalidOperationException())).ObservationId)
+            .Union(
+                childJourneys
+                    .SelectMany(journey => journey.Data.ChildDevelopment.Observations.Results)
+                    .Select(observation => observation.Id)
+            );
         var observations = this.DownloadObservationData(
             new ObservationRepository(this.DownloadHelper.RepositoryDirectory, true),
-            feedItems
-                .Where(feedItem => feedItem.Embed is FeedEmbedObservation)
-                .Select(feedItem => ((FeedEmbedObservation)(feedItem.Embed ?? throw new InvalidOperationException())).ObservationId)
+            observationIds
         ).ToList();
+        // child notes
         var childNotes = this.DownloadChildNoteData(
             new ChildNoteRepository(this.DownloadHelper.RepositoryDirectory, true),
             sidebar.ChildProfileItems.Select(child => child.Id)

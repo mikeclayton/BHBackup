@@ -1,61 +1,75 @@
-﻿//using BHBackup.Client.GraphQl.ChildNotes.Models;
-//using BHBackup.Client.GraphQl.LearningJourney.Models;
+﻿using BHBackup.Client.GraphQl.LearningJourney.Models;
 
-//namespace BHBackup.Storage;
+namespace BHBackup.Storage;
 
-//internal sealed class LearningJourneyRepository : OfflineRepository<LearningJourneyQueryResponse>
-//{
+internal sealed class LearningJourneyRepository : OfflineRepository<LearningJourneyQueryResponse>
+{
 
-//    public LearningJourneyRepository(string rootFolder, bool roundtrip)
-//        : base(rootFolder, roundtrip)
-//    {
-//    }
+    public LearningJourneyRepository(string rootFolder, bool roundtrip)
+        : base(rootFolder, roundtrip)
+    {
+    }
 
-//    private static string GetChildNoteFileRootPath()
-//    {
-//        return Path.Join(
-//            "data", "childnotes"
-//        );
-//    }
+    private static string GetLearningJourneyFileRootPath()
+    {
+        return Path.Join(
+            "data", "learningjourney"
+        );
+    }
 
-//    private static string GetChildNoteFileRelativePath(string childNoteId)
-//    {
-//        return Path.Join(
-//            ChildNoteRepository.GetChildNoteFileRootPath(),
-//            $"childnote-{childNoteId}.json"
-//        );
-//    }
+    private static string GettLearningJourneyFileRelativePath(string childNoteId)
+    {
+        return Path.Join(
+            LearningJourneyRepository.GetLearningJourneyFileRootPath(),
+            $"childJourney-{childNoteId}.json"
+        );
+    }
 
-//    #region OfflineRepository Interface
+    #region OfflineRepository Interface
 
-//    public override IEnumerable<ChildNote> ReadAll()
-//    {
-//        Console.WriteLine("reading cached child notes...");
-//        var cacheFiles = base.GetRepositoryFiles(
-//            ChildNoteRepository.GetChildNoteFileRootPath(),
-//            "childnote-*.json"
-//        );
-//        var childNotes = cacheFiles.Select(
-//                cacheFile => base.ReadRepositoryJsonFile(cacheFile, true)
-//            ).OrderByDescending(childNote => childNote.CreatedAtParsed);
-//        return childNotes;
-//    }
+    public void Clear()
+    {
+        var cacheFiles = base.GetRepositoryFiles(
+            LearningJourneyRepository.GetLearningJourneyFileRootPath(),
+            "*.json"
+        );
+        foreach (var cacheFile in cacheFiles)
+        {
+            File.Delete(cacheFile);
+        }
+    }
 
-//    public override ChildNote ReadItem(string id)
-//    {
-//        return base.ReadRepositoryJsonFile(
-//            ChildNoteRepository.GetChildNoteFileRelativePath(id)
-//        );
-//    }
+    public override IEnumerable<LearningJourneyQueryResponse> ReadAll()
+    {
+        Console.WriteLine("reading cached child notes...");
+        var cacheFiles = base.GetRepositoryFiles(
+            LearningJourneyRepository.GetLearningJourneyFileRootPath(),
+            "journey-*.json"
+        );
+        var childJourney = cacheFiles.Select(
+            cacheFile => base.ReadRepositoryJsonFile(cacheFile, true)
+        );
+        return childJourney;
+    }
 
-//    public override void WriteItem(ChildNote item)
-//    {
-//        this.WriteRepositoryJsonFile(
-//            ChildNoteRepository.GetChildNoteFileRelativePath(item.Id),
-//            item
-//        );
-//    }
+    public override LearningJourneyQueryResponse ReadItem(string id)
+    {
+        throw new NotImplementedException();
+    }
 
-//    #endregion
+    public override void WriteItem(LearningJourneyQueryResponse item)
+    {
+        throw new NotImplementedException();
+    }
 
-//}
+    public void WriteItem(LearningJourneyQueryResponse item, int index)
+    {
+        this.WriteRepositoryJsonFile(
+            LearningJourneyRepository.GettLearningJourneyFileRelativePath($"{index:000}"),
+            item
+        );
+    }
+
+    #endregion
+
+}
