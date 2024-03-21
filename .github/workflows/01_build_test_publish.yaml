@@ -37,6 +37,7 @@ jobs:
           versionSpec: '5.x'
 
       - name: gitversion executen
+        id:   gitversion
         uses: gittools/actions/gitversion/execute@v1.1.1
 
       - name: setup dotnet
@@ -57,12 +58,23 @@ jobs:
       - name: dotnet build
         working-directory: ${{ env.BUILD_PATH }}
         run: |
+
+            # /p:AssemblyVersion => "File version" property
+            # e.g. "1.2.3+45" -> "1.2.3.45"
+            $assemblyVersion = "${{ steps.gitversion.outputs.FullSemVer }}".Replace("+", ".");
+
+            # /p:yVersion => "Product version" property
+            # e.g. "1.2.3+45" -> "1.2.3+45"
+            $productVersion = "${{ steps.gitversion.outputs.FullSemVer }}"
+
             dotnet build "./BHBackup/BHBackup.csproj" `
                 --configuration "${{ env.CONFIG_NAME }}" `
                 --no-restore `
                 --runtime        "${{ env.RUNTIME }}" `
                 --self-contained true `
-                --property:PublishSingleFile=true
+                --property:PublishSingleFile=true ``
+                --property:AssemblyVersion=$assemblyVersion
+                --property:Version=$productVersion
 
       - name: dotnet test
         working-directory: ${{ env.BUILD_PATH }}
@@ -92,7 +104,7 @@ jobs:
       - name: upload release
         uses: actions/upload-artifact@v4
         with:
-          name: BHBackup-v0.0.0-preview
+          name: BHBackup-v${{ steps.gitversion.outputs.FullSemVer }}
           path: .build/app
 
       - name: dotnet tool jb inspectcode
