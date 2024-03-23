@@ -244,38 +244,39 @@ internal sealed class CmdLineArgs
                 : outputDirectory;
         }
 
-        // use the anonymous "authenticate" endpoint to log in and get an api access token
-        var httpClient = new HttpClient();
-        var apiCredentials = await LoginHelper.Authenticate(
-            httpClient,
-            username: cmdLineArgs.Username ?? throw new InvalidOperationException(),
-            password: cmdLineArgs.Password ?? throw new InvalidOperationException(),
-            deviceId: Guid.NewGuid().ToString()
-        );
-
-        // use the api access token to make any further api calls
-        var downloader = new ContentDownloader(
-            outputDirectory: cmdLineArgs.OutputDirectory ?? throw new InvalidOperationException(),
-            httpClient: httpClient,
-            apiCredentials: apiCredentials,
-            overwrite: false
-        );
-
         var repositoryFactory = new RepositoryFactory(
             rootFolder: cmdLineArgs.OutputDirectory ?? throw new InvalidOperationException(),
             roundtrip: true
         );
 
-        var download = !cmdLineArgs.SkipDownload;
-        var repository = download
-            ? downloader.DownloadRepositoryData(repositoryFactory)
-            : DataCollection.ReadRepositoryData(repositoryFactory);
-        new OfflineUrlVisitor().Visit(repository);
-        if (download)
+        var repository = default(DataCollection);
+        if (cmdLineArgs.SkipDownload)
         {
+            repository = DataCollection.ReadRepositoryData(repositoryFactory);
+        }
+        else
+        {
+            // use the anonymous "authenticate" endpoint to log in and get an api access token
+            using var httpClient = new HttpClient();
+            var apiCredentials = await LoginHelper.Authenticate(
+                httpClient,
+                username: cmdLineArgs.Username ?? throw new InvalidOperationException(),
+                password: cmdLineArgs.Password ?? throw new InvalidOperationException(),
+                deviceId: Guid.NewGuid().ToString()
+            );
+            // use the api access token to make any further api calls
+            var downloader = new ContentDownloader(
+                outputDirectory: cmdLineArgs.OutputDirectory ?? throw new InvalidOperationException(),
+                httpClient: httpClient,
+                apiCredentials: apiCredentials,
+                overwrite: false
+            );
+            // download the data, content and static resources
+            repository = downloader.DownloadRepositoryData(repositoryFactory);
             downloader.DownloadRepositoryContent(repository);
             await downloader.DownloadStaticResources(repository);
         }
+        new OfflineUrlVisitor().Visit(repository);
 
         if (!cmdLineArgs.SkipGenerate)
         {
