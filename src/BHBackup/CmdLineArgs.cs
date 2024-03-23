@@ -1,10 +1,9 @@
 ﻿using BHBackup.Client.Core;
 using BHBackup.Download;
-using BHBackup.Export;
 using BHBackup.Render.Export;
 using BHBackup.Storage;
+using BHBackup.Storage.Visitors;
 using CommandLine;
-using System.ComponentModel.Design.Serialization;
 using System.Diagnostics;
 using System.Reflection;
 using static Crayon.Output;
@@ -269,11 +268,13 @@ internal sealed class CmdLineArgs
 
         var download = !cmdLineArgs.SkipDownload;
         var repository = download
-            ? FamilyAppExporter.DownloadRepositoryData(downloader, repositoryFactory)
-            : FamilyAppExporter.ReadRepositoryData(repositoryFactory);
+            ? downloader.DownloadRepositoryData(repositoryFactory)
+            : DataCollection.ReadRepositoryData(repositoryFactory);
+        new OfflineUrlVisitor().Visit(repository);
         if (download)
         {
-            await FamilyAppExporter.DownloadStaticResources(downloader, repository);
+            downloader.DownloadRepositoryContent(repository);
+            await downloader.DownloadStaticResources(repository);
         }
 
         if (!cmdLineArgs.SkipGenerate)

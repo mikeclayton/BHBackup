@@ -1,15 +1,47 @@
-﻿using BHBackup.Client.GraphQl.ChildNotes.Models;
+﻿using BHBackup.Client.GraphQl.ChildNotes;
+using BHBackup.Client.GraphQl.ChildNotes.Models;
 using BHBackup.Client.GraphQl.Identity.Models.Context;
+using BHBackup.Storage.Repositories;
+using System.Diagnostics.Metrics;
 
-namespace BHBackup.Visitors;
+namespace BHBackup.Download;
 
-internal sealed partial class DownloadVisitor
+public sealed partial class ContentDownloader
 {
 
-    public override void Visit(IEnumerable<ChildNote> childNotes)
+    public IEnumerable<ChildNote> DownloadChildNoteData(ChildNoteRepository repository, IEnumerable<string> childIds)
+    {
+        var graphQlClient = this.GetGraphQlClient();
+        // read the child notes from the api
+        Console.WriteLine("downloading child notes data...");
+        var pageIndex = 1;
+        var childNotes = graphQlClient.PaginateChildNotes(
+                childId: childIds.First(),
+                noteTypes: ["Classic"],
+                limit: 10,
+                parentVisible: true,
+                safeguardingConcerns: false,
+                sensitive: false,
+                onBeforeRequest: () =>
+                {
+                    Console.WriteLine($"    downloading child notes data page {pageIndex}...");
+                    pageIndex++;
+                }
+            ).ToBlockingEnumerable()
+            .SelectMany(
+                response => response.Data.ChildNotes.Result
+            ).ToList();
+        // save the child notes to disk in individual files
+        foreach (var childNote in childNotes)
+        {
+            repository.WriteItem(childNote);
+            yield return childNote;
+        }
+    }
+
+    public void DownloadChildNoteDataContent(IEnumerable<ChildNote> childNotes)
     {
         var childNoteList = childNotes.ToList();
-        base.Visit(childNoteList);
         // child notes - profile images
         var profileImages = new List<ProfileImage>()
             .Union(childNoteList.Select(childNote => childNote.CreatedBy.ProfileImage))
@@ -21,7 +53,7 @@ internal sealed partial class DownloadVisitor
         Console.WriteLine("downloading child note profile images...");
         foreach (var profileImage in profileImages)
         {
-            this.Downloader.DownloadHttpResource(
+            this.DownloadHttpResource(
                 profileImage.Url, profileImage.OfflineUrl
             ).GetAwaiter().GetResult();
         }
@@ -44,7 +76,7 @@ internal sealed partial class DownloadVisitor
             .ToList();
         foreach (var childNoteImage in images)
         {
-            this.Downloader.DownloadHttpResource(
+            this.DownloadHttpResource(
                 childNoteImage.FullSizeUrl, childNoteImage.OfflineUrl
             ).GetAwaiter().GetResult();
         }

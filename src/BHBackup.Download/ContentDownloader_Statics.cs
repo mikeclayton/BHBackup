@@ -3,7 +3,7 @@
 public sealed partial class ContentDownloader
 {
 
-    public async Task DownloadStaticResources
+    private async Task DownloadStaticResources
         (IEnumerable<string> resourceUris)
     {
         var domainPathMap = new Dictionary<string, string>
@@ -32,7 +32,7 @@ public sealed partial class ContentDownloader
         }
     }
 
-    public async Task DownloadStaticHttpFonts()
+    public async Task DownloadStaticFonts()
     {
         var resourceUris = new[]
         {
@@ -100,7 +100,7 @@ public sealed partial class ContentDownloader
         await this.DownloadStaticResources(resourceUris);
     }
 
-    public async Task DownloadStaticHttpImages()
+    public async Task DownloadStaticImages()
     {
         var resourceUris = new[]
         {

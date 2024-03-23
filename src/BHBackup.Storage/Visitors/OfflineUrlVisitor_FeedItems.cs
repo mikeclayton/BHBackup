@@ -1,9 +1,9 @@
 ﻿using BHBackup.Client.ApiV1.Feeds.Models;
-using BHBackup.Render.Helpers;
+using BHBackup.Storage.Helpers;
 
-namespace BHBackup.Visitors;
+namespace BHBackup.Storage.Visitors;
 
-internal sealed partial class OfflineUrlVisitor
+public sealed partial class OfflineUrlVisitor
 {
 
     public override void Visit(FeedItem feedItem)

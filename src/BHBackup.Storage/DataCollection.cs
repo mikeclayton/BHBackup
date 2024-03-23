@@ -70,4 +70,43 @@ public sealed class DataCollection
         get;
     }
 
+    public static DataCollection ReadRepositoryData(RepositoryFactory repositoryFactory)
+    {
+        //var learningJourney = this.DownloadLearningJourneyData();
+        var identity = repositoryFactory.GetIdentityRepository().ReadItem().Data.Me;
+        var sidebar = repositoryFactory.GetSidebarRepository().ReadItem();
+        var summaries = repositoryFactory.GetChildSummaryRepository().ReadAll().ToList();
+        var feedItems = repositoryFactory.GetFeedItemRepository().ReadAll().ToList();
+        var observations = repositoryFactory.GetObservationRepository().ReadAll().ToList();
+        var childNotes = repositoryFactory.GetChildNoteRepository().ReadAll().ToList();
+        var repository = new DataCollection(
+            identity, sidebar, summaries, feedItems, observations, childNotes
+        );
+        // check we've read an observation for all "observation" feed items
+        var missingObservations = feedItems
+            .Where(
+                feedItem =>
+                    (feedItem.Embed is FeedEmbedObservation) &&
+                    (observations.SingleOrDefault(
+                        observation => observation.Id == ((FeedEmbedObservation)(feedItem.Embed ?? throw new InvalidOperationException())).ObservationId
+                    ) is null)
+            ).ToList();
+        if (missingObservations.Count > 0)
+        {
+            throw new InvalidOperationException();
+        }
+        // check we've got a child item for all sidebar child links
+        var missingSummaries = sidebar.ChildProfileItems
+            .Where(
+                sidebarItem => summaries.SingleOrDefault(
+                    summary => summary.Child.ChildId == sidebarItem.Id
+                ) is null
+            ).ToList();
+        if (missingSummaries.Count > 0)
+        {
+            throw new InvalidOperationException();
+        }
+        return repository;
+    }
+
 }

@@ -1,8 +1,7 @@
-﻿namespace BHBackup.Render.Helpers;
+﻿namespace BHBackup.Storage.Helpers;
 
 public sealed class OfflinePathHelper
 {
-
 
     public static string GetAssetResourceFileRelativePath(string filename)
     {

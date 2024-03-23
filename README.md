@@ -23,7 +23,7 @@ To use it:
 
 ## Disclaimers
 
-* I'm not affiliated with Bright Horizons or Famly - I'm just a parent who wrote a utility to let me download a copy of the notes and photos posted to the app that daughter's nursery uses to share pictures during the school day because, strangely, the app doesn't let me do that natively even though it seems like a fundamental feature request that parents of young children would want to keep a copy of *at least* the photos when their child moves on from nursery...
+* I'm not affiliated with Bright Horizons or Famly - I'm just a parent who wrote a utility to let me download a copy of the notes and photos posted to the app that daughter's nursery uses to share pictures during the school day because, strangely, the app doesn't let me do that natively, and I really want to keep a copy of all the photos and notes when my child leaves the nursery.
 
 * All trademarks, logos and brand names are the property of their respective owners. The makers of this program are not affiliated with Bright Horizons or Famly.
 

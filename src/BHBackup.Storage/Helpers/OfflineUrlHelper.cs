@@ -1,4 +1,4 @@
-﻿namespace BHBackup.Render.Helpers;
+﻿namespace BHBackup.Storage.Helpers;
 
 public static class OfflineUrlHelper
 {

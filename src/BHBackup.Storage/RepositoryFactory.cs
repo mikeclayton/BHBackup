@@ -11,7 +11,8 @@ public sealed class RepositoryFactory
         this.Roundtrip = roundtrip;
     }
 
-    public string RootFolder {
+    public string RootFolder
+    {
         get;
     }
 

@@ -1,14 +1,35 @@
-﻿using BHBackup.Client.ApiV1.Feeds.Models;
+﻿using BHBackup.Client.ApiV1.Feeds;
+using BHBackup.Client.ApiV1.Feeds.Models;
+using BHBackup.Storage.Repositories;
 
-namespace BHBackup.Visitors;
+namespace BHBackup.Download;
 
-internal sealed partial class DownloadVisitor
+public sealed partial class ContentDownloader
 {
 
-    public override void Visit(IEnumerable<FeedItem> feedItems)
+    public IEnumerable<FeedItem> DownloadFeedItemData(FeedItemRepository repository)
+    {
+        var feedsClient = this.GetApiV1Client();
+        // read the feed items from the api
+        Console.WriteLine("downloading feed item data...");
+        var feedItems = feedsClient.PaginateFeedItems(
+                onBeforeRequest: timestamp =>
+                    Console.WriteLine($"    downloading feed item data from {timestamp:yyyy-MM-dd}")
+            ).ToBlockingEnumerable()
+            .SelectMany(
+                response => response.FeedItems
+            ).ToList();
+        // save the feed items to disk in individual files
+        foreach (var feedItem in feedItems)
+        {
+            repository.WriteItem(feedItem);
+            yield return feedItem;
+        }
+    }
+
+    public void DownloadFeedItemContent(IEnumerable<FeedItem> feedItems)
     {
         var feedItemList = feedItems.ToList();
-        base.Visit(feedItemList);
         // feed items - profile images
         Console.WriteLine("downloading feed item profiles");
         var senders = feedItemList
@@ -16,7 +37,7 @@ internal sealed partial class DownloadVisitor
             .DistinctBy(sender => sender.OfflineUrl);
         foreach (var sender in senders)
         {
-            this.Downloader.DownloadHttpResource(
+            this.DownloadHttpResource(
                 sender.ProfileImage, sender.OfflineUrl
             ).GetAwaiter().GetResult();
         }
@@ -27,7 +48,7 @@ internal sealed partial class DownloadVisitor
         );
         foreach (var feedFile in feedFiles)
         {
-            this.Downloader.DownloadHttpResource(
+            this.DownloadHttpResource(
                 feedFile.Url, feedFile.OfflineUrl
             ).GetAwaiter().GetResult();
         }
@@ -38,10 +59,11 @@ internal sealed partial class DownloadVisitor
         );
         foreach (var feedImage in feedImages)
         {
-            this.Downloader.DownloadHttpResource(
+            this.DownloadHttpResource(
                 feedImage.FullSizeUrl, feedImage.OfflineUrl
             ).GetAwaiter().GetResult();
         }
     }
+
 
 }

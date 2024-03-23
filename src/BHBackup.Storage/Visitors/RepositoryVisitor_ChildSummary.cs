@@ -1,8 +1,8 @@
 ﻿using BHBackup.Client.ApiV2.ChildSummary.Models;
 
-namespace BHBackup.Visitors;
+namespace BHBackup.Storage.Visitors;
 
-internal abstract partial class RepositoryVisitor
+public abstract partial class RepositoryVisitor
 {
 
     public virtual void Visit(IEnumerable<ChildSummary> childSummaries)
