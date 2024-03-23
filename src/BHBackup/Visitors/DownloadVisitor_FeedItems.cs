@@ -16,7 +16,7 @@ internal sealed partial class DownloadVisitor
             .DistinctBy(sender => sender.OfflineUrl);
         foreach (var sender in senders)
         {
-            this.DownloadHelper.DownloadHttpResource(
+            this.Downloader.DownloadHttpResource(
                 sender.ProfileImage, sender.OfflineUrl
             ).GetAwaiter().GetResult();
         }
@@ -27,7 +27,7 @@ internal sealed partial class DownloadVisitor
         );
         foreach (var feedFile in feedFiles)
         {
-            this.DownloadHelper.DownloadHttpResource(
+            this.Downloader.DownloadHttpResource(
                 feedFile.Url, feedFile.OfflineUrl
             ).GetAwaiter().GetResult();
         }
@@ -38,7 +38,7 @@ internal sealed partial class DownloadVisitor
         );
         foreach (var feedImage in feedImages)
         {
-            this.DownloadHelper.DownloadHttpResource(
+            this.Downloader.DownloadHttpResource(
                 feedImage.FullSizeUrl, feedImage.OfflineUrl
             ).GetAwaiter().GetResult();
         }

@@ -1,0 +1,29 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="GraphQl\ChildNotes\Queries\GetChildNotes.graphql" />
+    <None Remove="GraphQl\Identity\Queries\Authenticate.graphql" />
+    <None Remove="GraphQl\Identity\Queries\GetCurrentContext.graphql" />
+    <None Remove="GraphQl\LearningJourney\Queries\LearningJourneyQuery.graphql" />
+    <None Remove="GraphQl\Observations\Queries\ObservationsByIds.graphql" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="GraphQl\ChildNotes\Queries\GetChildNotes.graphql" />
+    <EmbeddedResource Include="GraphQl\Identity\Queries\Authenticate.graphql" />
+    <EmbeddedResource Include="GraphQl\Identity\Queries\GetCurrentContext.graphql" />
+    <EmbeddedResource Include="GraphQl\LearningJourney\Queries\LearningJourneyQuery.graphql" />
+    <EmbeddedResource Include="GraphQl\Observations\Queries\ObservationsByIds.graphql" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\BHBackup.Common\BHBackup.Common.csproj" />
+  </ItemGroup>
+
+</Project>

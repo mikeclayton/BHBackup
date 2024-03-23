@@ -1,39 +1,27 @@
 ﻿using BHBackup.Client.ApiV1.Feeds.Models;
-using BHBackup.Client.GraphQl.Observations.Api;
-using BHBackup.Helpers;
-using BHBackup.Models;
+using BHBackup.Download;
 using BHBackup.Storage;
 using BHBackup.Visitors;
 
 namespace BHBackup.Export;
 
-internal sealed partial class FamilyAppExporter
+internal static  partial class FamilyAppExporter
 {
 
-    public FamilyAppExporter(DownloadHelper downloadHelper)
-    {
-        this.DownloadHelper = downloadHelper?? throw new ArgumentNullException(nameof(downloadHelper));
-    }
-
-    private DownloadHelper DownloadHelper
-    {
-        get;
-    }
-
-    public FamilyAppRepository DownloadRepositoryData()
+    public static DataCollection DownloadRepositoryData(ContentDownloader downloader, RepositoryFactory repositoryFactory)
     {
         // identity
-        var identity = this.DownloadCurrentContextData(
-            new IdentityRepository(this.DownloadHelper.RepositoryDirectory, true)
+        var identity = downloader.DownloadCurrentContextData(
+            repositoryFactory.GetIdentityRepository()
         ).Data.Me;
         // sidebar
-        var sidebar = this.DownloadSidebarData(
-            new SidebarRepository(this.DownloadHelper.RepositoryDirectory, true)
+        var sidebar = downloader.DownloadSidebarData(
+            repositoryFactory.GetSidebarRepository()
         );
         // child journeys
-        var journeyRepository = new LearningJourneyRepository(this.DownloadHelper.RepositoryDirectory, true);
+        var journeyRepository = repositoryFactory.GetLearningJourneyRepository();
         journeyRepository.Clear();
-        var childJourneys = this.DownloadLearningJourneyData(
+        var childJourneys = downloader.DownloadLearningJourneyData(
             journeyRepository,
             sidebar.ChildProfileItems.Select(child => child.Id),
             variants: [
@@ -44,13 +32,13 @@ internal sealed partial class FamilyAppExporter
             ]
         ).ToList();
         // child summaries
-        var summaries = this.DownloadChildSummaryData(
-            new ChildSummaryRepository(this.DownloadHelper.RepositoryDirectory, true),
+        var summaries = downloader.DownloadChildSummaryData(
+            repositoryFactory.GetChildSummaryRepository(),
             sidebar.ChildProfileItems.Select(item => item.Id)
         ).ToBlockingEnumerable().ToList();
         // feed items
-        var feedItems = this.DownloadFeedItemData(
-            new FeedItemRepository(this.DownloadHelper.RepositoryDirectory, true)
+        var feedItems = downloader.DownloadFeedItemData(
+            repositoryFactory.GetFeedItemRepository()
         ).ToList();
         // observations
         var observationIds = feedItems
@@ -61,13 +49,13 @@ internal sealed partial class FamilyAppExporter
                     .SelectMany(journey => journey.Data.ChildDevelopment.Observations.Results)
                     .Select(observation => observation.Id)
             );
-        var observations = this.DownloadObservationData(
-            new ObservationRepository(this.DownloadHelper.RepositoryDirectory, true),
+        var observations = downloader.DownloadObservationData(
+            repositoryFactory.GetObservationRepository(),
             observationIds
         ).ToList();
         // child notes
-        var childNotes = this.DownloadChildNoteData(
-            new ChildNoteRepository(this.DownloadHelper.RepositoryDirectory, true),
+        var childNotes = downloader.DownloadChildNoteData(
+            repositoryFactory.GetChildNoteRepository(),
             sidebar.ChildProfileItems.Select(child => child.Id)
         ).ToList();
         // check we've read an observation for all "observation" feed items
@@ -94,23 +82,23 @@ internal sealed partial class FamilyAppExporter
         {
             throw new InvalidOperationException();
         }
-        var repository = new FamilyAppRepository(
+        var repository = new DataCollection(
             identity, sidebar, summaries, feedItems, observations, childNotes
         );
         FamilyAppExporter.UpdateOfflineUrls(repository);
         return repository;
     }
 
-    public FamilyAppRepository ReadRepositoryData()
+    public static DataCollection ReadRepositoryData(RepositoryFactory repositoryFactory)
     {
         //var learningJourney = this.DownloadLearningJourneyData();
-        var identity = new IdentityRepository(this.DownloadHelper.RepositoryDirectory, true).ReadItem().Data.Me;
-        var sidebar = new SidebarRepository(this.DownloadHelper.RepositoryDirectory, true).ReadItem();
-        var summaries = new ChildSummaryRepository(this.DownloadHelper.RepositoryDirectory, true).ReadAll().ToList();
-        var feedItems = new FeedItemRepository(this.DownloadHelper.RepositoryDirectory, true).ReadAll().ToList();
-        var observations = new ObservationRepository(this.DownloadHelper.RepositoryDirectory, true).ReadAll().ToList();
-        var childNotes = new ChildNoteRepository(this.DownloadHelper.RepositoryDirectory, true).ReadAll().ToList();
-        var repository = new FamilyAppRepository(
+        var identity = repositoryFactory.GetIdentityRepository().ReadItem().Data.Me;
+        var sidebar = repositoryFactory.GetSidebarRepository().ReadItem();
+        var summaries = repositoryFactory.GetChildSummaryRepository().ReadAll().ToList();
+        var feedItems = repositoryFactory.GetFeedItemRepository().ReadAll().ToList();
+        var observations = repositoryFactory.GetObservationRepository().ReadAll().ToList();
+        var childNotes = repositoryFactory.GetChildNoteRepository().ReadAll().ToList();
+        var repository = new DataCollection(
             identity, sidebar, summaries, feedItems, observations, childNotes
         );
         // check we've read an observation for all "observation" feed items
@@ -141,101 +129,19 @@ internal sealed partial class FamilyAppExporter
         return repository;
     }
 
-    private static void UpdateOfflineUrls(FamilyAppRepository repository)
+    private static void UpdateOfflineUrls(DataCollection repository)
     {
         var visitor = new OfflineUrlVisitor();
         visitor.Visit(repository);
     }
 
-    public async Task DownloadResources(FamilyAppRepository repository)
+    public async static Task DownloadStaticResources(ContentDownloader downloader, DataCollection repository)
     {
-        var visitor = new DownloadVisitor(
-            this.DownloadHelper
-        );
+        var visitor = new DownloadVisitor(downloader);
         visitor.Visit(repository);
         // static resources
-        await this.DownloadStaticHttpFonts();
-        await this.DownloadStaticHttpImages();
+        await downloader.DownloadStaticHttpFonts();
+        await downloader.DownloadStaticHttpImages();
     }
 
-    public void GenerateHtmlFiles(FamilyAppRepository repository)
-    {
-
-        this.UnpackEmbeddedStylesheets(true);
-
-        var children = repository.Observations
-            .SelectMany(observation => observation.Children)
-            .DistinctBy(child => child.Id)
-            .ToList();
-
-        var index = new GenericPage(
-            name: "index",
-            templateFilename: $"{typeof(Liquid.EmbeddedResources).Namespace}.Pages.index.liquid",
-            outputFilename: "index.htm"
-        );
-
-        var pages = new List<GenericPage>()
-            .Concat(
-                // index
-                new List<GenericPage> { index }
-            ).Concat(
-                // newsfeed
-                new List<GenericPage> {
-                    new NewsfeedPage(
-                        name: "newsfeed",
-                        templateFilename: $"{typeof(Liquid.EmbeddedResources).Namespace}.Pages.newsfeed-page.liquid",
-                        outputFilename: OfflinePathHelper.GetNewsfeedPageRelativePath(),
-                        title: "Bright Horizons | Newsfeed",
-                        topBar: new(
-                            style: "newsfeed",
-                            title: "Newsfeed"
-                        )
-                    )
-                }
-            )
-            //.Concat(
-            //    // child profile - journey
-            //    repository.Sidebar.ChildProfileItems
-            //        .Select(
-            //            sidebarItem => new ChildProfilePage(
-            //                name: $"childprofile-journey-{sidebarItem.Id}",
-            //                templateFilename: $"{typeof(Liquid.EmbeddedResources).Namespace}.Pages.childprofile-journey-page.liquid",
-            //                outputFilename: OfflinePathHelper.GetChildProfileJourneyPageRelativePath(sidebarItem.Title, sidebarItem.Id),
-            //                title: "Bright Horizons | Child profile",
-            //                topBar: new(
-            //                    style: "child-profile",
-            //                    title: "Child profile"
-            //                ),
-            //                childSummary: repository.ChildSummaries.Single(childSummary => childSummary.Child.ChildId == sidebarItem.Id)
-            //            )
-            //        )
-            //)
-            .Concat(
-                // child profile - notes
-                repository.Sidebar.ChildProfileItems
-                    .Select(
-                        sidebarItem => new ChildProfilePage(
-                            name: $"childprofile-notes-{sidebarItem.Id}",
-                            templateFilename: $"{typeof(Liquid.EmbeddedResources).Namespace}.Pages.childprofile-notes-page.liquid",
-                            outputFilename: OfflinePathHelper.GetChildProfileNotesPageRelativePath(sidebarItem.Title, sidebarItem.Id),
-                            title: "Bright Horizons | Child profile",
-                            topBar: new(
-                                style: "child-profile",
-                                title: "Child profile"
-                            ),
-                            childSummary: repository.ChildSummaries.Single(childSummary => childSummary.Child.ChildId == sidebarItem.Id)
-                        )
-                    )
-            )
-            .ToList();
-
-        foreach (var page in pages)
-        {
-            this.RenderLiquidTemplate(
-                page, repository
-            );
-        }
-
-    }
-    
 }

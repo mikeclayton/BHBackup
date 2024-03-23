@@ -20,7 +20,7 @@ internal sealed partial class DownloadVisitor
             .ToList();
         foreach (var profileImage in profileImages)
         {
-            this.DownloadHelper.DownloadHttpResource(
+            this.Downloader.DownloadHttpResource(
                 profileImage.Url, profileImage.OfflineUrl
             ).GetAwaiter().GetResult();
         }
@@ -42,7 +42,7 @@ internal sealed partial class DownloadVisitor
         );
         foreach (var observationImage in observationImages)
         {
-            this.DownloadHelper.DownloadHttpResource(
+            this.Downloader.DownloadHttpResource(
                 observationImage.FullSizeUrl, observationImage.OfflineUrl
             ).GetAwaiter().GetResult();
         }

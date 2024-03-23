@@ -19,7 +19,7 @@ internal sealed partial class DownloadVisitor
 
     public override void Visit(SidebarItem item)
     {
-        this.DownloadHelper.DownloadHttpResource(
+        this.Downloader.DownloadHttpResource(
             item.Icon, item.OfflineIcon
         ).GetAwaiter().GetResult();
     }

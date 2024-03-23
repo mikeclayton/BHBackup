@@ -36,79 +36,16 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Remove="Client\GraphQl\Identity\Queries\Authenticate.graphql" />
-    <None Remove="Client\GraphQl\Identity\Queries\GetCurrentContext.graphql" />
-    <None Remove="Client\GraphQl\ChildNotes\Queries\GetChildNotes.graphql" />
-    <None Remove="Client\GraphQl\LearningJourney\LearningJourneyQuery.graphql" />
-    <None Remove="Client\GraphQl\Observations\Queries\ObservationsByIds.graphql" />
-    <None Remove="Liquid\childnotes-10-page-header.liquid" />
-    <None Remove="Liquid\childnotes-20-profile-header-wrapper.liquid" />
-    <None Remove="Liquid\childnotes-30-child-profile-view.liquid" />
-    <None Remove="Liquid\childnotes-40-page-footer.liquid" />
-    <None Remove="Liquid\Layout\layout-footer.liquid" />
-    <None Remove="Liquid\Layout\layout-header.liquid" />
-    <None Remove="Liquid\Layout\layout-sidebar.liquid" />
-    <None Remove="Liquid\Layout\layout-topbar.liquid" />
-    <None Remove="Liquid\Pages\childprofile-header.liquid" />
-    <None Remove="Liquid\Pages\childprofile-journey.liquid" />
-    <None Remove="Liquid\Pages\childprofile-notes-page.htm" />
-    <None Remove="Liquid\Pages\index.liquid" />
-    <None Remove="Liquid\Pages\newsfeed-page.liquid" />
-    <None Remove="Liquid\Panels\bhbackup-panel.liquid" />
-    <None Remove="Liquid\Panels\story-panel-checkin.liquid" />
-    <None Remove="Liquid\Panels\story-panel-child-note.liquid" />
-    <None Remove="Liquid\Panels\story-panel-news-item.liquid" />
-    <None Remove="Liquid\Panels\story-panel-observation.liquid" />
-    <None Remove="Liquid\story-panel-child-note.liquid" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="CommandLineParser" Version="2.9.1" />
     <PackageReference Include="Crayon" Version="2.0.69" />
-    <PackageReference Include="Fluid.Core" Version="2.5.0" />
-    <PackageReference Include="Microsoft.Extensions.FileProviders.Embedded" Version="3.1.0" />
-  </ItemGroup>
-
-  <PropertyGroup>
-    <GenerateEmbeddedFilesManifest>true</GenerateEmbeddedFilesManifest>
-  </PropertyGroup>
-
-  <ItemGroup>
-    <EmbeddedResource Include="Client\GraphQl\Identity\Queries\Authenticate.graphql" />
-    <EmbeddedResource Include="Client\GraphQl\Identity\Queries\GetCurrentContext.graphql" />
-    <EmbeddedResource Include="Client\GraphQl\ChildNotes\Queries\GetChildNotes.graphql" />
-    <EmbeddedResource Include="Client\GraphQl\LearningJourney\Queries\LearningJourneyQuery.graphql" />
-    <EmbeddedResource Include="Client\GraphQl\Observations\Queries\ObservationsByIds.graphql" />
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Include="Liquid\Layout\layout-footer.liquid" />
-    <EmbeddedResource Include="Liquid\Layout\layout-header.liquid" />
-    <EmbeddedResource Include="Liquid\Layout\layout-sidebar.liquid" />
-    <EmbeddedResource Include="Liquid\Layout\layout-topbar.liquid" />
-    <EmbeddedResource Include="Liquid\Panels\child-profile-header.liquid" />
-    <EmbeddedResource Include="Liquid\Pages\childprofile-journey-page.htm" />
-    <EmbeddedResource Include="Liquid\Pages\childprofile-notes-page.liquid" />
-    <EmbeddedResource Include="Liquid\Pages\index.liquid" />
-    <EmbeddedResource Include="Liquid\Pages\newsfeed-page.liquid" />
-    <EmbeddedResource Include="Liquid\Panels\bhbackup-banner.liquid" />
-    <EmbeddedResource Include="Liquid\Panels\story-panel-checkin.liquid" />
-    <EmbeddedResource Include="Liquid\Panels\story-panel-child-note.liquid" />
-    <EmbeddedResource Include="Liquid\Panels\story-panel-news-item.liquid" />
-    <EmbeddedResource Include="Liquid\Panels\story-panel-observation.liquid" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <EmbeddedResource Include="Static\Assets\bhbackup-banner.css" />
-    <EmbeddedResource Include="Static\Assets\childnotes-main.css" />
-    <EmbeddedResource Include="Static\Assets\childprofile-header-wrapper.css" />
-    <EmbeddedResource Include="Static\Assets\childprofile-page.css" />
-    <EmbeddedResource Include="Static\Assets\layout-sidebar.css" />
-    <EmbeddedResource Include="Static\Assets\layout-topbar.css" />
-    <EmbeddedResource Include="Static\Assets\newsfeed-fonts.css" />
-    <EmbeddedResource Include="Static\Assets\newsfeed-scaffold.css" />
-    <EmbeddedResource Include="Static\Assets\newsfeed-story.css" />
-    <EmbeddedResource Include="Static\Assets\story-panel-checkin.css" />
+    <ProjectReference Include="..\BHBackup.Client\BHBackup.Client.csproj" />
+    <ProjectReference Include="..\BHBackup.Common\BHBackup.Common.csproj" />
+    <ProjectReference Include="..\BHBackup.Download\BHBackup.Download.csproj" />
+    <ProjectReference Include="..\BHBackup.Render\BHBackup.Render.csproj" />
+    <ProjectReference Include="..\BHBackup.Storage\BHBackup.Storage.csproj" />
   </ItemGroup>
 
 </Project>

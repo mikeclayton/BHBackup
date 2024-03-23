@@ -21,7 +21,7 @@ internal sealed partial class DownloadVisitor
         Console.WriteLine("downloading child note profile images...");
         foreach (var profileImage in profileImages)
         {
-            this.DownloadHelper.DownloadHttpResource(
+            this.Downloader.DownloadHttpResource(
                 profileImage.Url, profileImage.OfflineUrl
             ).GetAwaiter().GetResult();
         }
@@ -44,7 +44,7 @@ internal sealed partial class DownloadVisitor
             .ToList();
         foreach (var childNoteImage in images)
         {
-            this.DownloadHelper.DownloadHttpResource(
+            this.Downloader.DownloadHttpResource(
                 childNoteImage.FullSizeUrl, childNoteImage.OfflineUrl
             ).GetAwaiter().GetResult();
         }

@@ -1,16 +1,16 @@
-﻿using BHBackup.Helpers;
+﻿using BHBackup.Download;
 
 namespace BHBackup.Visitors;
 
 internal sealed partial class DownloadVisitor : RepositoryVisitor
 {
 
-    public DownloadVisitor(DownloadHelper downloadHelper)
+    public DownloadVisitor(ContentDownloader downloader)
     {
-        this.DownloadHelper = downloadHelper ?? throw new ArgumentNullException(nameof(downloadHelper));
+        this.Downloader = downloader ?? throw new ArgumentNullException(nameof(downloader));
     }
 
-    private DownloadHelper DownloadHelper
+    private ContentDownloader Downloader
     {
         get;
     }

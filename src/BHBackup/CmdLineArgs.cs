@@ -1,11 +1,12 @@
-﻿using System.ComponentModel;
+﻿using BHBackup.Client.Core;
+using BHBackup.Download;
+using BHBackup.Export;
+using BHBackup.Render.Export;
+using BHBackup.Storage;
+using CommandLine;
+using System.ComponentModel.Design.Serialization;
 using System.Diagnostics;
 using System.Reflection;
-using BHBackup.Client.Core;
-using BHBackup.Client.GraphQl;
-using BHBackup.Export;
-using BHBackup.Helpers;
-using CommandLine;
 using static Crayon.Output;
 
 namespace BHBackup;
@@ -254,27 +255,31 @@ internal sealed class CmdLineArgs
         );
 
         // use the api access token to make any further api calls
-        var exporter = new FamilyAppExporter(
-            new DownloadHelper(
-                httpClient: httpClient,
-                repositoryDirectory: cmdLineArgs.OutputDirectory ?? throw new InvalidOperationException(),
-                apiCredentials: apiCredentials,
-                overwrite: false
-            )
+        var downloader = new ContentDownloader(
+            outputDirectory: cmdLineArgs.OutputDirectory ?? throw new InvalidOperationException(),
+            httpClient: httpClient,
+            apiCredentials: apiCredentials,
+            overwrite: false
+        );
+
+        var repositoryFactory = new RepositoryFactory(
+            rootFolder: cmdLineArgs.OutputDirectory ?? throw new InvalidOperationException(),
+            roundtrip: true
         );
 
         var download = !cmdLineArgs.SkipDownload;
         var repository = download
-            ? exporter.DownloadRepositoryData()
-            : exporter.ReadRepositoryData();
+            ? FamilyAppExporter.DownloadRepositoryData(downloader, repositoryFactory)
+            : FamilyAppExporter.ReadRepositoryData(repositoryFactory);
         if (download)
         {
-            await exporter.DownloadResources(repository);
+            await FamilyAppExporter.DownloadStaticResources(downloader, repository);
         }
 
         if (!cmdLineArgs.SkipGenerate)
         {
-            exporter.GenerateHtmlFiles(repository);
+            var htmlWriter = new HtmlWriter(cmdLineArgs.OutputDirectory);
+            htmlWriter.GenerateHtmlFiles(repository);
         }
 
         var indexPath = Path.Join(cmdLineArgs.OutputDirectory, "index.htm");

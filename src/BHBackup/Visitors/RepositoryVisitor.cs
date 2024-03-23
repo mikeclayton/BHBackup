@@ -1,4 +1,4 @@
-﻿using BHBackup.Export;
+﻿using BHBackup.Storage;
 
 namespace BHBackup.Visitors;
 
@@ -9,7 +9,7 @@ internal abstract partial class RepositoryVisitor
     {
     }
 
-    public virtual void Visit(FamilyAppRepository repository)
+    public virtual void Visit(DataCollection repository)
     {
         this.Visit(repository.Identity);
         this.Visit(repository.Sidebar);

@@ -1,0 +1,52 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <GenerateEmbeddedFilesManifest>true</GenerateEmbeddedFilesManifest>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Fluid.Core" Version="2.5.0" />
+    <PackageReference Include="Microsoft.Extensions.FileProviders.Embedded" Version="3.1.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Liquid\Layout\layout-footer.liquid" />
+    <EmbeddedResource Include="Liquid\Layout\layout-header.liquid" />
+    <EmbeddedResource Include="Liquid\Layout\layout-sidebar.liquid" />
+    <EmbeddedResource Include="Liquid\Layout\layout-topbar.liquid" />
+    <EmbeddedResource Include="Liquid\Panels\child-profile-header.liquid" />
+    <EmbeddedResource Include="Liquid\Pages\childprofile-journey-page.htm" />
+    <EmbeddedResource Include="Liquid\Pages\childprofile-notes-page.liquid" />
+    <EmbeddedResource Include="Liquid\Pages\index.liquid" />
+    <EmbeddedResource Include="Liquid\Pages\newsfeed-page.liquid" />
+    <EmbeddedResource Include="Liquid\Panels\bhbackup-banner.liquid" />
+    <EmbeddedResource Include="Liquid\Panels\story-panel-checkin.liquid" />
+    <EmbeddedResource Include="Liquid\Panels\story-panel-child-note.liquid" />
+    <EmbeddedResource Include="Liquid\Panels\story-panel-news-item.liquid" />
+    <EmbeddedResource Include="Liquid\Panels\story-panel-observation.liquid" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Static\Assets\bhbackup-banner.css" />
+    <EmbeddedResource Include="Static\Assets\childnotes-main.css" />
+    <EmbeddedResource Include="Static\Assets\childprofile-header-wrapper.css" />
+    <EmbeddedResource Include="Static\Assets\childprofile-page.css" />
+    <EmbeddedResource Include="Static\Assets\layout-sidebar.css" />
+    <EmbeddedResource Include="Static\Assets\layout-topbar.css" />
+    <EmbeddedResource Include="Static\Assets\newsfeed-fonts.css" />
+    <EmbeddedResource Include="Static\Assets\newsfeed-scaffold.css" />
+    <EmbeddedResource Include="Static\Assets\newsfeed-story.css" />
+    <EmbeddedResource Include="Static\Assets\story-panel-checkin.css" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\BHBackup.Storage\BHBackup.Storage.csproj" />
+  </ItemGroup>
+
+</Project>

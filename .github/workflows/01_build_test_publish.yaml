@@ -72,8 +72,8 @@ jobs:
                 --no-restore `
                 --runtime        "${{ env.RUNTIME }}" `
                 --self-contained true `
-                --property:PublishSingleFile=true ``
-                --property:AssemblyVersion=$assemblyVersion
+                --property:PublishSingleFile=true `
+                --property:AssemblyVersion=$assemblyVersion `
                 --property:Version=$productVersion
 
       - name: dotnet test

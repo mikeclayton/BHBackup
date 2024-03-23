@@ -12,6 +12,16 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "workflows", "workflows", "{
 		..\.github\workflows\01_build_test_publish.yaml = ..\.github\workflows\01_build_test_publish.yaml
 	EndProjectSection
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BHBackup.Client", "BHBackup.Client\BHBackup.Client.csproj", "{F606BC2B-20C5-4AAF-A8CC-7AB18EC42D62}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BHBackup.Common", "BHBackup.Common\BHBackup.Common.csproj", "{AED0D6DC-C4C1-4D8B-BD53-6A9F896DC3E4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BHBackup.Storage", "BHBackup.Storage\BHBackup.Storage.csproj", "{AFF55A7A-6A92-493C-A27D-1EB0903AB68D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BHBackup.Render", "BHBackup.Render\BHBackup.Render.csproj", "{1358E6CB-0E73-4274-94BE-F209A2E73A1C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BHBackup.Download", "BHBackup.Download\BHBackup.Download.csproj", "{5BF9DA2B-06DD-452B-8253-20543B9273B3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -22,6 +32,26 @@ Global
 		{4AEAA535-7548-4DB5-9FCB-B46E08D36095}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4AEAA535-7548-4DB5-9FCB-B46E08D36095}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4AEAA535-7548-4DB5-9FCB-B46E08D36095}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F606BC2B-20C5-4AAF-A8CC-7AB18EC42D62}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F606BC2B-20C5-4AAF-A8CC-7AB18EC42D62}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F606BC2B-20C5-4AAF-A8CC-7AB18EC42D62}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F606BC2B-20C5-4AAF-A8CC-7AB18EC42D62}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AED0D6DC-C4C1-4D8B-BD53-6A9F896DC3E4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AED0D6DC-C4C1-4D8B-BD53-6A9F896DC3E4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AED0D6DC-C4C1-4D8B-BD53-6A9F896DC3E4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AED0D6DC-C4C1-4D8B-BD53-6A9F896DC3E4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AFF55A7A-6A92-493C-A27D-1EB0903AB68D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AFF55A7A-6A92-493C-A27D-1EB0903AB68D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AFF55A7A-6A92-493C-A27D-1EB0903AB68D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AFF55A7A-6A92-493C-A27D-1EB0903AB68D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1358E6CB-0E73-4274-94BE-F209A2E73A1C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1358E6CB-0E73-4274-94BE-F209A2E73A1C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1358E6CB-0E73-4274-94BE-F209A2E73A1C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1358E6CB-0E73-4274-94BE-F209A2E73A1C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5BF9DA2B-06DD-452B-8253-20543B9273B3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5BF9DA2B-06DD-452B-8253-20543B9273B3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5BF9DA2B-06DD-452B-8253-20543B9273B3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5BF9DA2B-06DD-452B-8253-20543B9273B3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
