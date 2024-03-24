@@ -70,11 +70,12 @@ jobs:
             dotnet build "./BHBackup/BHBackup.csproj" `
                 --configuration "${{ env.CONFIG_NAME }}" `
                 --no-restore `
-                --runtime        "${{ env.RUNTIME }}" `
+                --runtime       "${{ env.RUNTIME }}" `
                 --self-contained true `
                 --property:PublishSingleFile=true `
                 --property:AssemblyVersion=$assemblyVersion `
-                --property:Version=$productVersion
+                --property:Version=$productVersion `
+                --property:DebugType=embedded
 
       - name: dotnet test
         working-directory: ${{ env.BUILD_PATH }}
@@ -94,7 +95,14 @@ jobs:
                 --runtime        "${{ env.RUNTIME }}" `
                 --output         "${{ env.PUBLISH_PATH }}/win-x64" `
                 --self-contained true `
-                --property:PublishSingleFile=true
+                --property:PublishSingleFile=true `
+                --property:DebugType=embedded
+
+                #--property:PublishTrimmed=true
+
+            Move-Item `
+                -Path        "${{ env.PUBLISH_PATH }}/win-x64/BHBackup.exe" `
+                -Destination "${{ env.PUBLISH_PATH }}/win-x64/BHBackup-winx64.exe"
 
       #- name: zip release
       #  working-directory: ${{ env.BUILD_PATH }}
