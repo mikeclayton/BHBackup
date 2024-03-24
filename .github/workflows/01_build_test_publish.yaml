@@ -102,7 +102,7 @@ jobs:
 
             Move-Item `
                 -Path        "${{ env.PUBLISH_PATH }}/win-x64/BHBackup.exe" `
-                -Destination "${{ env.PUBLISH_PATH }}/win-x64/BHBackup-winx64.exe"
+                -Destination "${{ env.PUBLISH_PATH }}/win-x64/BHBackup-win-x64.exe"
 
       #- name: zip release
       #  working-directory: ${{ env.BUILD_PATH }}
@@ -113,7 +113,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: BHBackup-v${{ steps.gitversion.outputs.FullSemVer }}
-          path: .build/app
+          path: .build/app/win-x64
 
       - name: dotnet tool jb inspectcode
         working-directory: ${{ env.BUILD_PATH }}
