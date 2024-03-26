@@ -91,9 +91,11 @@
                 <TextBlock VerticalAlignment="Center" TextWrapping="WrapWithOverflow" Margin="10, 0, 10, 0" Padding="0" Foreground="SlateGray">
                     All trademarks, logos and brand names are the property of their respective owners.
                 </TextBlock>
+                <TextBlock VerticalAlignment="Center" TextWrapping="WrapWithOverflow" Margin="10, 0, 10, 0" Padding="0" Foreground="SlateGray">
+                    The makers of this program are not affiliated with Bright Horizons or Famly.
+                </TextBlock>
                 <TextBlock VerticalAlignment="Center" TextWrapping="WrapWithOverflow" Margin="10, 0, 10, 5" Padding="0" Foreground="SlateGray">
-                    The makers of this program are not affiliated with Bright Horizons or Famly. Licensed for
-                    use under the terms of The MIT License. Use this program at your own risk.
+                    Licensed for use under the terms of The MIT License. Use this program at your own risk.
                 </TextBlock>
             </StackPanel>
         </DockPanel>

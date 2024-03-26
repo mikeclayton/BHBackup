@@ -7,7 +7,7 @@
 This program lets you download and save the notes and images from your
 child's account on the Bright Horizons "FamilyApp" website.
 
-To install:
+**To install:**
 
 * Download the latest version of the program to your computer from <a href="https://github.com/mikeclayton/BHBackup/releases">here</a>.
 
@@ -15,7 +15,7 @@ To install:
 
 * On Windows computers you *may* need to "unblock" the file to allow it to run - right click it, select "Properties" (or "Show more options" and *then* "Properties") and in the pop-up dialog tick the "Unblock" checkbox and click "OK".
 
-To use:
+**To use:**
 
 * Double-click ```BHBackup-gui-win-x64.exe``` to launch it - you'll see window like the one at the top of this page.
 
