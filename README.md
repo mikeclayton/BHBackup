@@ -29,11 +29,11 @@ child's account on the Bright Horizons "FamilyApp" website.
 
 ## Disclaimers
 
-* I'm not affiliated with Bright Horizons or Famly - I'm just a parent who wrote a utility to let me download a copy of the notes and photos posted to the app that daughter's nursery uses to share pictures during the school day because, strangely, the app doesn't let me do that natively, and I really want to keep a copy of all the photos and notes when my child leaves the nursery.
+* I'm not affiliated with Bright Horizons or Famly - I'm just a parent who wrote a utility to let me download a copy of the notes and photos posted to the app that my daughter's nursery uses to share pictures during the school day because, strangely, the app doesn't let me do that natively, and I really want to keep a copy of all the photos and notes when my child leaves the nursery.
 
 * All trademarks, logos and brand names are the property of their respective owners. The makers of this program are not affiliated with Bright Horizons or Famly.
 
-* I also don't provide any warranty for this FREE software, or make any claims about its suitability for any particular purpose. If you decide to use this program, you agree to do so at your own risk - see the License section below for more details.
+* I also don't provide any warranty for this **FREE** software, or make any claims about its suitability for any particular purpose. If you decide to use this program, you agree to do so at your own risk - see the License section below for more details.
 
 * In particular, please don't *rely* on this utility working at any time, and make sure you take *other* backups of your child's data stored in the Family App website by different means. Aside from any bugs and defects that might be present in this utility, the Family App website could be updated at any time in a way that completely breaks this utility.
 
