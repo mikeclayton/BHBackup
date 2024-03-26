@@ -45,7 +45,7 @@ public static class LearningJourneyExtensions
             method: HttpMethod.Post,
             requestBody: requestBody,
             roundtrip: true
-        );
+        ).ConfigureAwait(false);
     }
 
     public static async IAsyncEnumerable<LearningJourneyQueryResponse> PaginateLearningJourneys(
@@ -63,7 +63,7 @@ public static class LearningJourneyExtensions
             onBeforeRequest?.Invoke();
             var responseObject = await graphQlClient.LearningJourneyQuery(
                     childId, variantList, 10, nextCursor
-                ) ?? throw new InvalidOperationException();
+                ).ConfigureAwait(false) ?? throw new InvalidOperationException();
             yield return responseObject;
             nextCursor = responseObject.Data.ChildDevelopment.Observations.Next;
             if (nextCursor is null)

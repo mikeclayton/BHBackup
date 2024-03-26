@@ -1,23 +1,29 @@
 # BHBackup - Bright Horizons FamilyApp website backup utility
 
-![BHBackup screenshot](wiki/BHBackup.png "BHBackup screenshot")
+![BHBackup screenshot](wiki/BHBackup-gui.png "BHBackup screenshot")
 
 ## Overview
 
 This program lets you download and save the notes and images from your
 child's account on the Bright Horizons "FamilyApp" website.
 
-To use it:
+To install:
 
-* Download the latest version of the program to your computer from <a href="https://github.com/mikeclayton/BHBackup/releases">here</a>
+* Download the latest version of the program to your computer from <a href="https://github.com/mikeclayton/BHBackup/releases">here</a>.
 
-* Find the ```BHBackup.exe``` program in your Downloads folder
+* Find the ```BHBackup-gui-win-x64.exe``` program in your Downloads folder.
 
 * On Windows computers you *may* need to "unblock" the file to allow it to run - right click it, select "Properties" (or "Show more options" and *then* "Properties") and in the pop-up dialog tick the "Unblock" checkbox and click "OK".
 
-* Double-click ```BHBackup.exe``` to launch it - you'll see a black text-based window like the one at the top of this page.
+To use:
 
-* When prompted, enter your username and password that you normally use to log into the Bright Horizons FamilyApp website
+* Double-click ```BHBackup-gui-win-x64.exe``` to launch it - you'll see window like the one at the top of this page.
+
+* Enter your username and password that you normally use to log into the Bright Horizons FamilyApp website.
+
+* Enter the name of folder you want to create the backup in.
+
+* Click the "Start Backup" button.
 
 * The program will make an offline copy of some parts of your child's account, including all the posts and images "Newsfeed" and "Notes" pages and will build an offline website you can keep and access even after your child leaves the nursery.
 
@@ -48,3 +54,8 @@ THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR I
 I imagine there's lots of other parents who would want to be able to use this utility, so I've open-sourced it, but please remember this isn't a commercial product - I wrote it in my spare time and I'm making it available for **FREE** to anyone who agrees to the terms of the license above.
 
 If you have problems running it or you get error messages, or something just doesn't seem quite right, please feel free to create an "Issue" (see the links in the menu at the very top of this page) with details of the problem and I'll do what I can to help, but I *can't* make any promises that I'll have either the time or the ability to fix it.
+
+## Attribution
+
+* Sun icon - <a href="https://www.flaticon.com/free-icon/sun_3050031" title="sun icons" target="_blank">Sun icons created by Freepik - Flaticon</a>
+* Message box icon - <a href="http://sixrevisions.com/freebies/icons/free-icons-candy-ui-icon-set/" target="_blank">Candy UI Icon Set</a>

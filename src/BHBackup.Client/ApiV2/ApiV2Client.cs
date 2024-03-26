@@ -15,7 +15,7 @@ public sealed partial class ApiV2Client : CoreApiClient
 
         return await base.ExecuteTextRequestAsync(
             CoreApiClient.JoinUrl(CoreApiClient.FamilyAppUri, requestUrl), querystring, method, requestBody
-        ) ?? throw new InvalidOperationException();
+        ).ConfigureAwait(false) ?? throw new InvalidOperationException();
     }
 
     public async Task<TResponse> ExecuteApiV2Request<TResponse>(string requestUrl, Dictionary<string, string>? querystring, HttpMethod method, object? requestBody, bool roundtrip)
@@ -23,7 +23,7 @@ public sealed partial class ApiV2Client : CoreApiClient
 
         return await base.ExecuteJsonRequestAsync<TResponse>(
             CoreApiClient.JoinUrl(CoreApiClient.FamilyAppUri, requestUrl), querystring, method, requestBody, roundtrip
-        ) ?? throw new InvalidOperationException();
+        ).ConfigureAwait(false) ?? throw new InvalidOperationException();
     }
 
 }

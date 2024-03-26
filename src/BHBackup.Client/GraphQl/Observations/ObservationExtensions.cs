@@ -33,7 +33,7 @@ public static class ObservationExtensions
             method: HttpMethod.Post,
             requestBody: requestBody,
             roundtrip: true
-        );
+        ).ConfigureAwait(false);
     }
 
     public static async IAsyncEnumerable<ObservationsByIdsResponse> PaginateObservationsByIds(
@@ -48,7 +48,7 @@ public static class ObservationExtensions
         foreach (var page in pages)
         {
             onBeforeRequest?.Invoke();
-            var response = await graphQlClient.ObservationsByIds(page);
+            var response = await graphQlClient.ObservationsByIds(page).ConfigureAwait(false);
             yield return response;
         }
     }

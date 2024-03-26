@@ -1,26 +1,34 @@
 ﻿using BHBackup.Client.GraphQl.Identity.Models.Context;
 using BHBackup.Client.GraphQl.Observations;
 using BHBackup.Client.GraphQl.Observations.Models;
+using BHBackup.Download.Extensions;
 using BHBackup.Storage.Repositories;
+using Microsoft.Extensions.Logging;
 
 namespace BHBackup.Download;
 
 public sealed partial class ContentDownloader
 {
 
-    public IEnumerable<Observation> DownloadObservationData(ObservationRepository repository, IEnumerable<string> observationIds)
+    public async IAsyncEnumerable<Observation> DownloadObservationData(ObservationRepository repository, IEnumerable<string> observationIds)
     {
         var graphQlClient = this.GetGraphQlClient();
         // read the observations from the api
-        Console.WriteLine("downloading observation data...");
-        var observations = graphQlClient.PaginateObservationsByIds(
+        this.Logger.LogInformation("downloading observation data...");
+        var pageIndex = 1;
+        var responses = await graphQlClient.PaginateObservationsByIds(
                 observationIds,
                 pageSize: 5,
                 onBeforeRequest: () =>
-                    Console.WriteLine($"    downloading observation data page...")
-            ).ToBlockingEnumerable()
-            .SelectMany(response => response.Data.ChildDevelopment.Observations.Results)
-            .ToList();
+                {
+                    this.Logger.LogInformation($"downloading observation data page {pageIndex}...");
+                    pageIndex++;
+                }
+            ).ConfigureAwait(false).ToListAsync();
+        var observations = responses
+            .SelectMany(
+                response => response.Data.ChildDevelopment.Observations.Results
+            ).ToList();
         // save the observations to disk in individual files
         foreach (var observation in observations)
         {
@@ -29,11 +37,11 @@ public sealed partial class ContentDownloader
         }
     }
 
-    public void DownloadObservationContent(IEnumerable<Observation> observations)
+    public async Task DownloadObservationContent(IEnumerable<Observation> observations)
     {
         var observationList = observations.ToList();
         // observations - profile images
-        Console.WriteLine("downloading observation profile images...");
+        this.Logger.LogInformation("downloading observation profile images...");
         var profileImages = observationList
             .Select(observation => observation.CreatedBy.ProfileImage)
             .Where(profileImage => profileImage?.Url is not null)
@@ -42,12 +50,12 @@ public sealed partial class ContentDownloader
             .ToList();
         foreach (var profileImage in profileImages)
         {
-            this.DownloadHttpResource(
+            await this.DownloadHttpResource(
                 profileImage.Url, profileImage.OfflineUrl
-            ).GetAwaiter().GetResult();
+            ).ConfigureAwait(false);
         }
         //// observations - content files
-        //Console.WriteLine("downloading feed item files");
+        //this.Logger.LogInformation("downloading feed item files");
         //var observationFiles = observationList.SelectMany(
         //    observation => observation.Files
         //);
@@ -58,15 +66,15 @@ public sealed partial class ContentDownloader
         //    ).GetAwaiter().GetResult();
         //}
         // observations - content images
-        Console.WriteLine("downloading observation content images");
+        this.Logger.LogInformation("downloading observation content images");
         var observationImages = observationList.SelectMany(
             observation => observation.Images
         );
         foreach (var observationImage in observationImages)
         {
-            this.DownloadHttpResource(
+            await this.DownloadHttpResource(
                 observationImage.FullSizeUrl, observationImage.OfflineUrl
-            ).GetAwaiter().GetResult();
+            ).ConfigureAwait(false);
         }
     }
 

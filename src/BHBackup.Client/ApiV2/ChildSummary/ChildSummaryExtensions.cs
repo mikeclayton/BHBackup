@@ -14,7 +14,7 @@ public static class ChildSummaryExtensions
             method: HttpMethod.Get,
             requestBody: null,
             roundtrip: true
-        );
+        ).ConfigureAwait(false);
     }
 
 }

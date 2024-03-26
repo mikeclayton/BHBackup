@@ -17,6 +17,11 @@ public sealed class OfflinePathHelper
         );
     }
 
+    public static string GetIndexPageRelativePath()
+    {
+        return "index.htm";
+    }
+
     public static string GetChildProfileNotesPageRelativePath(string childGivenName, string childId)
     {
         return Path.Join(

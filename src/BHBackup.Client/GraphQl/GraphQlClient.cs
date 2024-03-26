@@ -16,7 +16,7 @@ public sealed partial class GraphQlClient : CoreApiClient
     {
         return await base.ExecuteJsonRequestAsync<TResponse>(
             CoreApiClient.JoinUrl(CoreApiClient.FamilyAppUri, requestUrl), querystring, method, requestBody, roundtrip
-        ) ?? throw new InvalidOperationException();
+        ).ConfigureAwait(false);
     }
 
 }

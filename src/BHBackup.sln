@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.9.34526.213
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BHBackup", "BHBackup\BHBackup.csproj", "{4AEAA535-7548-4DB5-9FCB-B46E08D36095}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BHBackup.ConsoleApp", "BHBackup\BHBackup.ConsoleApp.csproj", "{4AEAA535-7548-4DB5-9FCB-B46E08D36095}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".github", ".github", "{4B852D42-F884-47C6-B24A-7E6DFFC4CEE8}"
 EndProject
@@ -14,13 +14,17 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "workflows", "workflows", "{
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BHBackup.Client", "BHBackup.Client\BHBackup.Client.csproj", "{F606BC2B-20C5-4AAF-A8CC-7AB18EC42D62}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BHBackup.Common", "BHBackup.Common\BHBackup.Common.csproj", "{AED0D6DC-C4C1-4D8B-BD53-6A9F896DC3E4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BHBackup.Common", "BHBackup.Common\BHBackup.Common.csproj", "{AED0D6DC-C4C1-4D8B-BD53-6A9F896DC3E4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BHBackup.Storage", "BHBackup.Storage\BHBackup.Storage.csproj", "{AFF55A7A-6A92-493C-A27D-1EB0903AB68D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BHBackup.Storage", "BHBackup.Storage\BHBackup.Storage.csproj", "{AFF55A7A-6A92-493C-A27D-1EB0903AB68D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BHBackup.Render", "BHBackup.Render\BHBackup.Render.csproj", "{1358E6CB-0E73-4274-94BE-F209A2E73A1C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BHBackup.Render", "BHBackup.Render\BHBackup.Render.csproj", "{1358E6CB-0E73-4274-94BE-F209A2E73A1C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BHBackup.Download", "BHBackup.Download\BHBackup.Download.csproj", "{5BF9DA2B-06DD-452B-8253-20543B9273B3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BHBackup.Download", "BHBackup.Download\BHBackup.Download.csproj", "{5BF9DA2B-06DD-452B-8253-20543B9273B3}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BHBackup.WpfApp", "BHBackup.WpfApp\BHBackup.WpfApp.csproj", "{20BD16F2-103E-4791-A6FC-54D7CC639C06}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BHBackup.Engine", "BHBackup.Engine\BHBackup.Engine.csproj", "{E49D7E6C-C8D7-4D06-AEF7-53D735D401A8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -52,6 +56,14 @@ Global
 		{5BF9DA2B-06DD-452B-8253-20543B9273B3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5BF9DA2B-06DD-452B-8253-20543B9273B3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5BF9DA2B-06DD-452B-8253-20543B9273B3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{20BD16F2-103E-4791-A6FC-54D7CC639C06}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{20BD16F2-103E-4791-A6FC-54D7CC639C06}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{20BD16F2-103E-4791-A6FC-54D7CC639C06}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{20BD16F2-103E-4791-A6FC-54D7CC639C06}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E49D7E6C-C8D7-4D06-AEF7-53D735D401A8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E49D7E6C-C8D7-4D06-AEF7-53D735D401A8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E49D7E6C-C8D7-4D06-AEF7-53D735D401A8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E49D7E6C-C8D7-4D06-AEF7-53D735D401A8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -10,7 +10,7 @@ public static class LoginHelper
     public static async Task<CoreApiCredentials> Authenticate(HttpClient httpClient, string username, string password, string deviceId)
     {
         var graphQlClient = new GraphQlClient(httpClient);
-        var response = await graphQlClient.Authenticate(username, password, deviceId);
+        var response = await graphQlClient.Authenticate(username, password, deviceId).ConfigureAwait(false);
         return response.Data.Me.AuthenticateWithPassword switch
         {
             AuthenticationSucceeded success =>

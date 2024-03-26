@@ -38,12 +38,15 @@
   <ItemGroup>
     <PackageReference Include="CommandLineParser" Version="2.9.1" />
     <PackageReference Include="Crayon" Version="2.0.69" />
+    <PackageReference Include="Serilog.Extensions.Logging" Version="8.0.0" />
+    <PackageReference Include="Serilog.Sinks.Console" Version="5.0.1" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\BHBackup.Client\BHBackup.Client.csproj" />
     <ProjectReference Include="..\BHBackup.Common\BHBackup.Common.csproj" />
     <ProjectReference Include="..\BHBackup.Download\BHBackup.Download.csproj" />
+    <ProjectReference Include="..\BHBackup.Engine\BHBackup.Engine.csproj" />
     <ProjectReference Include="..\BHBackup.Render\BHBackup.Render.csproj" />
     <ProjectReference Include="..\BHBackup.Storage\BHBackup.Storage.csproj" />
   </ItemGroup>

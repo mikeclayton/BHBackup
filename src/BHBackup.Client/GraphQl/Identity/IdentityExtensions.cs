@@ -71,7 +71,7 @@ public static class IdentityExtensions
             method: HttpMethod.Post,
             requestBody: requestBody,
             roundtrip: true
-        );
+        ).ConfigureAwait(false);
     }
 
     public static async Task<GetCurrentContextResponse> GetCurrentContext(
@@ -96,7 +96,7 @@ public static class IdentityExtensions
             method: HttpMethod.Post,
             requestBody: requestBody,
             roundtrip: true
-        );
+        ).ConfigureAwait(false);
 
     }
 

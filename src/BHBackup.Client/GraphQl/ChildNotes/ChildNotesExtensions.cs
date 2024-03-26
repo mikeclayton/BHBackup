@@ -43,7 +43,7 @@ public static class ChildNotesExtensions
             method: HttpMethod.Post,
             requestBody: requestBody,
             roundtrip: true
-        );
+        ).ConfigureAwait(false);
     }
 
     public static async IAsyncEnumerable<GetChildNotesResponse> PaginateChildNotes(
@@ -65,7 +65,7 @@ public static class ChildNotesExtensions
             onBeforeRequest?.Invoke();
             var responseObject = await graphQlClient.GetChildNotes(
                     childId, noteTypesList, limit, parentVisible, safeguardingConcerns, sensitive, nextCursor
-                ) ?? throw new InvalidOperationException();
+                ).ConfigureAwait(false) ?? throw new InvalidOperationException();
             yield return responseObject;
             nextCursor = responseObject.Data.ChildNotes.Next;
             if (nextCursor is null)

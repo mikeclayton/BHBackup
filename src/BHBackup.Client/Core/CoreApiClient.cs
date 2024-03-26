@@ -95,8 +95,8 @@ public abstract class CoreApiClient
         );
 
         // get the http response
-        var response = await this.HttpClient.SendAsync(request);
-        var responseContent = await response.Content.ReadAsStringAsync();
+        var response = await this.HttpClient.SendAsync(request).ConfigureAwait(false);
+        var responseContent = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
 
         // parse the json
         var responseObject = JsonHelper.ConvertFromJson<TResponse>(responseContent, roundtrip);

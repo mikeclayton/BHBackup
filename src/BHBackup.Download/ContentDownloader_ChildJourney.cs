@@ -1,29 +1,30 @@
 ﻿using BHBackup.Client.GraphQl.LearningJourney;
 using BHBackup.Client.GraphQl.LearningJourney.Models;
 using BHBackup.Storage.Repositories;
+using Microsoft.Extensions.Logging;
 
 namespace BHBackup.Download;
 
 public sealed partial class ContentDownloader
 {
 
-    public IEnumerable<LearningJourneyQueryResponse> DownloadChildJourneyData(
+    public async IAsyncEnumerable<LearningJourneyQueryResponse> DownloadChildJourneyData(
         LearningJourneyRepository repository, IEnumerable<string> childIds, IEnumerable<string> variants)
     {
         var graphQlClient = this.GetGraphQlClient();
         // read the learning journey from the api
-        Console.WriteLine("downloading learning journey data...");
+        this.Logger.LogInformation("downloading learning journey data...");
         var counter = 1;
         foreach (var childId in childIds)
         {
-            var journeys = graphQlClient.PaginateLearningJourneys(
+            var responses = graphQlClient.PaginateLearningJourneys(
                 childId: childId, variants
-            ).ToBlockingEnumerable().ToList();
+            ).ConfigureAwait(false);
             // save the journeys to disk in individual files
-            foreach (var journey in journeys)
+            await foreach (var response in responses)
             {
-                repository.WriteItem(journey, counter);
-                yield return journey;
+                repository.WriteItem(response, counter);
+                yield return response;
                 counter++;
             }
         }

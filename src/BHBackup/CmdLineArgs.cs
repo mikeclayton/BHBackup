@@ -1,14 +1,13 @@
-﻿using BHBackup.Client.Core;
-using BHBackup.Download;
-using BHBackup.Render.Export;
-using BHBackup.Storage;
-using BHBackup.Storage.Visitors;
+﻿using BHBackup.Common.Helpers;
+using BHBackup.Engine;
+using BHBackup.Storage.Helpers;
 using CommandLine;
-using System.Diagnostics;
+using Serilog;
+using Serilog.Extensions.Logging;
 using System.Reflection;
 using static Crayon.Output;
 
-namespace BHBackup;
+namespace BHBackup.ConsoleApp;
 
 internal sealed class CmdLineArgs
 {
@@ -244,53 +243,25 @@ internal sealed class CmdLineArgs
                 : outputDirectory;
         }
 
-        var repositoryFactory = new RepositoryFactory(
-            rootFolder: cmdLineArgs.OutputDirectory ?? throw new InvalidOperationException(),
-            roundtrip: true
+        var loggerProvider = new SerilogLoggerProvider(
+            new LoggerConfiguration()
+                .WriteTo.Console(outputTemplate: "{Message:lj}{NewLine}{Exception}")
+                .CreateLogger()
         );
+        var logger = loggerProvider.CreateLogger(nameof(Program));
 
-        var repository = default(DataCollection);
-        if (cmdLineArgs.SkipDownload)
+        var backupOptions = new BackupOptions
         {
-            repository = DataCollection.ReadRepositoryData(repositoryFactory);
-        }
-        else
-        {
-            // use the anonymous "authenticate" endpoint to log in and get an api access token
-            using var httpClient = new HttpClient();
-            var apiCredentials = await LoginHelper.Authenticate(
-                httpClient,
-                username: cmdLineArgs.Username ?? throw new InvalidOperationException(),
-                password: cmdLineArgs.Password ?? throw new InvalidOperationException(),
-                deviceId: Guid.NewGuid().ToString()
-            );
-            // use the api access token to make any further api calls
-            var downloader = new ContentDownloader(
-                outputDirectory: cmdLineArgs.OutputDirectory ?? throw new InvalidOperationException(),
-                httpClient: httpClient,
-                apiCredentials: apiCredentials,
-                overwrite: false
-            );
-            // download the data, content and static resources
-            repository = downloader.DownloadRepositoryData(repositoryFactory);
-            downloader.DownloadRepositoryContent(repository);
-            await downloader.DownloadStaticResources(repository);
-        }
-        new OfflineUrlVisitor().Visit(repository);
+            Logger = logger,
+            Username = cmdLineArgs.Username,
+            Password = cmdLineArgs.Password,
+            OutputDirectory = cmdLineArgs.OutputDirectory,
+            SkipDownload = cmdLineArgs.SkipDownload,
+            SkipGenerate = cmdLineArgs.SkipGenerate,
+            SkipLaunch = cmdLineArgs.SkipGenerate
+        };
 
-        if (!cmdLineArgs.SkipGenerate)
-        {
-            var htmlWriter = new HtmlWriter(cmdLineArgs.OutputDirectory);
-            htmlWriter.GenerateHtmlFiles(repository);
-        }
-
-        var indexPath = Path.Join(cmdLineArgs.OutputDirectory, "index.htm");
-        _ = Process.Start(
-            new ProcessStartInfo(indexPath)
-            {
-                UseShellExecute = true
-            }
-        );
+        await BackupEngine.ExecuteBackup(backupOptions);
 
         Console.WriteLine();
         Console.WriteLine(
@@ -311,7 +282,12 @@ internal sealed class CmdLineArgs
         );
         Console.WriteLine();
         Console.WriteLine(
-            Yellow(indexPath)
+            Yellow(
+                RelativePathMapper.GetAbsolutePath(
+                    backupOptions.OutputDirectory,
+                    OfflinePathHelper.GetIndexPageRelativePath()
+                )
+            )
         );
 
         Console.WriteLine();

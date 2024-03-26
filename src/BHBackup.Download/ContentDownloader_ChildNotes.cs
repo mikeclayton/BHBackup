@@ -1,21 +1,22 @@
 ﻿using BHBackup.Client.GraphQl.ChildNotes;
 using BHBackup.Client.GraphQl.ChildNotes.Models;
 using BHBackup.Client.GraphQl.Identity.Models.Context;
+using BHBackup.Download.Extensions;
 using BHBackup.Storage.Repositories;
-using System.Diagnostics.Metrics;
+using Microsoft.Extensions.Logging;
 
 namespace BHBackup.Download;
 
 public sealed partial class ContentDownloader
 {
 
-    public IEnumerable<ChildNote> DownloadChildNoteData(ChildNoteRepository repository, IEnumerable<string> childIds)
+    public async IAsyncEnumerable<ChildNote> DownloadChildNoteData(ChildNoteRepository repository, IEnumerable<string> childIds)
     {
         var graphQlClient = this.GetGraphQlClient();
         // read the child notes from the api
-        Console.WriteLine("downloading child notes data...");
+        this.Logger.LogInformation("downloading child notes data...");
         var pageIndex = 1;
-        var childNotes = graphQlClient.PaginateChildNotes(
+        var responses = await graphQlClient.PaginateChildNotes(
                 childId: childIds.First(),
                 noteTypes: ["Classic"],
                 limit: 10,
@@ -24,10 +25,11 @@ public sealed partial class ContentDownloader
                 sensitive: false,
                 onBeforeRequest: () =>
                 {
-                    Console.WriteLine($"    downloading child notes data page {pageIndex}...");
+                    this.Logger.LogInformation($"downloading child notes data page {pageIndex}...");
                     pageIndex++;
                 }
-            ).ToBlockingEnumerable()
+            ).ConfigureAwait(false).ToListAsync();
+        var childNotes = responses
             .SelectMany(
                 response => response.Data.ChildNotes.Result
             ).ToList();
@@ -39,7 +41,7 @@ public sealed partial class ContentDownloader
         }
     }
 
-    public void DownloadChildNoteDataContent(IEnumerable<ChildNote> childNotes)
+    public async Task DownloadChildNoteContent(IEnumerable<ChildNote> childNotes)
     {
         var childNoteList = childNotes.ToList();
         // child notes - profile images
@@ -50,15 +52,15 @@ public sealed partial class ContentDownloader
             .Cast<ProfileImage>()
             .DistinctBy(profileImage => profileImage.Url)
             .ToList();
-        Console.WriteLine("downloading child note profile images...");
+        this.Logger.LogInformation("downloading child note profile images...");
         foreach (var profileImage in profileImages)
         {
-            this.DownloadHttpResource(
+            await this.DownloadHttpResource(
                 profileImage.Url, profileImage.OfflineUrl
-            ).GetAwaiter().GetResult();
+            ).ConfigureAwait(false);
         }
         //// child notes - content files
-        //Console.WriteLine("downloading child note files");
+        //this.Logger.LogInformation("downloading child note files");
         //var childNoteFiles = childNotes.SelectMany(
         //    childNote => childNote.Files
         //);
@@ -69,16 +71,16 @@ public sealed partial class ContentDownloader
         //    ).GetAwaiter().GetResult();
         //}
         // child notes - content images
-        Console.WriteLine("downloading child note content images...");
+        this.Logger.LogInformation("downloading child note content images...");
         var images = childNoteList
             .SelectMany(childNote => childNote.Images)
             .OrderBy(image => image.OfflineUrl)
             .ToList();
         foreach (var childNoteImage in images)
         {
-            this.DownloadHttpResource(
+            await this.DownloadHttpResource(
                 childNoteImage.FullSizeUrl, childNoteImage.OfflineUrl
-            ).GetAwaiter().GetResult();
+            ).ConfigureAwait(false);
         }
     }
 

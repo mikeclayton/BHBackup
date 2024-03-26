@@ -67,7 +67,7 @@ jobs:
             # e.g. "1.2.3+45" -> "1.2.3+45"
             $productVersion = "${{ steps.gitversion.outputs.FullSemVer }}"
 
-            dotnet build "./BHBackup/BHBackup.csproj" `
+            dotnet build "./BHBackup.WpfApp/BHBackup.WpfApp.csproj" `
                 --configuration "${{ env.CONFIG_NAME }}" `
                 --no-restore `
                 --runtime       "${{ env.RUNTIME }}" `
@@ -101,8 +101,8 @@ jobs:
                 #--property:PublishTrimmed=true
 
             Move-Item `
-                -Path        "${{ env.PUBLISH_PATH }}/win-x64/BHBackup.exe" `
-                -Destination "${{ env.PUBLISH_PATH }}/win-x64/BHBackup-win-x64.exe"
+                -Path        "${{ env.PUBLISH_PATH }}/win-x64/BHBackup.WpfApp.exe" `
+                -Destination "${{ env.PUBLISH_PATH }}/win-x64/BHBackup-gui-win-x64.exe"
 
       #- name: zip release
       #  working-directory: ${{ env.BUILD_PATH }}

@@ -14,7 +14,7 @@ public static class SidebarExtensions
             method: HttpMethod.Get,
             requestBody: null,
             roundtrip: true
-        );
+        ).ConfigureAwait(false);
     }
 
 }

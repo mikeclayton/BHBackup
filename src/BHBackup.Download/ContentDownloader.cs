@@ -4,28 +4,53 @@ using BHBackup.Client.ApiV2;
 using BHBackup.Client.Core;
 using BHBackup.Client.GraphQl;
 using BHBackup.Common.Helpers;
+using BHBackup.Download.Extensions;
 using BHBackup.Storage;
+using Microsoft.Extensions.Logging;
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace BHBackup.Download;
 
 public sealed partial class ContentDownloader
 {
 
-    public ContentDownloader(string outputDirectory, HttpClient httpClient, CoreApiCredentials apiCredentials, bool overwrite)
+    public ContentDownloader(ILogger logger, HttpClient httpClient, CoreApiCredentials apiCredentials, string outputDirectory, bool overwrite)
     {
-        this.OutputDirectory = outputDirectory ?? throw new ArgumentNullException(nameof(outputDirectory));
+        this.Logger = logger ?? throw new ArgumentNullException(nameof(logger));
         this.HttpClient = httpClient ?? throw new ArgumentNullException(nameof(httpClient));
         this.ApiCredentials = apiCredentials ?? throw new ArgumentNullException(nameof(apiCredentials));
+        this.OutputDirectory = outputDirectory ?? throw new ArgumentNullException(nameof(outputDirectory));
         this.Overwrite = overwrite;
     }
 
-    public string OutputDirectory { get; }
+    public ILogger Logger
+    {
+        get;
+    }
 
-    public HttpClient HttpClient { get; }
+    public string OutputDirectory
+    {
+        get;
+    }
 
-    public CoreApiCredentials ApiCredentials { get; }
+    public HttpClient HttpClient
+    {
+        get;
+    }
 
-    public bool Overwrite { get;  }
+    public CoreApiCredentials ApiCredentials
+    {
+        get;
+    }
+
+    public bool Overwrite 
+    {
+        get;
+    }
 
     public ApiV1Client GetApiV1Client()
     {
@@ -64,7 +89,7 @@ public sealed partial class ContentDownloader
         var absolutePath = this.GetAbsoluteFilename(relativePath);
         if (!this.Overwrite && File.Exists(absolutePath))
         {
-            Console.WriteLine($"    skipping '{relativePath}'...");
+            this.Logger.LogInformation($"skipping '{relativePath}'...");
             return;
         }
         // create the destination directory if it doesn't already exist
@@ -75,27 +100,27 @@ public sealed partial class ContentDownloader
         var request = new HttpRequestMessage(HttpMethod.Get, resourceUri);
         request.Headers.ConnectionClose = false;
         // download the resource
-        Console.WriteLine($"    downloading '{relativePath}'...");
-        var response = await this.HttpClient.SendAsync(request);
-        await using var responseStream = await response.Content.ReadAsStreamAsync();
-        await using var fileStream = new FileStream(absolutePath, FileMode.Create, FileAccess.Write);
-        await responseStream.CopyToAsync(fileStream);
+        this.Logger.LogInformation($"downloading '{relativePath}'...");
+        var response = await this.HttpClient.SendAsync(request).ConfigureAwait(false);
+        await using var responseStream = await response.Content.ReadAsStreamAsync().ConfigureAwait(false);
+        using var fileStream = new FileStream(absolutePath, FileMode.Create, FileAccess.Write);
+        await responseStream.CopyToAsync(fileStream).ConfigureAwait(false);
     }
 
-    public DataCollection DownloadRepositoryData(RepositoryFactory repositoryFactory)
+    public async Task<DataCollection> DownloadRepositoryData(RepositoryFactory repositoryFactory)
     {
         // identity
-        var identity = this.DownloadCurrentContextData(
+        var identity = await this.DownloadCurrentContextData(
             repositoryFactory.GetIdentityRepository()
-        ).Data.Me;
+        );
         // sidebar
-        var sidebar = this.DownloadSidebarData(
+        var sidebar = await this.DownloadSidebarData(
             repositoryFactory.GetSidebarRepository()
         );
         // child journeys
         var journeyRepository = repositoryFactory.GetLearningJourneyRepository();
         journeyRepository.Clear();
-        var childJourneys = this.DownloadChildJourneyData(
+        var childJourneys = await this.DownloadChildJourneyData(
             journeyRepository,
             sidebar.ChildProfileItems.Select(child => child.Id),
             variants: [
@@ -104,34 +129,34 @@ public sealed partial class ContentDownloader
                 "ASSESSMENT",
                 "TWO_YEAR_PROGRESS"
             ]
-        ).ToList();
+        ).ConfigureAwait(false).ToListAsync();
         // child summaries
-        var summaries = this.DownloadChildSummaryData(
+        var summaries = await this.DownloadChildSummaryData(
             repositoryFactory.GetChildSummaryRepository(),
             sidebar.ChildProfileItems.Select(item => item.Id)
-        ).ToBlockingEnumerable().ToList();
+        ).ConfigureAwait(false).ToListAsync();
         // feed items
-        var feedItems = this.DownloadFeedItemData(
+        var feedItems = await this.DownloadFeedItemData(
             repositoryFactory.GetFeedItemRepository()
-        ).ToList();
+        ).ConfigureAwait(false).ToListAsync();
         // observations
         var observationIds = feedItems
             .Where(feedItem => feedItem.Embed is FeedEmbedObservation)
             .Select(feedItem => ((FeedEmbedObservation)(feedItem.Embed ?? throw new InvalidOperationException())).ObservationId)
-            .Union(
+            .Concat(
                 childJourneys
                     .SelectMany(journey => journey.Data.ChildDevelopment.Observations.Results)
                     .Select(observation => observation.Id)
-            );
-        var observations = this.DownloadObservationData(
+            ).Distinct();
+        var observations = await this.DownloadObservationData(
             repositoryFactory.GetObservationRepository(),
             observationIds
-        ).ToList();
+        ).ConfigureAwait(false).ToListAsync();
         // child notes
-        var childNotes = this.DownloadChildNoteData(
+        var childNotes = await this.DownloadChildNoteData(
             repositoryFactory.GetChildNoteRepository(),
             sidebar.ChildProfileItems.Select(child => child.Id)
-        ).ToList();
+        ).ConfigureAwait(false).ToListAsync();
         // check we've read an observation for all "observation" feed items
         var missingObservations = feedItems
             .Where(
@@ -157,24 +182,24 @@ public sealed partial class ContentDownloader
             throw new InvalidOperationException();
         }
         var repository = new DataCollection(
-            identity, sidebar, summaries, feedItems, observations, childNotes
+            identity.Data.Me, sidebar, summaries, feedItems, observations, childNotes
         );
         return repository;
     }
 
-    public void DownloadRepositoryContent(DataCollection repository)
+    public async Task DownloadRepositoryContent(DataCollection repository)
     {
-        this.DownloadChildNoteDataContent(repository.ChildNotes);
-        this.DownloadFeedItemContent(repository.FeedItems);
-        this.DownloadObservationContent(repository.Observations);
-        this.DownloadSidebarContent(repository.Sidebar);
+        await this.DownloadChildNoteContent(repository.ChildNotes).ConfigureAwait(false);
+        await this.DownloadFeedItemContent(repository.FeedItems).ConfigureAwait(false);
+        await this.DownloadObservationContent(repository.Observations).ConfigureAwait(false);
+        await this.DownloadSidebarContent(repository.Sidebar).ConfigureAwait(false);
     }
 
     public async Task DownloadStaticResources(DataCollection repository)
     {
         // static resources
-        await this.DownloadStaticFonts();
-        await this.DownloadStaticImages();
+        await this.DownloadStaticFonts().ConfigureAwait(false);
+        await this.DownloadStaticImages().ConfigureAwait(false);
     }
 
 }

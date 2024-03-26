@@ -1,4 +1,6 @@
-﻿namespace BHBackup.Download;
+﻿using Microsoft.Extensions.Logging;
+
+namespace BHBackup.Download;
 
 public sealed partial class ContentDownloader
 {
@@ -28,7 +30,7 @@ public sealed partial class ContentDownloader
             );
             await this.DownloadHttpResource(
                 resourceUri, targetFullname
-            );
+            ).ConfigureAwait(false);
         }
     }
 
@@ -96,8 +98,8 @@ public sealed partial class ContentDownloader
             "https://familyapp.brighthorizons.co.uk/fonts/Matter/Matter-SemiBoldItalic.woff",
             "https://familyapp.brighthorizons.co.uk/fonts/Matter/Matter-SemiBoldItalic.woff2"
         };
-        Console.WriteLine("downloading static fonts...");
-        await this.DownloadStaticResources(resourceUris);
+        this.Logger.LogInformation("downloading static fonts...");
+        await this.DownloadStaticResources(resourceUris).ConfigureAwait(false);
     }
 
     public async Task DownloadStaticImages()
@@ -109,8 +111,8 @@ public sealed partial class ContentDownloader
             "https://static.famly.co/core/feed-icons/checkin.png",
             "https://static.famly.co/core/feed-icons/checkout.png"
         };
-        Console.WriteLine("downloading static images...");
-        await this.DownloadStaticResources(resourceUris);
+        this.Logger.LogInformation("downloading static images...");
+        await this.DownloadStaticResources(resourceUris).ConfigureAwait(false);
     }
 
 }
