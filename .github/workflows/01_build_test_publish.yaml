@@ -64,7 +64,7 @@ jobs:
             # e.g. "1.2.3+45" -> "1.2.3.45"
             $assemblyVersion = "${{ steps.gitversion.outputs.FullSemVer }}".Replace("+", ".");
 
-            # /p:yVersion => "Product version" property
+            # /p:Version => "Product version" property
             # e.g. "1.2.3+45" -> "1.2.3+45"
             $productVersion = "${{ steps.gitversion.outputs.FullSemVer }}"
 
@@ -73,9 +73,9 @@ jobs:
                 --no-restore `
                 --runtime       "${{ env.RUNTIME }}" `
                 --self-contained true `
-                --property:PublishSingleFile=true `
                 --property:AssemblyVersion=$assemblyVersion `
                 --property:Version=$productVersion `
+                --property:PublishSingleFile=true `
                 --property:DebugType=embedded
 
       - name: dotnet test
@@ -97,6 +97,7 @@ jobs:
                 --output         "${{ env.PUBLISH_PATH }}/win-x64" `
                 --self-contained true `
                 --property:PublishSingleFile=true `
+                --property:IncludeNativeLibrariesForSelfExtract=true `
                 --property:DebugType=embedded
 
                 #--property:PublishTrimmed=true
