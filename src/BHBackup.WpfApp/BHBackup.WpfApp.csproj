@@ -8,6 +8,17 @@
     <UseWPF>true</UseWPF>
   </PropertyGroup>
 
+  <PropertyGroup>
+    <Product>BHBackup</Product>
+    <AssemblyTitle>Bright Horizons FamilyApp website backup utility</AssemblyTitle>
+    <Copyright>Copyright (c) 2024 Michael Clayton</Copyright>
+    <Description>
+      This program lets you download and save the notes and images from
+      your child's account on the Bright Horizons "FamilyApp" website.
+    </Description>
+    <AssemblyVersion>0.1.0</AssemblyVersion>
+  </PropertyGroup>
+
   <ItemGroup>
     <None Remove="images\soiconsline-32.png" />
   </ItemGroup>
