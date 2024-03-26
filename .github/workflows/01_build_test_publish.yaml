@@ -21,6 +21,7 @@ jobs:
 
       BUILD_PATH: ./src
       CONFIG_NAME: Release
+      PROJECT_PATH: ./BHBackup.WpfApp/BHBackup.WpfApp.csproj
       # relative to BUILD_PATH
       PUBLISH_PATH: ../.build/app
       RUNTIME: win-x64
@@ -67,7 +68,7 @@ jobs:
             # e.g. "1.2.3+45" -> "1.2.3+45"
             $productVersion = "${{ steps.gitversion.outputs.FullSemVer }}"
 
-            dotnet build "./BHBackup.WpfApp/BHBackup.WpfApp.csproj" `
+            dotnet build "${{ env.PROJECT_PATH }}" `
                 --configuration "${{ env.CONFIG_NAME }}" `
                 --no-restore `
                 --runtime       "${{ env.RUNTIME }}" `
@@ -89,7 +90,7 @@ jobs:
         working-directory: ${{ env.BUILD_PATH }}
         run: |
             # windows
-            dotnet publish "./BHBackup/BHBackup.csproj" `
+            dotnet publish "${{ env.PROJECT_PATH }}" `
                 --configuration  "${{ env.CONFIG_NAME }}" `
                 --no-build `
                 --runtime        "${{ env.RUNTIME }}" `
